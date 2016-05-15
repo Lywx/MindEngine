@@ -1,0 +1,66 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin
+/intermediateDir:obj
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:..\bin\Debug\MetaMind.EngineProcessor.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Fonts/UiRegularFont.bmp
+/importer:TextureImporter
+/processor:FontTextureProcessor
+/processorParam:FirstCharacter= 
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/UiRegularFont.bmp
+
+#begin Fonts/UiStatisticsFont.bmp
+/importer:TextureImporter
+/processor:FontTextureProcessor
+/processorParam:FirstCharacter= 
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/UiStatisticsFont.bmp
+
+#begin Fonts/Lucida Console Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Lucida Console Regular.spritefont
+
+#begin Fonts/NSimSun Bold Italic.spritefont
+/importer:FontDescriptionImporter
+/processor:ChineseSpriteFontProcessor
+/processorParam:CharacterSet=Fonts\Characters\Chinese5931.txt
+/processorParam:TextureFormat=Compressed
+/build:Fonts/NSimSun Bold Italic.spritefont
+
+#begin Fonts/NSimSun Bold.spritefont
+/importer:FontDescriptionImporter
+/processor:ChineseSpriteFontProcessor
+/processorParam:CharacterSet=Fonts\Characters\Chinese5931.txt
+/processorParam:TextureFormat=Compressed
+/build:Fonts/NSimSun Bold.spritefont
+
+#begin Fonts/NSimSun Italic.spritefont
+/importer:FontDescriptionImporter
+/processor:ChineseSpriteFontProcessor
+/processorParam:CharacterSet=Fonts\Characters\Chinese5931.txt
+/processorParam:TextureFormat=Compressed
+/build:Fonts/NSimSun Italic.spritefont
+
+#begin Fonts/NSimSun Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:ChineseSpriteFontProcessor
+/processorParam:CharacterSet=Fonts\Characters\Chinese5931.txt
+/processorParam:TextureFormat=Compressed
+/build:Fonts/NSimSun Regular.spritefont
+
