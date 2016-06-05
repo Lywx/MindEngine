@@ -7,7 +7,8 @@
     {
         SpriteBatch SpriteBatch { get; }
 
-        MMViewportAdapter ViewportAdapter { get; set; }
+        //TODO(Wuxiang)
+        //MMViewportAdapter ViewportAdapter { get; set; }
 
         Viewport Viewport { get; }
 

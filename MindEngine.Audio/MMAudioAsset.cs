@@ -4,7 +4,7 @@
 
     public class MMAudioAsset : MMAsset
     {
-        public MMAudioAsset(string name, string path) : base(name, path)
+        public MMAudioAsset(string name, string asset) : base(name, asset)
         {
             
         }

@@ -1,6 +1,7 @@
 namespace MindEngine.Core.Services
 {
     using System;
+    using Audio;
 
     public sealed class MMEngineAudioService : IMMEngineAudioService
     {
@@ -18,10 +19,10 @@ namespace MindEngine.Core.Services
 
         public IMMAudioManager Manager => this.Audio.Manager;
 
-        public MMAudioSettings Settings => this.Audio.Settings;
+        public IMMAudioSettings Settings => this.Audio.Settings;
 
         public IMMAudioController Controller => this.Audio.Controller;
 
-        public MMAudioDeviceController DeviceController => this.Audio.DeviceController;
+        public IMMAudioDeviceController DeviceController => this.Audio.DeviceController;
     }
 }

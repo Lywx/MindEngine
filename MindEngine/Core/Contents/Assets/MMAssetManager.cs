@@ -24,7 +24,7 @@ namespace MindEngine.Core.Contents.Assets
 
         #region Dependency
 
-        protected ContentManager Content => this.GlobalInterop.Content;
+        protected ContentManager Content => this.Engine.Content;
 
         #endregion
 
@@ -54,7 +54,10 @@ namespace MindEngine.Core.Contents.Assets
 
         private string AssetPath(string catalog, string asset) => Path.Combine(this.AssetCatalogPath(catalog), asset);
 
-        private string AssetCatalogPath(string catalog) => MMDirectoryManager.ContentPath(catalog) + @"/";
+        /// <summary>
+        /// The path used in Load method in ContentManager, which doesn't include ".\\Content\" prefix.
+        /// </summary>
+        private string AssetCatalogPath(string catalog) => catalog + @"\";
 
         #endregion
 
@@ -70,6 +73,14 @@ namespace MindEngine.Core.Contents.Assets
         #endregion
 
         #region Load and Unload 
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+
+            // Load engine persistent asset
+            this.LoadPackage("Engine.Persistent");
+        }
 
         public void LoadPackage(string packageName, bool async = false)
         {
@@ -88,7 +99,7 @@ namespace MindEngine.Core.Contents.Assets
 
         private void LoadFont(MMFontAsset font, bool async = false)
         {
-            var spriteFontPath = this.AssetPath("Fonts", font.Path);
+            var spriteFontPath = this.AssetPath("Fonts", font.Asset);
 
             if (async)
             {

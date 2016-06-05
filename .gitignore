@@ -8,12 +8,20 @@
 *.xwb
 *.user
 
+*.xnb
+
 .vs/
 
+Build/
 Packages/
 
+MindEngine/Content/bin/
 MindEngine/Content/obj/
 MindEngine/Content/Audio/
+MindEngine/Content/Cursor/
+MindEngine/Content/Fonts/
+MindEngine/Content/Texture/
+
 MindEngine/obj/
 MindEngine/bin/
 

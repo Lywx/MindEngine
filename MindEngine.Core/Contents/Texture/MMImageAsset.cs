@@ -5,15 +5,13 @@
 
     public class MMImageAsset : MMAsset
     {
-        public MMImageAsset(string name, string path, MMImageDesign design) 
-            : base(name, path)
+        public MMImageAsset(string name, string asset, MMImageDesign design) 
+            : base(name, asset)
         {
             this.Design = design;
         }
 
         #region Resource
-
-        public string Asset { get; set; }
 
         public MMImageDesign Design { get; set; }
 

@@ -3,7 +3,7 @@ namespace MindEngine.IO.Platform
 {
     public class MMPlatformPathWin32 : IMMPlatformPath
     {
-        public string ConfigurationDirectory => @".\Configurations\";
+        public string ConfigurationDirectory => @".\Configuration\";
 
         public string ContentDirectory       => @".\Content\";
 

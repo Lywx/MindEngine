@@ -5,14 +5,14 @@ namespace MindEngine.Core.Contents.Fonts
 
     public class MMFontAsset : MMAsset
     {
-        public MMFontAsset(string name, string path, int size, SpriteFont resource) 
-            : this(name, path, size)
+        public MMFontAsset(string name, string asset, int size, SpriteFont resource) 
+            : this(name, asset, size)
         {
             this.Resource = resource;
         }
 
-        public MMFontAsset(string name, string path, int size) 
-            : base(name, path)
+        public MMFontAsset(string name, string asset, int size) 
+            : base(name, asset)
         {
             this.Size = size;
         }

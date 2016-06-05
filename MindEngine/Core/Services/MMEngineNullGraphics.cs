@@ -1,21 +1,17 @@
 ﻿namespace MindEngine.Core.Services
 {
+    using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 
-    // TODO
     internal class MMEngineNullGraphics : IMMEngineGraphics
     {
-        public MMGraphicsManager Manager { get; }
+        public IMMGraphicsManager Manager { get; }
 
-        public IMMScreenDirector Screen { get; }
-
-        public MMGraphicsSettings Settings { get; }
-
-        public SpriteBatch SpriteBatch { get; }
+        public IMMGraphicsSettings Settings { get; }
 
         public IMMRenderer Renderer { get; }
 
-        public MMGraphicsDeviceController DeviceController { get; }
+        public IMMGraphicsDeviceController DeviceController { get; }
 
         public GraphicsDevice Device { get; }
 

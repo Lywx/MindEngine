@@ -30,15 +30,13 @@ namespace MindEngine.Core.Components
 
         #region Service Data
 
-        protected IMMEngineInputService GlobalInput => MMEngine.Service.Input;
+        protected IMMEngineInputService EngineInput => MMEngine.Service.Input;
 
-        protected IMMEngineInteropService GlobalInterop => MMEngine.Service.Interop;
+        protected IMMEngineInteropService EngineInterop => MMEngine.Service.Interop;
 
-        protected IMMEngineGraphicsService GlobalGraphics => MMEngine.Service.Graphics;
+        protected IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
 
-        protected IMMRenderer GlobalGraphicsRenderer => this.GlobalGraphics.Renderer;
-
-        protected IMMEngineNumericalService GlobalNumerical => MMEngine.Service.Numerical;
+        protected IMMEngineNumericalService EngineNumerical => MMEngine.Service.Numerical;
 
         #endregion
 

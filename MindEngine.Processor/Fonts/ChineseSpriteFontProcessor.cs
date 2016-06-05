@@ -14,7 +14,7 @@ namespace MindEngine.Processor.Fonts
     ///
     /// This should be part of a Content Pipeline Extension Library project.
     /// </summary>
-    [ContentProcessor(DisplayName = "Chinese Sprite Font Description - MetaMind")]
+    [ContentProcessor(DisplayName = "Chinese Sprite Font Description - Mind Engine")]
     public class ChineseSpriteFontProcessor : FontDescriptionProcessor
     {
         public override SpriteFontContent Process(FontDescription input, ContentProcessorContext context)

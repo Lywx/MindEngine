@@ -2,7 +2,7 @@ namespace MindEngine.Processor
 {
     using Microsoft.Xna.Framework.Content.Pipeline;
 
-    [ContentImporter(".xml", DisplayName = "Package Importer - Meta Mind")]
+    [ContentImporter(".xml", DisplayName = "Package Importer - Mind Engine")]
     internal class PackageImporter : ContentImporter<PackageXmlDocument>
     {
         public override PackageXmlDocument Import(string filename, ContentImporterContext context)

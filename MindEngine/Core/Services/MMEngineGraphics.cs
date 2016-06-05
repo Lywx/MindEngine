@@ -1,6 +1,7 @@
 namespace MindEngine.Core.Services
 {
     using System;
+    using Graphics;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -22,29 +23,31 @@ namespace MindEngine.Core.Services
             this.Settings = settings;
             this.Manager  = new MMGraphicsManager(engine, settings);
 
+            //TODO(Wuxiang)
             // No dependency injection here, because sprite batch is never replaced as long 
             // as this is a MonoGame application.
             this.DeviceController = new MMGraphicsDeviceController(engine);
-            this.Game.Components.Add(this.DeviceController);
+            //this.Game.Components.Add(this.DeviceController);
 
+            //TODO(Wuxiang)
             // No dependency injection here, because string drawer is a class focus on string 
             // drawing. The functionality is never extended in the form of inheritance.
-            this.Renderer = new MMRenderer(this.DeviceController);
+            //this.Renderer = new MMRenderer(this.DeviceController);
         }
 
         public GraphicsDevice Device => this.Manager.GraphicsDevice;
 
         #region Setting Data
 
-        public MMGraphicsManager Manager { get; private set; }
+        public IMMGraphicsManager Manager { get; private set; }
         
-        public MMGraphicsSettings Settings { get; private set; }
+        public IMMGraphicsSettings Settings { get; private set; }
 
         #endregion
 
         #region Render Data
 
-        public MMGraphicsDeviceController DeviceController { get; private set; }
+        public IMMGraphicsDeviceController DeviceController { get; private set; }
 
         public IMMRenderer Renderer { get; private set; }
 
@@ -54,7 +57,8 @@ namespace MindEngine.Core.Services
 
         public override void Initialize()
         {
-            this.Manager.Initialize();
+            //TODO(Wuxiang)
+            //this.Manager.Initialize();
         }
 
         #endregion
@@ -71,10 +75,12 @@ namespace MindEngine.Core.Services
                 {
                     if (!this.IsDisposed)
                     {
-                        this.Manager?.Dispose();
+                        //TODO(Wuxiang)
+                        //this.Manager?.Dispose();
                         this.Manager = null;
 
-                        this.DeviceController?.Dispose();
+                        //TODO(Wuxiang)
+                        //this.DeviceController?.Dispose();
                         this.DeviceController = null;
                     }
 

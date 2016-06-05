@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Package>
+  <Fonts>
+    <Font Name="Lucida Console Regular" Asset="Lucida Console Regular" Size="18"/>
+    <Font Name="NSimSun Regular"        Asset="NSimSun Regular"        Size="18"/>
+    <Font Name="NSimSun Bold"           Asset="NSimSun Bold"           Size="18"/>
+    <Font Name="NSimSun Italic"         Asset="NSimSun Italic"         Size="18"/>
+    <Font Name="NSimSun Bold Italic"    Asset="NSimSun Bold Italic"    Size="18"/>
+  </Fonts>
+  <Texture>
+    <Image Name="Screen.Blank" Asset="Screen.Blank">
+      <Design ScreenWidth="1920" ScreenHeight="1080"/>
+    </Image>
+  </Texture>
+</Package>

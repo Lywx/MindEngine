@@ -2,6 +2,7 @@ namespace MindEngine.Core.Contents.Fonts
 {
     using System.Collections.Generic;
     using Components;
+    using Contents.Extensions;
     using Extensions;
 
     /// <summary>
@@ -22,6 +23,7 @@ namespace MindEngine.Core.Contents.Fonts
 
         public override void Initialize()
         {
+            // This method call LoadContent method to load necessary data
             base.Initialize();
 
             StringUtils.Initialize(this);
@@ -45,7 +47,6 @@ namespace MindEngine.Core.Contents.Fonts
         /// </remarks>
         protected override void LoadContent()
         {
-            this.Fonts.Clear();
         }
 
         /// <summary>

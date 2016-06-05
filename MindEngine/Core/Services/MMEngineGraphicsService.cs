@@ -1,6 +1,7 @@
 namespace MindEngine.Core.Services
 {
     using System;
+    using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 
     public sealed class MMEngineGraphicsService : IMMEngineGraphicsService

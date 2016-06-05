@@ -2,31 +2,32 @@ namespace MindEngine.Core.Services
 {
     using Contents.Assets;
     using IO.Directory;
-    using Microsoft.Xna.Framework.Content;
 
-    public interface IMMEngineInteropService
+    public interface IMMEngineInteropService 
     {
         IMMAssetManager Asset { get; }
 
-        ContentManager Content { get; }
-
-        MMConsole Console { get; set; }
+        // TODO(Wuxiang)
+        //IMMConsole Console { get; set; }
 
         IMMDirectoryManager File { get; }
 
-        IMMEventManager Event { get; }
+        // TODO(Wuxiang)
+        //IMMEventManager Event { get; }
 
         IMMGameManager Game { get; }
 
         MMEngine Engine { get; }
 
-        IMMProcessManager Process { get; }
+        // TODO(Wuxiang)
+        //IMMProcessManager Process { get; }
 
-        IMMScreenDirector Screen { get; }
+        // TODO(Wuxiang)
+        //IMMScreenDirector Screen { get; }
 
         /// <remarks>
         /// Save that is replaceable in specific game 
         /// </remarks>
-        IMMSaveManager Save { get; set; }
+        //IMMSaveManager Save { get; set; }
     }
 }

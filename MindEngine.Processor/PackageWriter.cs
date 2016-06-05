@@ -20,7 +20,7 @@ namespace MindEngine.Processor
 
         public override string GetRuntimeReader(TargetPlatform targetPlatform)
         {
-            return "MetaMind.Engine.Component.Content.Asset.PackageReader, MetaMind.Engine";
+            return "MindEngine.Core.Contents.Packages.MMPackageReader, MindEngine.Core";
         }
     }
 }

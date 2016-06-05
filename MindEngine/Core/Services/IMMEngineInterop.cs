@@ -2,7 +2,7 @@
 {
     using Components;
 
-    public interface IMMEngineInterop : IMMCompositeComponent, IMMEngineInteropService
+    public interface IMMEngineInterop : IMMGameComponent, IMMEngineInteropService
     {
         void OnExit();
     }

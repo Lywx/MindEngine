@@ -1,7 +1,7 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
-    using Microsoft.Xna.Framework.Content;
+    using IO.Directory;
 
     /// <remarks>
     ///     Sealed for added new keyword and changed accessibility in MMEngine property
@@ -17,43 +17,44 @@ namespace MindEngine.Core.Services
 
         public IMMAssetManager Asset => this.interop.Asset;
 
-        public ContentManager Content => this.interop.Content;
-
-        public MMConsole Console
-        {
-            get
-            {
-                return this.interop.Console;
-            }
-            set
-            {
-                this.interop.Console = value;
-            }
-        }
+        //TODO(Wuxiang)
+        //public MMConsole Console
+        //{
+        //    get
+        //    {
+        //        return this.interop.Console;
+        //    }
+        //    set
+        //    {
+        //        this.interop.Console = value;
+        //    }
+        //}
 
         public IMMDirectoryManager File => this.interop.File;
 
         public MMEngine Engine => this.interop.Engine;
 
-        public IMMEventManager Event => this.interop.Event;
+        //TODO(Wuxiang)
+        //public IMMEventManager Event => this.interop.Event;
 
         public IMMGameManager Game => this.interop.Game;
 
-        public IMMProcessManager Process => this.interop.Process;
+        //TODO(Wuxiang)
+        //public IMMProcessManager Process => this.interop.Process;
 
-        public IMMScreenDirector Screen => this.interop.Screen;
+        //public IMMScreenDirector Screen => this.interop.Screen;
 
-        public IMMSaveManager Save
-        {
-            get
-            {
-                return this.interop.Save;
-            }
+        //public IMMSaveManager Save
+        //{
+        //    get
+        //    {
+        //        return this.interop.Save;
+        //    }
 
-            set
-            {
-                this.interop.Save = value;
-            }
-        }
+        //    set
+        //    {
+        //        this.interop.Save = value;
+        //    }
+        //}
     }
 }

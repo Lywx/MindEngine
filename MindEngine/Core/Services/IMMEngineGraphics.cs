@@ -2,7 +2,7 @@ namespace MindEngine.Core.Services
 {
     using Components;
 
-    public interface IMMEngineGraphics : IMMDrawableComponent, IMMEngineGraphicsService 
+    public interface IMMEngineGraphics : IMMGameComponent, IMMEngineGraphicsService 
     {
     }
 }

@@ -6,20 +6,20 @@ namespace MindEngine.Core.Contents.Assets
     {
         #region Constructors 
 
-        protected MMAsset(string name, string path)
+        protected MMAsset(string name, string asset)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if (path == null)
+            if (asset == null)
             {
-                throw new ArgumentNullException(nameof(path));
+                throw new ArgumentNullException(nameof(asset));
             }
 
             this.Name = name;
-            this.Path = path;
+            this.Asset = asset;
         }
 
         #endregion
@@ -29,7 +29,7 @@ namespace MindEngine.Core.Contents.Assets
         /// <summary>
         /// The asset file path.
         /// </summary>
-        public string Path { get; }
+        public string Asset { get; }
 
         /// <summary>
         /// The descriptive name for the asset. For example, fonts will have names

@@ -11,26 +11,26 @@ namespace MindEngine.Core.Scenes
     [DataContract]
     public class MMObject
     {
-        protected IMMEngine GlobalEngine => this.GlobalInterop.Engine;
+        protected IMMEngine Engine => this.EngineInterop.Engine;
 
         #region Graphics
 
-        protected IMMEngineGraphicsService GlobalGraphics => MMEngine.Service.Graphics;
+        protected IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
 
-        protected GraphicsDevice GlobalGraphicsDevice => this.GlobalGraphics.Device;
+        protected GraphicsDevice EngineGraphicsDevice => this.EngineGraphics.Device;
 
-        protected IMMRenderer GlobalGraphicsRenderer => this.GlobalGraphics.Renderer;
+        protected IMMRenderer EngineGraphicsRenderer => this.EngineGraphics.Renderer;
 
-        protected IMMGraphicsDeviceController GlobalGraphicsDeviceController => this.GlobalGraphics.DeviceController;
+        protected IMMGraphicsDeviceController EngineGraphicsDeviceController => this.EngineGraphics.DeviceController;
 
         #endregion
 
-        protected IMMEngineAudioService GlobalAudio => MMEngine.Service.Audio;
+        protected IMMEngineAudioService EngineAudio => MMEngine.Service.Audio;
 
-        protected IMMEngineInteropService GlobalInterop => MMEngine.Service.Interop;
+        protected IMMEngineInteropService EngineInterop => MMEngine.Service.Interop;
 
-        protected IMMEngineInputService GlobalInput => MMEngine.Service.Input;
+        protected IMMEngineInputService EngineInput => MMEngine.Service.Input;
 
-        protected IMMEngineNumericalService GlobalNumerical => MMEngine.Service.Numerical;
+        protected IMMEngineNumericalService EngineNumerical => MMEngine.Service.Numerical;
     }
 }

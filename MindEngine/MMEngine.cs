@@ -24,7 +24,7 @@
         {
             this.Content.RootDirectory = "Content";
 
-            this.IsMouseVisible = false;
+            this.IsMouseVisible = true;
         }
 
         #endregion
@@ -98,7 +98,7 @@
             get
             {
                 return this.interop
-                       ?? (this.interop = new MMEngineNullInterop(this));
+                       ?? (this.interop = new MMEngineNullInterop());
             }
 
             set
@@ -157,9 +157,6 @@
 
         protected override void LoadContent()
         {
-            // Load engine persistent asset
-            this.Interop.Asset.LoadPackage("Engine.Persistent");
-
             base.LoadContent();
         }
 
@@ -180,10 +177,7 @@
         private void UpdateInput(GameTime gameTime)
         {
             // Update input buffer
-            this.Input  .UpdateInput(gameTime);
-
-            // Update input using input buffer
-            this.Interop.UpdateInput(gameTime);
+            this.Input.UpdateInput(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -208,7 +202,8 @@
         {
             // Save immediately because the Exit is an asynchronous call, 
             // which may not finished before Process.Start() is called
-            this.Interop.Save.Save();
+            //TODO(Wuxiang)
+            //this.Interop.Save.Save();
 
             this.Exit();
 
@@ -232,7 +227,7 @@
                 {
                     if (!this.IsDisposed)
                     {
-                        // Don't set to null, for there is null checking in property 
+                        // Don't set camel case properties to null, for there is null checking in property 
                         // injection
                         this.Interop?.Dispose();
                         this.interop = null;

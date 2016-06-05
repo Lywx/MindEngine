@@ -25,7 +25,8 @@
 
         public SpriteBatch SpriteBatch { get; private set; }
 
-        public MMViewportAdapter ViewportAdapter { get; set; } = new MMDefaultViewportAdapter();
+        //TODO(Wuxiang)
+        //public MMViewportAdapter ViewportAdapter { get; set; } = new MMDefaultViewportAdapter();
 
         public Viewport Viewport => this.GraphicsDevice.Viewport;
 
