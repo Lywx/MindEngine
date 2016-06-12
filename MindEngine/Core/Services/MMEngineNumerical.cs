@@ -14,5 +14,9 @@ namespace MindEngine.Core.Services
         public void Initialize()
         {
         }
+
+        public void Dispose()
+        {
+        }
     }
 }

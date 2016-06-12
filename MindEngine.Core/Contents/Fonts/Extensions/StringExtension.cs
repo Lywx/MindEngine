@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Text;
-    using Contents.Fonts;
     using Microsoft.Xna.Framework;
 
     public static class StringExtension
@@ -38,7 +37,8 @@
                     position += 0.5f;
                 }
 
-                if (i > 0 && CJKUniqueCharIndexes.Contains(i - 1))
+                if (i > 0
+                    && CJKUniqueCharIndexes.Contains(i - 1))
                 {
                     position += 0.5f;
                 }
@@ -67,7 +67,7 @@
 
         public static void Initialize(IMMFontManager fonts)
         {
-            NSimSunRegularFont       = fonts["NSimSum Regular"];
+            NSimSunRegularFont = fonts["NSimSum Regular"];
             LucidaConsoleRegularFont = fonts["Lucida Console Regular"];
         }
 

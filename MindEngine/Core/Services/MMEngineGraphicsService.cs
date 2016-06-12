@@ -30,6 +30,8 @@ namespace MindEngine.Core.Services
 
         public GraphicsDevice Device => this.Manager.GraphicsDevice;
 
+        public MMCursorDevice Cursor => this.Graphics.Cursor;
+
         public IMMRenderer Renderer => this.Graphics.Renderer;
 
         public IMMGraphicsDeviceController DeviceController => this.Graphics.DeviceController;

@@ -1,7 +1,10 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
+    using Events;
     using IO.Directory;
+    using Processes;
+    using Saves;
 
     public interface IMMEngineInteropService 
     {
@@ -12,15 +15,13 @@ namespace MindEngine.Core.Services
 
         IMMDirectoryManager File { get; }
 
-        // TODO(Wuxiang)
-        //IMMEventManager Event { get; }
+        IMMEventManager Event { get; }
 
         IMMGameManager Game { get; }
 
         MMEngine Engine { get; }
 
-        // TODO(Wuxiang)
-        //IMMProcessManager Process { get; }
+        IMMProcessManager Process { get; }
 
         // TODO(Wuxiang)
         //IMMScreenDirector Screen { get; }
@@ -28,6 +29,6 @@ namespace MindEngine.Core.Services
         /// <remarks>
         /// Save that is replaceable in specific game 
         /// </remarks>
-        //IMMSaveManager Save { get; set; }
+        IMMSaveManager Save { get; set; }
     }
 }

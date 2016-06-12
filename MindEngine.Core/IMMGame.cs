@@ -1,9 +1,9 @@
 namespace MindEngine.Core
 {
-    using System;
+    using Components;
     using Microsoft.Xna.Framework;
 
-    public interface IMMGame : IGameComponent, IUpdateable, IDrawable, IDisposable
+    public interface IMMGame : IMMGameComponent, IUpdateable, IDrawable
     {
         void Run();
 

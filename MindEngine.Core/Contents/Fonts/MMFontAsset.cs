@@ -1,7 +1,7 @@
 namespace MindEngine.Core.Contents.Fonts
 {
     using Microsoft.Xna.Framework.Graphics;
-    using MindEngine.Core.Contents.Assets;
+    using Assets;
 
     public class MMFontAsset : MMAsset
     {
@@ -20,5 +20,10 @@ namespace MindEngine.Core.Contents.Fonts
         public int Size { get; }
 
         public SpriteFont Resource { get; set; }
+
+        public override void Dispose()
+        {
+            this.Resource = null;
+        }
     }
 }

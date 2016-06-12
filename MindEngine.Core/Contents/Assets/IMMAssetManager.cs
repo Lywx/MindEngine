@@ -1,6 +1,7 @@
 namespace MindEngine.Core.Contents.Assets
 {
     using Components;
+    using Cursors;
     using Fonts;
     using Texture;
 
@@ -11,6 +12,8 @@ namespace MindEngine.Core.Contents.Assets
         IMMFontManager Fonts { get; }
 
         IMMTextureManager Texture { get; }
+
+        IMMCursorManager Cursors { get; }
 
         #endregion
 

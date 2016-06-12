@@ -12,4 +12,38 @@
       <Design ScreenWidth="1920" ScreenHeight="1080"/>
     </Image>
   </Texture>
+  <Cursors>
+    <Cursor Name ="Default">
+      <Design NormalSelect = "entis-arrow" 
+              HelpSelect = "entis-help"
+              WorkingInBackground = "entis-background"
+              Busy = "entis-busy"
+              PrecisionSelect = "entis-precision"
+              TextSelect = "entis-text"
+              Handwriting = "entis-pencil"
+              Unavailable = "entis-forbidden"
+              VerticalResize = "entis-vertical"
+              HorizontalResize = "entis-horizontal"
+              DiagonalResize1 = "entis-resize_down_left"
+              DiagonalResize2 = "entis-resize_down_right"
+              Move = "entis-move"
+              AlternativeSelect = "entis-alternate"
+              LinkSelect = "entis-link"/>
+      <Hotspot NormalSelect="5, 2" 
+               HelpSelect="5, 2" 
+               WorkingInBackground="5, 2" 
+               Busy="16, 15" 
+               PrecisionSelect="16, 15" 
+               TextSelect="15, 15" 
+               Handwriting="6, 28" 
+               Unavailable="5, 2" 
+               VerticalResize="16, 15" 
+               HorizontalResize="16, 15" 
+               DiagonalResize1="16, 15" 
+               DiagonalResize2="16, 15" 
+               Move="16, 15" 
+               AlternativeSelect="11, 3" 
+               LinkSelect="5, 2"/>
+    </Cursor>
+  </Cursors>
 </Package>

@@ -2,9 +2,9 @@ namespace MindEngine.Core.Contents.Assets
 {
     using System;
 
-    public abstract class MMAsset
+    public abstract class MMAsset : IDisposable
     {
-        #region Constructors 
+        #region Constructors and Finalizer
 
         protected MMAsset(string name, string asset)
         {
@@ -37,5 +37,7 @@ namespace MindEngine.Core.Contents.Assets
         /// the asset filename.
         /// </summary>
         public string Name { get; set; }
+
+        public abstract void Dispose();
     }
 }

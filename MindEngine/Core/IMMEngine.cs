@@ -1,7 +1,7 @@
-﻿namespace MindEngine
+﻿namespace MindEngine.Core
 {
     using System;
-    using Core.Services;
+    using Services;
 
     public interface IMMEngine : IDisposable, IMMEngineOperations
     {

@@ -22,5 +22,7 @@ namespace MindEngine.Core.Services
         GraphicsDevice Device { get; }
 
         #endregion
+
+        MMCursorDevice Cursor { get; }
     }
 }

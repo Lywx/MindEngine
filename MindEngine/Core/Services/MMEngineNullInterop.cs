@@ -1,8 +1,11 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
+    using Events;
     using IO.Directory;
     using Microsoft.Xna.Framework.Content;
+    using Processes;
+    using Saves;
 
     internal class MMEngineNullInterop : IMMEngineInterop
     {
@@ -16,9 +19,15 @@ namespace MindEngine.Core.Services
 
         public IMMDirectoryManager File { get; }
 
+        public IMMEventManager Event { get; }
+
         public IMMGameManager Game { get; }
 
         public MMEngine Engine { get; }
+
+        public IMMProcessManager Process { get; }
+
+        public IMMSaveManager Save { get; set; }
 
         public void OnExit() {}
     }

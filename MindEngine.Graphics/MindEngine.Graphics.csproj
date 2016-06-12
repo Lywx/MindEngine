@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="IMMGraphicsSettings.cs" />
     <Compile Include="IMMRenderer.cs" />
-    <Compile Include="MMCursor.cs" />
     <Compile Include="MMGraphicsSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

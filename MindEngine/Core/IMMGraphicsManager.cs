@@ -1,8 +1,10 @@
-namespace MindEngine.Graphics
+namespace MindEngine.Core
 {
+    using Components;
+    using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 
-    public interface IMMGraphicsManager
+    public interface IMMGraphicsManager : IMMGameComponent
     {
         GraphicsDevice GraphicsDevice { get; }
 

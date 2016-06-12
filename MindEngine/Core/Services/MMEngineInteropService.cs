@@ -1,7 +1,10 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
+    using Events;
     using IO.Directory;
+    using Processes;
+    using Saves;
 
     /// <remarks>
     ///     Sealed for added new keyword and changed accessibility in MMEngine property
@@ -34,27 +37,25 @@ namespace MindEngine.Core.Services
 
         public MMEngine Engine => this.interop.Engine;
 
-        //TODO(Wuxiang)
-        //public IMMEventManager Event => this.interop.Event;
+        public IMMEventManager Event => this.interop.Event;
 
         public IMMGameManager Game => this.interop.Game;
 
-        //TODO(Wuxiang)
-        //public IMMProcessManager Process => this.interop.Process;
+        public IMMProcessManager Process => this.interop.Process;
 
         //public IMMScreenDirector Screen => this.interop.Screen;
 
-        //public IMMSaveManager Save
-        //{
-        //    get
-        //    {
-        //        return this.interop.Save;
-        //    }
+        public IMMSaveManager Save
+        {
+            get
+            {
+                return this.interop.Save;
+            }
 
-        //    set
-        //    {
-        //        this.interop.Save = value;
-        //    }
-        //}
+            set
+            {
+                this.interop.Save = value;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ namespace MindEngine.Parser
     using System;
     using System.Xml;
     using Core;
+    using Core.Utils;
     using Microsoft.Xna.Framework;
 
     public static class MMXmlReader
@@ -59,6 +60,40 @@ namespace MindEngine.Parser
             var valueObject = (object)value;
 
             ReadAttribute(valueElement, valueAttribute, ref valueObject, typeof(byte), valueDefault, valueRequired, valueInherited);
+        }
+
+        /// <remarks>
+        ///     The primary difference from the overloaded version is that it allow
+        ///     inherited from parent value when return value already has parent's value.
+        /// </remarks>
+        public static void ReadAttributeVector2(XmlElement valueElement, string valueAttribute, ref Vector2 value, Vector2 valueDefault, bool valueRequired, bool valueInherited)
+        {
+            var valueString = value.ToString();
+
+            ReadAttributeString(valueElement, valueAttribute, ref valueString, valueDefault.ToString(), valueRequired, valueInherited);
+
+            try
+            {
+                value = MMVectorConverter.ParseVector2(valueString);
+            }
+            catch (Exception)
+            {
+                value = valueDefault;
+            }
+        }
+
+        public static Vector2 ReadAttributeVector2(XmlElement valueElement, string valueAttribute, Vector2 valueDefault, bool valueRequired)
+        {
+            var valueString = ReadAttributeString(valueElement, valueAttribute, valueDefault.ToString(), valueRequired);
+
+            try
+            {
+                return MMVectorConverter.ParseVector2(valueString);
+            }
+            catch (Exception)
+            {
+                return valueDefault;
+            }
         }
 
         /// <remarks>

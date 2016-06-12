@@ -4,10 +4,11 @@ namespace MindEngine.Input
 {
     using System;
     using System.Windows.Forms;
-    using Microsoft.Xna.Framework;
+    using Core;
     using Core.Components;
-    using Input.Keyboard.EventArgs;
-    using Input.Mouse.EventArgs;
+    using Keyboard.EventArgs;
+    using Microsoft.Xna.Framework;
+    using Mouse.EventArgs;
 
     public class MMInputEventWin32 : MMCompositeComponent, IMMInputEvent
     {
@@ -46,9 +47,7 @@ namespace MindEngine.Input
 
         #region Update
 
-        public override void UpdateInput(GameTime time)
-        {
-        }
+        public override void UpdateInput(GameTime time) {}
 
         #endregion
 
@@ -74,52 +73,52 @@ namespace MindEngine.Input
         /// <summary>
         ///     Event raised when a character has been entered.
         /// </summary>
-        public event EventHandler<MMKeyInputEventArgs> CharEntered = delegate { };
+        public event EventHandler<MMKeyInputEventArgs> CharEntered = delegate {};
 
         /// <summary>
         ///     Event raised when a key has been pressed down. May fire multiple times due to keyboard repeat.
         /// </summary>
-        public event EventHandler<MMKeyEventArgs> KeyDown = delegate { };
+        public event EventHandler<MMKeyEventArgs> KeyDown = delegate {};
 
         /// <summary>
         ///     Event raised when a key has been released.
         /// </summary>
-        public event EventHandler<MMKeyEventArgs> KeyUp = delegate { };
+        public event EventHandler<MMKeyEventArgs> KeyUp = delegate {};
 
         /// <summary>
         ///     Event raised when a key has been pressed.
         /// </summary>
-        public event EventHandler<MMKeyPressEventArgs> KeyPress = delegate { };
+        public event EventHandler<MMKeyPressEventArgs> KeyPress = delegate {};
 
         /// <summary>
         ///     Event raised when a mouse button has been double clicked.
         /// </summary>
-        public event EventHandler<MMMouseEventArgs> MouseDoubleClick = delegate { };
+        public event EventHandler<MMMouseEventArgs> MouseDoubleClick = delegate {};
 
         /// <summary>
         ///     Event raised when a mouse button is pressed.
         /// </summary>
-        public event EventHandler<MMMouseEventArgs> MouseDown = delegate { };
+        public event EventHandler<MMMouseEventArgs> MouseDown = delegate {};
 
         /// <summary>
         ///     Event raised when the mouse has hovered in the same location for a short period of time.
         /// </summary>
-        public event EventHandler MouseHover = delegate { };
+        public event EventHandler MouseHover = delegate {};
 
         /// <summary>
         ///     Event raised when the mouse changes location.
         /// </summary>
-        public event EventHandler<MMMouseEventArgs> MouseMove = delegate { };
+        public event EventHandler<MMMouseEventArgs> MouseMove = delegate {};
 
         /// <summary>
         ///     Event raised when a mouse button is released.
         /// </summary>
-        public event EventHandler<MMMouseEventArgs> MouseUp = delegate { };
+        public event EventHandler<MMMouseEventArgs> MouseUp = delegate {};
 
         /// <summary>
         ///     Event raised when the mouse wheel has been moved.
         /// </summary>
-        public event EventHandler<MMMouseEventArgs> MouseScroll = delegate { };
+        public event EventHandler<MMMouseEventArgs> MouseScroll = delegate {};
 
         #endregion
 

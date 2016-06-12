@@ -1,4 +1,4 @@
-﻿namespace MindEngine
+﻿namespace MindEngine.Core
 {
     public interface IMMEngineOperations
     {

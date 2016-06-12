@@ -1,5 +1,6 @@
 namespace MindEngine.Input
 {
+    using Core;
     using Core.Components;
     using Keyboard;
     using Microsoft.Xna.Framework;
@@ -24,7 +25,7 @@ namespace MindEngine.Input
 
         public void LoadKeyboardBinding<TActions>() where TActions : MMInputActions
         {
-            this.Keyboard = new MMKeyboardInput(MMKeyboardBindingUtils.Load<TActions>(@"Control\Keyboard.ini"));
+            this.Keyboard = new MMKeyboardInput(MMKeyboardBindingUtils.Load<TActions>(@"Control (Keyboard).ini"));
         }
 
         public void LoadMouseBinding<TActions>() where TActions : MMInputActions

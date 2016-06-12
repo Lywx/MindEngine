@@ -1,10 +1,10 @@
-﻿namespace MindEngine
+﻿namespace MindEngine.Core
 {
     using System;
     using System.Diagnostics;
     using System.Reflection;
-    using Core.Services;
     using Microsoft.Xna.Framework;
+    using Services;
 
     public class MMEngine : Game, IMMEngine
     {
@@ -12,11 +12,11 @@
 
         private IMMEngineGraphics graphics;
 
-        private IMMEngineNumerical numerical;
+        private IMMEngineInput input;
 
         private IMMEngineInterop interop;
 
-        private IMMEngineInput input;
+        private IMMEngineNumerical numerical;
 
         #region Constructors
 
@@ -24,7 +24,8 @@
         {
             this.Content.RootDirectory = "Content";
 
-            this.IsMouseVisible = true;
+            // Use software cursor implemented by the engine
+            this.IsMouseVisible = false;
         }
 
         #endregion
@@ -35,33 +36,56 @@
 
         #endregion
 
+        #region Operations
+
+        public void Restart()
+        {
+            // Save immediately because the Exit is an asynchronous call, 
+            // which may not finished before Process.Start() is called
+            this.Interop.Save.Save();
+
+            this.Exit();
+
+            using (var p = Process.GetCurrentProcess())
+            {
+                Process.Start(Assembly.GetEntryAssembly().Location, p.StartInfo.Arguments);
+            }
+        }
+
+        #endregion
+
+        #region Initialization
+
+        protected override void Initialize()
+        {
+            // Service is loaded after MMEngine.Initialize. But it has to 
+            // be constructed after Components.
+            Service = new MMEngineService(
+                new MMEngineAudioService(this.Audio),
+                new MMEngineGraphicsService(this.Graphics),
+                new MMEngineInputService(this.Input),
+                new MMEngineInteropService(this.Interop),
+                new MMEngineNumericalService(this.Numerical));
+
+            // Load engine persistent asset
+            this.Interop.Asset.LoadPackage("Engine.Persistent");
+
+            // Graphics has to initialized first
+            this.Graphics.Initialize();
+            this.Input.Initialize();
+            this.Interop.Initialize();
+            this.Numerical.Initialize();
+
+            base.Initialize();
+        }
+
+        #endregion
+
         #region Components
 
         public IMMEngineAudio Audio
         {
-            get
-            {
-                return this.audio ?? (this.audio = new MMEngineNullAudio());
-            }
-
-            private set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.audio = value;
-            }
-        }
-
-
-        public IMMEngineGraphics Graphics
-        {
-            get
-            {
-                return this.graphics ?? (this.graphics = new MMEngineNullGraphics());
-            }
+            get { return this.audio ?? (this.audio = new MMEngineNullAudio()); }
 
             set
             {
@@ -70,7 +94,27 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
+                this.Components.Remove(this.graphics);
+                this.audio = value;
+                this.Components.Add(this.graphics);
+            }
+        }
+
+
+        public IMMEngineGraphics Graphics
+        {
+            get { return this.graphics ?? (this.graphics = new MMEngineNullGraphics(this)); }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
+                this.Components.Remove(this.graphics);
                 this.graphics = value;
+                this.Components.Add(this.graphics);
             }
         }
 
@@ -89,7 +133,9 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
+                this.Components.Remove(this.numerical);
                 this.numerical = value;
+                this.Components.Add(this.numerical);
             }
         }
 
@@ -108,7 +154,9 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
+                this.Components.Remove(this.interop);
                 this.interop = value;
+                this.Components.Add(this.interop);
             }
         }
 
@@ -123,46 +171,17 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
+                this.Components.Remove(this.input);
                 this.input = value;
+                this.Components.Add(this.input);
             }
-        }
-
-        #endregion
-
-        #region Initialization
-
-        protected override void Initialize()
-        {
-            // Service is loaded after MMEngine.Initialize. But it has to 
-            // be constructed after Components.
-            Service = new MMEngineService(
-                new MMEngineAudioService(this.Audio), 
-                new MMEngineGraphicsService(this.Graphics),
-                new MMEngineInputService(this.Input),
-                new MMEngineInteropService(this.Interop),
-                new MMEngineNumericalService(this.Numerical));
-
-            // Graphics has to initialized first
-            this.Graphics .Initialize();
-            this.Input    .Initialize();
-            this.Interop  .Initialize();
-            this.Numerical.Initialize();
-
-            base.Initialize();
         }
 
         #endregion
 
         #region Load and Unload
 
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
-
-        protected override void UnloadContent()
-        {
-        }
+        protected override void UnloadContent() {}
 
         #endregion
 
@@ -180,37 +199,18 @@
             this.Input.UpdateInput(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime time)
         {
             this.GraphicsDevice.Clear(Color.Transparent);
-            base.Draw(gameTime);
+            base.Draw(time);
         }
 
         protected override void OnExiting(object sender, EventArgs args)
         {
             this.Interop.OnExit();
-            base        .OnExiting(sender, args);
+            base.OnExiting(sender, args);
 
             this.Dispose(true);
-        }
-
-        #endregion
-
-        #region Operations
-
-        public void Restart()
-        {
-            // Save immediately because the Exit is an asynchronous call, 
-            // which may not finished before Process.Start() is called
-            //TODO(Wuxiang)
-            //this.Interop.Save.Save();
-
-            this.Exit();
-
-            using (var p = Process.GetCurrentProcess())
-            {
-                Process.Start(Assembly.GetEntryAssembly().Location, p.StartInfo.Arguments);
-            }
         }
 
         #endregion

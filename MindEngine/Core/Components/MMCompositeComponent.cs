@@ -1,7 +1,6 @@
 namespace MindEngine.Core.Components
 {
     using System;
-    using Graphics;
     using Microsoft.Xna.Framework;
     using Services;
 
@@ -28,38 +27,36 @@ namespace MindEngine.Core.Components
 
         #endregion
 
-        #region Service Data
+        #region Update
 
-        protected IMMEngineInputService EngineInput => MMEngine.Service.Input;
+        public virtual void UpdateInput(GameTime time) {}
 
-        protected IMMEngineInteropService EngineInterop => MMEngine.Service.Interop;
+        #endregion
 
-        protected IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
+        /// The engine component accessors here are available immediately after the 
+        /// engine is properly composited. You don't need to initialize engine to 
+        /// use engine components.
+        /// 
+        /// This part is different from the game object engine accessors, which 
+        /// only become available after the engine started running.
 
-        protected IMMEngineNumericalService EngineNumerical => MMEngine.Service.Numerical;
+        #region Engine Component Accessors
+
+        protected IMMEngineInput EngineInput => Engine.Input;
+
+        protected IMMEngineInterop EngineInterop => Engine.Interop;
+
+        protected IMMEngineGraphics EngineGraphics => Engine.Graphics;
+
+        protected IMMEngineNumerical EngineNumerical => Engine.Numerical;
 
         #endregion
 
         #region Draw
 
-        public virtual void BeginDraw(GameTime time)
-        {
+        public virtual void BeginDraw(GameTime time) {}
 
-        }
-
-        public virtual void EndDraw(GameTime time)
-        {
-
-        }
-
-        #endregion
-
-        #region Update
-
-        public virtual void UpdateInput(GameTime time)
-        {
-
-        }
+        public virtual void EndDraw(GameTime time) {}
 
         #endregion
     }

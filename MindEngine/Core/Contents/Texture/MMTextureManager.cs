@@ -2,7 +2,6 @@ namespace MindEngine.Core.Contents.Texture
 {
     using System.Collections.Generic;
     using Components;
-    using MindEngine;
 
     public class MMTextureManager : MMCompositeComponent, IMMTextureManager
     {

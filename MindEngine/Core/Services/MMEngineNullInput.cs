@@ -3,7 +3,6 @@
     using Components;
     using Input;
 
-    // TODO
     internal class MMEngineNullInput : MMCompositeComponent, IMMEngineInput
     {
         public IMMInputEvent Event { get; private set; }

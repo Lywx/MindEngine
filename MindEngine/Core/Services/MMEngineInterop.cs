@@ -2,8 +2,11 @@ namespace MindEngine.Core.Services
 {
     using Components;
     using Contents.Assets;
+    using Events;
     using IO.Directory;
     using Microsoft.Xna.Framework;
+    using Processes;
+    using Saves;
 
     public class MMEngineInterop : MMCompositeComponent, IMMEngineInterop
     {
@@ -12,26 +15,11 @@ namespace MindEngine.Core.Services
         public MMEngineInterop(MMEngine engine)
             : base(engine)
         {
-            this.Asset = new MMAssetManager(engine);
-            this.Engine.Components.Add(this.Asset);
-
-            this.File = new MMDirectoryManager();
-
-            //TODO(Wuxiang)
-            //this.Event = new MMEventManager(engine)
-            //{
-            //    UpdateOrder = 3
-            //};
-            //this.Engine.Components.Add(this.Event);
-
-            this.Game = new MMGameManager(engine);
-
-            //TODO(Wuxiang)
-            //this.Process = new MMProcessManager(engine)
-            //{
-            //    UpdateOrder = 4
-            //};
-            //this.Engine.Components.Add(this.Process);
+            this.Asset   = new MMAssetManager(engine);
+            this.File    = new MMDirectoryManager();
+            this.Event   = new MMEventManager(engine);
+            this.Game    = new MMGameManager(engine);
+            this.Process = new MMProcessManager(engine);
 
             //this.Screen = screen;
             //this.Engine.Components.Add(this.Screen);
@@ -49,24 +37,23 @@ namespace MindEngine.Core.Services
 
         public IMMDirectoryManager File { get; private set; }
 
-        //TODO(Wuxiang)
-        //public IMMEventManager Event { get; private set; }
+        public IMMEventManager Event { get; private set; }
 
         public new IMMGameManager Game { get; private set; }
 
-        //TODO(Wuxiang)
-
-        //public IMMProcessManager Process { get; private set; }
+        public IMMProcessManager Process { get; private set; }
 
         //TODO(Wuxiang)
         //public IMMScreenDirector Screen { get; private set; }
 
-        //TODO(Wuxiang)
-        //public IMMSaveManager Save { get; set; }
+        public IMMSaveManager Save { get; set; }
 
         #region Initialization
 
-        public override void Initialize() {}
+        public override void Initialize()
+        {
+            this.Asset.Initialize();
+        }
 
         #endregion
 
@@ -109,20 +96,19 @@ namespace MindEngine.Core.Services
                 this.File?.Dispose();
                 this.File = null;
 
-                //TODO(Wuxiang)
-                //this.Event?.Dispose();
-                //this.Event = null;
+                this.Event?.Dispose();
+                this.Event = null;
 
                 this.Game?.Dispose();
                 this.Game = null;
 
+                this.Process?.Dispose();
+                this.Process = null;
+
+                this.Save?.Dispose();
+                this.Save = null;
+
                 //TODO(Wuxiang)
-                //this.Process?.Dispose();
-                //this.Process = null;
-
-                //this.Save?.Dispose();
-                //this.Save = null;
-
                 //this.Screen?.Dispose();
                 //this.Screen = null;
             }

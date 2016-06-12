@@ -1,9 +1,10 @@
 ﻿namespace MindEngine.Core.Services
 {
+    using Components;
     using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 
-    internal class MMEngineNullGraphics : IMMEngineGraphics
+    internal class MMEngineNullGraphics : MMCompositeComponent, IMMEngineGraphics
     {
         public IMMGraphicsManager Manager { get; }
 
@@ -15,12 +16,11 @@
 
         public GraphicsDevice Device { get; }
 
-        public void Initialize()
-        {
-        }
+        public MMCursorDevice Cursor { get; set; }
 
-        public void Dispose()
+        public MMEngineNullGraphics(MMEngine engine) : base(engine)
         {
+            
         }
     }
 }

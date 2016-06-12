@@ -1,8 +1,8 @@
 namespace MindEngine.Core.Services
 {
-    using Microsoft.Xna.Framework;
+    using Components;
 
-    public interface IMMEngineNumerical : IGameComponent, IMMEngineNumericalService
+    public interface IMMEngineNumerical : IMMGameComponent, IMMEngineNumericalService
     {
     }
 }

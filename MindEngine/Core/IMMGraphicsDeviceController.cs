@@ -1,9 +1,10 @@
-﻿namespace MindEngine.Graphics
+﻿namespace MindEngine.Core
 {
+    using Components;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
-    public interface IMMGraphicsDeviceController
+    public interface IMMGraphicsDeviceController : IMMGameComponent
     {
         SpriteBatch SpriteBatch { get; }
 

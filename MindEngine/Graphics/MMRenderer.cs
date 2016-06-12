@@ -1,55 +1,46 @@
 namespace MindEngine.Graphics
 {
+    using System;
     using System.Globalization;
+    using Core;
+    using Core.Components;
     using Core.Contents.Fonts;
     using Core.Contents.Fonts.Alignment;
     using Core.Contents.Fonts.Extensions;
-    using Core.Scenes;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class MMRenderer : MMObject, IMMRenderer
+    public class MMRenderer : MMCompositeComponent, IMMRenderer
     {
-        #region Constructors
 
-        public MMRenderer()
+        #region Constructors and Finalizer
+
+        public MMRenderer(MMEngine engine, IMMGraphicsDeviceController deviceController)
+            : base(engine)
         {
-            // TODO
-            var cursor = new MMCursor(@"Cursor\Entis\")
+            if (deviceController == null)
             {
-                FileNormalSelect        = "arrow.ani",
-                FileHelpSelect          = "help.ani",
-                FileWorkingInBackground = "background.ani",
-                FileBusy                = "busy.ani",
-                FilePrecisionSelect     = "precision.ani",
-                FileTextSelect          = "text.ani",
-                FileHandwriting         = "pencil.ani",
-                FileUnavailable         = "forbidden.ani",
-                FileVerticalResize      = "vertical.ani",
-                FileHorizontalResize    = "horizontal.ani",
-                FileDiagonalResize1     = "resize_down_left.ani",
-                FileDiagonalResize2     = "resize_down_right.ani",
-                FileMove                = "move.ani",
-                FileAlternativeSelect   = "alternative.ani",
-                FileLinkSelect          = "link.ani"
-            };
+                throw new ArgumentNullException(nameof(deviceController));
+            }
+
+            this.DeviceController = deviceController;
+
         }
 
         #endregion
 
         #region Render Data
 
-        private SpriteBatch SpriteBatch => this.EngineGraphicsDeviceController.SpriteBatch;
+        public IMMGraphicsDeviceController DeviceController { get; }
+
+        private SpriteBatch SpriteBatch => this.DeviceController.SpriteBatch;
 
         #endregion
 
         #region Initialization
 
-        public bool Initialized { get; private set; }
-
-        public void Initialize()
+        public override void Initialize()
         {
-            this.Initialized = true;
         }
 
         #endregion
@@ -236,22 +227,23 @@ namespace MindEngine.Graphics
         public void Draw(Texture2D texture, Rectangle destination, Color color, float depth)
         {
             if (destination.Width > 0
-                &&
-                destination.Height > 0)
+                && destination.Height > 0)
             {
                 this.SpriteBatch.Draw(texture, destination, null, color, 0.0f, Vector2.Zero, SpriteEffects.None, depth);
             }
         }
 
+        public void Draw(Texture2D texture, Vector2 position, float depth)
+        {
+            this.Draw(texture, (int)position.X, (int)position.Y, Color.White, depth);
+        }
+
         public void Draw(Texture2D texture, Rectangle destination, Rectangle source, Color color, float depth)
         {
             if (source.Width > 0
-                &&
-                source.Height > 0
-                &&
-                destination.Width > 0
-                &&
-                destination.Height > 0)
+                && source.Height > 0
+                && destination.Width > 0
+                && destination.Height > 0)
             {
                 this.SpriteBatch.Draw(texture, destination, source, color, 0.0f, Vector2.Zero, SpriteEffects.None, depth);
             }
@@ -265,8 +257,7 @@ namespace MindEngine.Graphics
         public void Draw(Texture2D texture, int x, int y, Rectangle source, Color color, float depth)
         {
             if (source.Width > 0
-                &&
-                source.Height > 0)
+                && source.Height > 0)
             {
                 this.SpriteBatch.Draw(texture, new Vector2(x, y), source, color, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, depth);
             }

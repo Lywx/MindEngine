@@ -1,12 +1,15 @@
 namespace MindEngine.Graphics
 {
+    using Core.Components;
+    using Core.Contents.Fonts;
     using Core.Contents.Fonts.Alignment;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using MindEngine.Core.Contents.Fonts;
 
     public interface IMMRendererTextureOperaions
     {
+        void Draw(Texture2D texture, Vector2 position, float depth);
+
         void Draw(Texture2D texture, Rectangle destination, Rectangle source, Color color, float depth);
 
         void Draw(Texture2D texture, Rectangle destination, Color color, float depth);
@@ -48,11 +51,10 @@ namespace MindEngine.Graphics
         void End();
     }
 
-    public interface IMMRenderer :
+    public interface IMMRenderer : IMMDrawableComponent,
         IMMRendererStringOperations,
         IMMRendererTextureOperaions,
         IMMRendererBatchOperations
     {
-        
     }
 }

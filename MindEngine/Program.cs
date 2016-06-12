@@ -5,6 +5,8 @@ using System.Text;
 
 namespace MindEngine
 {
+    using Core;
+
     class Program
     {
         static void Main()

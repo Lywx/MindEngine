@@ -88,9 +88,9 @@ namespace MindEngine.Audio
         {
             var configuration = MMPlainConfigurationLoader.LoadUnique("Audio.ini");
 
-            this.VolumeEffect = MMPlainConfigurationReader.ReadValueInt(configuration, "Volume Effect", 100);
-            this.VolumeMaster = MMPlainConfigurationReader.ReadValueInt(configuration, "Volume Master", 100);
-            this.VolumeMusic = MMPlainConfigurationReader.ReadValueInt(configuration, "Volume Music", 100);
+            this.VolumeEffect = MMPlainConfigurationReader.ReadValueInt(configuration, "Effect Volume", 100);
+            this.VolumeMaster = MMPlainConfigurationReader.ReadValueInt(configuration, "Master Volume", 100);
+            this.VolumeMusic  = MMPlainConfigurationReader.ReadValueInt(configuration, "Music Volume", 100);
         }
 
         #endregion

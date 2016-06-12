@@ -1,11 +1,12 @@
 namespace MindEngine.Core.Services
 {
     using System;
+    using Components;
     using Graphics;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class MMEngineGraphics : DrawableGameComponent, IMMEngineGraphics
+    public class MMEngineGraphics : MMCompositeComponent, IMMEngineGraphics
     {
         public MMEngineGraphics(MMEngine engine, MMGraphicsSettings settings)
             : base(engine)
@@ -21,27 +22,53 @@ namespace MindEngine.Core.Services
             }
 
             this.Settings = settings;
-            this.Manager  = new MMGraphicsManager(engine, settings);
+            this.Manager = new MMGraphicsManager(engine, settings);
 
-            //TODO(Wuxiang)
             // No dependency injection here, because sprite batch is never replaced as long 
             // as this is a MonoGame application.
             this.DeviceController = new MMGraphicsDeviceController(engine);
-            //this.Game.Components.Add(this.DeviceController);
 
-            //TODO(Wuxiang)
             // No dependency injection here, because string drawer is a class focus on string 
             // drawing. The functionality is never extended in the form of inheritance.
-            //this.Renderer = new MMRenderer(this.DeviceController);
+            this.Renderer = new MMRenderer(engine, this.DeviceController);
         }
 
         public GraphicsDevice Device => this.Manager.GraphicsDevice;
 
+        public MMCursorDevice Cursor { get; set; }
+
+        #region Initialization
+
+        public override void Initialize()
+        {
+            this.Manager.Initialize();
+            this.DeviceController.Initialize();
+            this.Renderer.Initialize();
+
+            this.Cursor = new MMCursorDevice(this.EngineInterop.Asset.Cursors["Default"]);
+        }
+
+        #endregion
+
+        public override void Update(GameTime time)
+        {
+            base.Update(time);
+
+            this.Cursor.Update(time);
+        }
+
+        public override void Draw(GameTime time)
+        {
+            base.Draw(time);
+
+            this.Cursor.Draw(time);
+        }
+
         #region Setting Data
 
         public IMMGraphicsManager Manager { get; private set; }
-        
-        public IMMGraphicsSettings Settings { get; private set; }
+
+        public IMMGraphicsSettings Settings { get; }
 
         #endregion
 
@@ -49,17 +76,7 @@ namespace MindEngine.Core.Services
 
         public IMMGraphicsDeviceController DeviceController { get; private set; }
 
-        public IMMRenderer Renderer { get; private set; }
-
-        #endregion
-
-        #region Initialization
-
-        public override void Initialize()
-        {
-            //TODO(Wuxiang)
-            //this.Manager.Initialize();
-        }
+        public IMMRenderer Renderer { get; }
 
         #endregion
 
@@ -75,12 +92,10 @@ namespace MindEngine.Core.Services
                 {
                     if (!this.IsDisposed)
                     {
-                        //TODO(Wuxiang)
-                        //this.Manager?.Dispose();
+                        this.Manager?.Dispose();
                         this.Manager = null;
 
-                        //TODO(Wuxiang)
-                        //this.DeviceController?.Dispose();
+                        this.DeviceController?.Dispose();
                         this.DeviceController = null;
                     }
 

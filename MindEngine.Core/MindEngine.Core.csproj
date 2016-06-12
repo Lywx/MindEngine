@@ -55,8 +55,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MMColorExtension.cs" />
-    <Compile Include="MMColorConverter.cs" />
+    <Compile Include="Contents\Cursors\IMMCursorManager.cs" />
+    <Compile Include="Contents\Cursors\MMCursorAsset.cs" />
+    <Compile Include="Contents\Cursors\MMCursorDesign.cs" />
+    <Compile Include="Contents\Cursors\MMCursorHotspot.cs" />
+    <Compile Include="Contents\Cursors\MMCursorResource.cs" />
+    <Compile Include="Contents\Cursors\MMCursorShape.cs" />
+    <Compile Include="Services\Debug\MMDebugBlockTimer.cs" />
+    <Compile Include="Services\Debug\MMDebugBlockTimerRecord.cs" />
+    <Compile Include="Services\Events\IMMEvent.cs" />
+    <Compile Include="Services\Events\IMMEventListener.cs" />
+    <Compile Include="Services\Events\IMMEventManager.cs" />
+    <Compile Include="Services\Events\MMEvent.cs" />
+    <Compile Include="Services\Events\MMEventListener.cs" />
+    <Compile Include="Services\Processes\IMMProcess.cs" />
+    <Compile Include="Services\Processes\IMMProcessManager.cs" />
+    <Compile Include="Services\Processes\IMMProcessManagerItem.cs" />
+    <Compile Include="Services\Processes\MMProcess.cs" />
+    <Compile Include="Services\Processes\MMProcessCategory.cs" />
+    <Compile Include="Utils\MMFrameCounter.cs" />
+    <Compile Include="Utils\MMFrameCounterInstance.cs" />
+    <Compile Include="Services\Processes\MMProcessState.cs" />
+    <Compile Include="Services\Processes\MMProcessInstance_SoundEffect.cs" />
+    <Compile Include="Services\Processes\MMProcessInstance_Count.cs" />
+    <Compile Include="Services\Processes\MMProcessInstance_Wait.cs" />
+    <Compile Include="Services\Saves\IMMSaveManager.cs" />
+    <Compile Include="Utils\MMColorExtension.cs" />
+    <Compile Include="Utils\MMColorConverter.cs" />
     <Compile Include="Components\IMMDrawableComponent.cs" />
     <Compile Include="Components\IMMDrawableComponentOperations.cs" />
     <Compile Include="Contents\Extensions\ContentManagerExtension.cs" />
@@ -88,6 +113,11 @@
     <Compile Include="Contents\Assets\MMAsset.cs" />
     <Compile Include="Contents\Assets\MMAssetDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sessions\IMMSession.cs" />
+    <Compile Include="Sessions\IMMSessionController.cs" />
+    <Compile Include="Sessions\IMMSessionData.cs" />
+    <Compile Include="Utils\MMFrameCounterState.cs" />
+    <Compile Include="Utils\MMVectorConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contents\Settings\" />

@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core;
+    using Core.Components;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using MindEngine;
-    using MindEngine.Core.Components;
 
     /// <summary>
-    /// It is a wrapper class around the GraphicsDevice. 
+    ///     It is a wrapper class around the GraphicsDevice.
     /// </summary>
     public class MMGraphicsDeviceController : MMCompositeComponent, IMMGraphicsDeviceController
     {
@@ -21,9 +21,20 @@
 
         #endregion
 
+        #region Initialization
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            this.MatrixInitialize();
+        }
+
+        #endregion
+
         #region Components
 
-        public SpriteBatch SpriteBatch { get; private set; }
+        public SpriteBatch SpriteBatch { get; }
 
         //TODO(Wuxiang)
         //public MMViewportAdapter ViewportAdapter { get; set; } = new MMDefaultViewportAdapter();
@@ -72,7 +83,7 @@
 
         #region Scissor Test
 
-        private List<RasterizerState> rasterizerStatesCache = new List<RasterizerState>();
+        private readonly List<RasterizerState> rasterizerStatesCache = new List<RasterizerState>();
 
         public Rectangle ScissorRectangle
         {
@@ -81,14 +92,14 @@
         }
 
         /// <reference>
-        /// http://gamedev.stackexchange.com/questions/24697/how-to-clip-cut-off-text-in-a-textbox 
+        ///     http://gamedev.stackexchange.com/questions/24697/how-to-clip-cut-off-text-in-a-textbox
         /// </reference>
         /// <summary>
-        /// Whether enable scissor in rasterization. 
+        ///     Whether enable scissor in rasterization.
         /// </summary>
         /// <remarks>
-        /// Set it to true, before using the scissor. After drawing using sprite
-        /// batch, you could set it to false before sprite batch end.
+        ///     Set it to true, before using the scissor. After drawing using sprite
+        ///     batch, you could set it to false before sprite batch end.
         /// </remarks>
         public bool ScissorRectangleEnabled
         {
@@ -110,18 +121,16 @@
             for (var i = 0; i < this.rasterizerStatesCache.Count; i++)
             {
                 var state = this.rasterizerStatesCache[i];
-                if (
-                    state.ScissorTestEnable == scissorEnabled &&
-                    currentState.CullMode == state.CullMode &&
+                if (state.ScissorTestEnable == scissorEnabled
+                    && currentState.CullMode == state.CullMode
 
                     // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    currentState.DepthBias == state.DepthBias &&
-                    currentState.FillMode == state.FillMode &&
-                    currentState.MultiSampleAntiAlias == state.MultiSampleAntiAlias &&
+                    && currentState.DepthBias == state.DepthBias
+                    && currentState.FillMode == state.FillMode
+                    && currentState.MultiSampleAntiAlias == state.MultiSampleAntiAlias
 
                     // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    currentState.SlopeScaleDepthBias == state.SlopeScaleDepthBias
-                )
+                    && currentState.SlopeScaleDepthBias == state.SlopeScaleDepthBias)
                 {
                     return state;
                 }
@@ -129,12 +138,12 @@
 
             var newState = new RasterizerState
             {
-                ScissorTestEnable    = scissorEnabled,
-                CullMode             = currentState.CullMode,
-                DepthBias            = currentState.DepthBias,
-                FillMode             = currentState.FillMode,
+                ScissorTestEnable = scissorEnabled,
+                CullMode = currentState.CullMode,
+                DepthBias = currentState.DepthBias,
+                FillMode = currentState.FillMode,
                 MultiSampleAntiAlias = currentState.MultiSampleAntiAlias,
-                SlopeScaleDepthBias  = currentState.SlopeScaleDepthBias
+                SlopeScaleDepthBias = currentState.SlopeScaleDepthBias
             };
 
             this.rasterizerStatesCache.Add(newState);
@@ -271,8 +280,8 @@
 
                 if (matrices != null)
                 {
-                    matrices.World      = this.matrixWorld;
-                    matrices.View       = this.matrixView;
+                    matrices.World = this.matrixWorld;
+                    matrices.View = this.matrixView;
                     matrices.Projection = this.matrixProjection;
                 }
 
@@ -310,23 +319,23 @@
                 }
             }
 
-            this.effectChanged  = false;
+            this.effectChanged = false;
             this.textureChanged = false;
 
-            this.matrixWorldChanged      = false;
-            this.matrixViewChanged       = false;
+            this.matrixWorldChanged = false;
+            this.matrixViewChanged = false;
             this.matrixProjectionChanged = false;
         }
 
         private void EffectResetDefault()
         {
-            this.effectDefault.Alpha              = 1f;
-            this.effectDefault.TextureEnabled     = false;
-            this.effectDefault.Texture            = null;
+            this.effectDefault.Alpha = 1f;
+            this.effectDefault.TextureEnabled = false;
+            this.effectDefault.Texture = null;
             this.effectDefault.VertexColorEnabled = true;
 
-            this.effectDefault.View       = this.matrixView;
-            this.effectDefault.World      = this.matrixWorld;
+            this.effectDefault.View = this.matrixView;
+            this.effectDefault.World = this.matrixWorld;
             this.effectDefault.Projection = this.matrixProjection;
         }
 
@@ -342,7 +351,7 @@
 
         #region Effect Matrix
 
-        private Stack<Matrix> matrixStack = new Stack<Matrix>();
+        private readonly Stack<Matrix> matrixStack = new Stack<Matrix>();
 
         private Matrix matrixWorld = Matrix.Identity;
 
@@ -394,20 +403,9 @@
 
         private void MatrixReset()
         {
-            this.matrixWorldChanged      = false;
-            this.matrixViewChanged       = false;
+            this.matrixWorldChanged = false;
+            this.matrixViewChanged = false;
             this.matrixProjectionChanged = false;
-        }
-
-        #endregion
-
-        #region Initialization
-
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            this.MatrixInitialize();
         }
 
         #endregion
@@ -428,8 +426,8 @@
         private void ResetDevice()
         {
             // Reset states
-            this.GraphicsDevice.RasterizerState  = RasterizerState.CullNone;
-            this.GraphicsDevice.BlendState       = BlendState.AlphaBlend;
+            this.GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+            this.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             this.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
 
             // Reset buffers
@@ -446,7 +444,7 @@
             PrimitiveType primitiveType,
             T[] vertexData,
             int vertexOffset,
-            int primitiveCount) 
+            int primitiveCount)
             where T : struct, IVertexType
         {
             if (primitiveCount <= 0)

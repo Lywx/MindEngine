@@ -1,9 +1,10 @@
 ﻿namespace MindEngine.Audio
 {
-    using Microsoft.Xna.Framework;
+    using Core;
+    using Core.Components;
     using Microsoft.Xna.Framework.Audio;
 
-    public interface IMMAudioDeviceController
+    public interface IMMAudioDeviceController : IMMGameComponent, IMMUpdateableOperations
     {
         AudioEngine AudioEngine { get; }
 
@@ -11,10 +12,10 @@
 
         WaveBank WaveBank { get; }
 
+        bool IsInitialized { get; }
+
         Cue GetCue(string cueName);
 
         void PlayCue(string cueName);
-
-        void Update(GameTime gameTime);
     }
 }

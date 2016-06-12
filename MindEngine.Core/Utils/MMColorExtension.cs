@@ -1,4 +1,4 @@
-namespace MindEngine.Core
+namespace MindEngine.Core.Utils
 {
     using Microsoft.Xna.Framework;
 

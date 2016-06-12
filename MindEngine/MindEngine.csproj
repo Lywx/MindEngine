@@ -53,18 +53,24 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Audio\MMAudioController.cs" />
+    <Compile Include="Audio\MMAudioDeviceController.cs" />
+    <Compile Include="Audio\MMAudioManager.cs" />
     <Compile Include="Audio\MMAudioSettings.cs" />
     <Compile Include="Core\Components\MMGameManager.cs" />
     <Compile Include="Core\Contents\Assets\MMAssetManager.cs" />
     <Compile Include="Core\Contents\Fonts\MMFontManager.cs" />
+    <Compile Include="Core\Contents\Cursors\MMCursorManager.cs" />
     <Compile Include="Core\Contents\Texture\MMTextureManager.cs" />
     <Compile Include="Core\Scenes\MMObject.cs" />
+    <Compile Include="Core\Services\Events\MMEventManager.cs" />
     <Compile Include="Core\Services\IMMEngineAudio.cs" />
     <Compile Include="Core\Services\IMMEngineAudioService.cs" />
     <Compile Include="Core\Services\IMMEngineGraphics.cs" />
     <Compile Include="Core\Services\IMMEngineGraphicsService.cs" />
     <Compile Include="Core\Services\IMMEngineInput.cs" />
     <Compile Include="Core\Services\IMMEngineInputService.cs" />
+    <Compile Include="Graphics\MMCursorDevice.cs" />
     <Compile Include="Core\Services\MMEngineAudio.cs" />
     <Compile Include="Core\Services\MMEngineAudioService.cs" />
     <Compile Include="Core\Services\MMEngineGraphics.cs" />
@@ -80,23 +86,27 @@
     <Compile Include="Core\Services\MMEngineNumerical.cs" />
     <Compile Include="Core\Services\MMEngineNumericalService.cs" />
     <Compile Include="Core\Services\MMEngineService.cs" />
-    <Compile Include="Graphics\IMMGraphicsDeviceController.cs" />
-    <Compile Include="Graphics\IMMGraphicsManager.cs" />
+    <Compile Include="Core\IMMGraphicsDeviceController.cs" />
+    <Compile Include="Core\IMMGraphicsManager.cs" />
+    <Compile Include="Core\Services\Processes\MMProcessManager.cs" />
+    <Compile Include="Core\Services\Saves\MMSaveManager.cs" />
+    <Compile Include="Core\Sessions\MMSession.cs" />
     <Compile Include="Graphics\MMGraphicsDeviceController.cs" />
     <Compile Include="Graphics\MMGraphicsManager.cs" />
     <Compile Include="Graphics\MMRenderer.cs" />
-    <Compile Include="IMMEngine.cs" />
+    <Compile Include="Core\IMMEngine.cs" />
     <Compile Include="Core\Services\IMMEngineInterop.cs" />
     <Compile Include="Core\Services\IMMEngineInteropService.cs" />
     <Compile Include="Core\Services\IMMEngineNumerical.cs" />
     <Compile Include="Core\Services\IMMEngineNumericalService.cs" />
-    <Compile Include="IMMEngineOperations.cs" />
+    <Compile Include="Core\IMMEngineOperations.cs" />
     <Compile Include="Core\Services\IMMEngineService.cs" />
     <Compile Include="Input\MMInputEventWin32.cs" />
     <Compile Include="Input\MMInputState.cs" />
     <Compile Include="Input\Keyboard\MMKeyboardBindingUtils.cs" />
-    <Compile Include="MMEngine.cs" />
+    <Compile Include="Core\MMEngine.cs" />
     <Compile Include="Core\Components\MMCompositeComponent.cs" />
+    <Compile Include="Core\MMGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +167,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Configuration\Audio.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuration\Control %28Keyboard%29.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuration\Graphics.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Audio\Win\Audio.xgs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -164,51 +183,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Audio\Win\Wave Bank.xwb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\alternate.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\arrow.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\background.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\busy.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\forbidden.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\help.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\horizontal.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\link.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\move.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\pencil.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\precision.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\resize_down_left.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\resize_down_right.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\text.ani">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Cursor\Entis\vertical.ani">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Engine.Persistent.xnb">

@@ -3,34 +3,85 @@
   <xs:element name="Package">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="Fonts">
+        <xs:element name="Fonts" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="Font">
+              <xs:element name="Font" maxOccurs="unbounded">
                 <xs:complexType>
-                  <xs:attribute name="Name" type="xs:string" use="required" />
-                  <xs:attribute name="Size" type="xs:unsignedByte" use="required" />
-                  <xs:attribute name="Asset" type="xs:string" use="required" />
+                  <xs:attribute name="Name" type="xs:string" use="required"/>
+                  <xs:attribute name="Size" type="xs:unsignedInt" use="required"/>
+                  <xs:attribute name="Asset" type="xs:string" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Texture">
+        <xs:element name="Texture" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="Image">
+              <xs:element name="Image" maxOccurs="unbounded">
                 <xs:complexType>
-                  <xs:sequence minOccurs="1">
-                    <xs:element name="Design">
+                  <xs:sequence>
+                    <xs:element name="Design" minOccurs="1">
                       <xs:complexType>
-                        <xs:attribute name="ScreenWidth" type="xs:unsignedShort" use="required" />
-                        <xs:attribute name="ScreenHeight" type="xs:unsignedShort" use="required" />
+                        <xs:attribute name="ScreenWidth" type="xs:unsignedInt" use="required"/>
+                        <xs:attribute name="ScreenHeight" type="xs:unsignedInt" use="required"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute name="Name" type="xs:string" use="required" />
-                  <xs:attribute name="Asset" type="xs:string" use="required" />
+                  <xs:attribute name="Name" type="xs:string" use="required"/>
+                  <xs:attribute name="Asset" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Cursors" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cursor" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Design" minOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="NormalSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="HelpSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="WorkingInBackground" type="xs:string" use="required"/>
+                        <xs:attribute name="Busy" type="xs:string" use="required"/>
+                        <xs:attribute name="PrecisionSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="TextSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="Handwriting" type="xs:string" use="required"/>
+                        <xs:attribute name="Unavailable" type="xs:string" use="required"/>
+                        <xs:attribute name="VerticalResize" type="xs:string" use="required"/>
+                        <xs:attribute name="HorizontalResize" type="xs:string" use="required"/>
+                        <xs:attribute name="DiagonalResize1" type="xs:string" use="required"/>
+                        <xs:attribute name="DiagonalResize2" type="xs:string" use="required"/>
+                        <xs:attribute name="Move" type="xs:string" use="required"/>
+                        <xs:attribute name="AlternativeSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="LinkSelect" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Hotspot" minOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="NormalSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="HelpSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="WorkingInBackground" type="xs:string" use="required"/>
+                        <xs:attribute name="Busy" type="xs:string" use="required"/>
+                        <xs:attribute name="PrecisionSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="TextSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="Handwriting" type="xs:string" use="required"/>
+                        <xs:attribute name="Unavailable" type="xs:string" use="required"/>
+                        <xs:attribute name="VerticalResize" type="xs:string" use="required"/>
+                        <xs:attribute name="HorizontalResize" type="xs:string" use="required"/>
+                        <xs:attribute name="DiagonalResize1" type="xs:string" use="required"/>
+                        <xs:attribute name="DiagonalResize2" type="xs:string" use="required"/>
+                        <xs:attribute name="Move" type="xs:string" use="required"/>
+                        <xs:attribute name="AlternativeSelect" type="xs:string" use="required"/>
+                        <xs:attribute name="LinkSelect" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Name" type="xs:string" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
