@@ -65,11 +65,10 @@
     <Compile Include="MMInputAction.cs" />
     <Compile Include="MMInputActionParser.cs" />
     <Compile Include="MMInputActions.cs" />
-    <Compile Include="Keyboard\EventArgs\MMKeyPressEventArgs.cs" />
-    <Compile Include="Keyboard\EventArgs\MMKeyInputEventArgs.cs" />
+    <Compile Include="Keyboard\EventArgs\MMCharEventArgs.cs" />
     <Compile Include="Mouse\IMMMouseInput.cs" />
-    <Compile Include="Mouse\MMMouseButtons.cs" />
     <Compile Include="Mouse\EventArgs\MMMouseEventArgs.cs" />
+    <Compile Include="Mouse\MMMouseButtons.cs" />
     <Compile Include="Mouse\MMMouseInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

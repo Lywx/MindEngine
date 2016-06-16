@@ -30,7 +30,7 @@
 /processorParam:TextureFormat=Color
 /build:Texture/Screen.Blank.png
 
-#begin Cursors/entis-alternate.png
+#begin Cursors/entis_alternate.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -39,9 +39,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-alternate.png
+/build:Cursors/entis_alternate.png
 
-#begin Cursors/entis-arrow.png
+#begin Cursors/entis_arrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -50,9 +50,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-arrow.png
+/build:Cursors/entis_arrow.png
 
-#begin Cursors/entis-background.png
+#begin Cursors/entis_background.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -61,9 +61,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-background.png
+/build:Cursors/entis_background.png
 
-#begin Cursors/entis-busy.png
+#begin Cursors/entis_busy.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -72,9 +72,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-busy.png
+/build:Cursors/entis_busy.png
 
-#begin Cursors/entis-forbidden.png
+#begin Cursors/entis_forbidden.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,9 +83,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-forbidden.png
+/build:Cursors/entis_forbidden.png
 
-#begin Cursors/entis-help.png
+#begin Cursors/entis_help.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -94,9 +94,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-help.png
+/build:Cursors/entis_help.png
 
-#begin Cursors/entis-horizontal.png
+#begin Cursors/entis_horizontal.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -105,9 +105,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-horizontal.png
+/build:Cursors/entis_horizontal.png
 
-#begin Cursors/entis-link.png
+#begin Cursors/entis_link.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -116,9 +116,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-link.png
+/build:Cursors/entis_link.png
 
-#begin Cursors/entis-move.png
+#begin Cursors/entis_move.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -127,9 +127,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-move.png
+/build:Cursors/entis_move.png
 
-#begin Cursors/entis-pencil.png
+#begin Cursors/entis_pencil.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -138,9 +138,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-pencil.png
+/build:Cursors/entis_pencil.png
 
-#begin Cursors/entis-precision.png
+#begin Cursors/entis_precision.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -149,9 +149,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-precision.png
+/build:Cursors/entis_precision.png
 
-#begin Cursors/entis-resize_down_left.png
+#begin Cursors/entis_resize_down_left.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -160,9 +160,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-resize_down_left.png
+/build:Cursors/entis_resize_down_left.png
 
-#begin Cursors/entis-resize_down_right.png
+#begin Cursors/entis_resize_down_right.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -171,9 +171,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-resize_down_right.png
+/build:Cursors/entis_resize_down_right.png
 
-#begin Cursors/entis-text.png
+#begin Cursors/entis_text.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -182,9 +182,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-text.png
+/build:Cursors/entis_text.png
 
-#begin Cursors/entis-vertical.png
+#begin Cursors/entis_vertical.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -193,5 +193,5 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Cursors/entis-vertical.png
+/build:Cursors/entis_vertical.png
 

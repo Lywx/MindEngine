@@ -224,43 +224,39 @@ namespace MindEngine.Graphics
 
         #region Draw Helpers
 
-        public void Draw(Texture2D texture, Rectangle destination, Color color, float depth)
-        {
-            if (destination.Width > 0
-                && destination.Height > 0)
-            {
-                this.SpriteBatch.Draw(texture, destination, null, color, 0.0f, Vector2.Zero, SpriteEffects.None, depth);
-            }
-        }
-
         public void Draw(Texture2D texture, Vector2 position, float depth)
         {
-            this.Draw(texture, (int)position.X, (int)position.Y, Color.White, depth);
-        }
-
-        public void Draw(Texture2D texture, Rectangle destination, Rectangle source, Color color, float depth)
-        {
-            if (source.Width > 0
-                && source.Height > 0
-                && destination.Width > 0
-                && destination.Height > 0)
-            {
-                this.SpriteBatch.Draw(texture, destination, source, color, 0.0f, Vector2.Zero, SpriteEffects.None, depth);
-            }
+            this.Draw(texture, position, null, Color.White, depth);
         }
 
         public void Draw(Texture2D texture, int x, int y, Color color, float depth)
         {
-            this.SpriteBatch.Draw(texture, new Vector2(x, y), null, color, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, depth);
+            this.Draw(texture, x, y, null, color, depth);
         }
 
-        public void Draw(Texture2D texture, int x, int y, Rectangle source, Color color, float depth)
+        public void Draw(Texture2D texture, int x, int y, Rectangle? source, Color color, float depth)
         {
-            if (source.Width > 0
-                && source.Height > 0)
-            {
-                this.SpriteBatch.Draw(texture, new Vector2(x, y), source, color, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, depth);
-            }
+            this.Draw(texture, new Vector2(x, y), source, color, depth);
+        }
+
+        public void Draw(Texture2D texture, Vector2 position, Vector2 size, Color color, float depth)
+        {
+            this.Draw(texture, new Rectangle(position.ToPoint(), size.ToPoint()), color, depth);
+        }
+
+        private void Draw(Texture2D texture, Vector2 position, Rectangle? source, Color color, float depth)
+        {
+            this.SpriteBatch.Draw(texture, position, source, color, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, depth);
+        }
+
+        public void Draw(Texture2D texture, Rectangle destination, Color color, float depth)
+        {
+            this.SpriteBatch.Draw(texture, destination, null, color, 0.0f, Vector2.Zero, SpriteEffects.None, depth);
+        }
+
+        public void Draw(Texture2D texture, Rectangle destination, Rectangle? source, Color color, float depth)
+        {
+            this.SpriteBatch.Draw(texture, destination, source, color, 0.0f, Vector2.Zero, SpriteEffects.None, depth);
         }
 
         #endregion

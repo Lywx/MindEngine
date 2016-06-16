@@ -22,5 +22,10 @@
         {
             return new MMKeyEventArgs(args.KeyCode);
         }
+
+        public static implicit operator MMKeyEventArgs(KeyPressEventArgs args)
+        {
+            return new MMKeyEventArgs((Keys)args.KeyChar);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace MindEngine.Core.Contents.Texture
 {
+    using System;
     using Assets;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -40,6 +41,7 @@
         public override void Dispose()
         {
             this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)

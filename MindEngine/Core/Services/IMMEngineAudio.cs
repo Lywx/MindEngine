@@ -1,6 +1,6 @@
 namespace MindEngine.Core.Services
 {
-    public interface IMMEngineAudio : IMMEngineAudioService
+    public interface IMMEngineAudio : IMMEngineAudioService, IMMUpdateableOperations
     {
     }
 }

@@ -1,8 +1,8 @@
 namespace MindEngine.Graphics
 {
     using System;
+    using Core;
     using Core.Contents.Cursors;
-    using Core.Scenes;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -129,6 +129,8 @@ namespace MindEngine.Graphics
         public void Dispose()
         {
             this.Dispose(true);
+
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)

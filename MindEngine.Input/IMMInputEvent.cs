@@ -15,7 +15,7 @@ namespace MindEngine.Input
         /// <summary>
         ///     Event raised when a character has been entered.
         /// </summary>
-        event EventHandler<MMKeyInputEventArgs> CharEntered;
+        event EventHandler<MMCharEventArgs> CharEntered;
 
         /// <summary>
         ///     Event raised when a key has been pressed down. May fire multiple
@@ -31,7 +31,7 @@ namespace MindEngine.Input
         /// <summary>
         ///     Event raised when a char key has been pressed.
         /// </summary>
-        event EventHandler<MMKeyPressEventArgs> KeyPress;
+        event EventHandler<MMKeyEventArgs> KeyPress;
 
         /// <summary>
         ///     Event raised when a mouse button has been double clicked.

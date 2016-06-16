@@ -8,15 +8,17 @@ namespace MindEngine.Graphics
 
     public interface IMMRendererTextureOperaions
     {
+        void Draw(Texture2D texture, int x, int y, Color color, float depth);
+
+        void Draw(Texture2D texture, int x, int y, Rectangle? source, Color color, float depth);
+
         void Draw(Texture2D texture, Vector2 position, float depth);
 
-        void Draw(Texture2D texture, Rectangle destination, Rectangle source, Color color, float depth);
+        void Draw(Texture2D texture, Vector2 position, Vector2 size, Color color, float depth);
+
+        void Draw(Texture2D texture, Rectangle destination, Rectangle? source, Color color, float depth);
 
         void Draw(Texture2D texture, Rectangle destination, Color color, float depth);
-
-        void Draw(Texture2D texture, int x, int y, Rectangle source, Color color, float depth);
-        
-        void Draw(Texture2D texture, int x, int y, Color color, float depth);
     }
 
     public interface IMMRendererStringOperations

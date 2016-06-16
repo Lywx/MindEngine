@@ -26,8 +26,7 @@
         public void Dispose()
         {
             this.Dispose(true);
-
-            // Don't call GC.SuppressFinalize because this only dispose the Texture data.
+            GC.SuppressFinalize(this);
         }
 
         private bool IsDisposed { get; set; }

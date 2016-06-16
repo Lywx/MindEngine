@@ -42,6 +42,7 @@ namespace MindEngine.Core.Contents.Cursors
         public void Dispose()
         {
             this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -53,20 +54,49 @@ namespace MindEngine.Core.Contents.Cursors
                     if (!this.IsDisposed)
                     {
                         this.NormalSelect?.Dispose();
+                        this.NormalSelect = null;
+
                         this.HelpSelect?.Dispose();
+                        this.HelpSelect = null;
+
                         this.WorkingInBackground?.Dispose();
+                        this.WorkingInBackground = null;
+
                         this.Busy?.Dispose();
+                        this.Busy = null;
+
                         this.PrecisionSelect?.Dispose();
+                        this.PrecisionSelect = null;
+
                         this.TextSelect?.Dispose();
+                        this.TextSelect = null;
+
                         this.Handwriting?.Dispose();
+                        this.Handwriting = null;
+
                         this.Unavailable?.Dispose();
+                        this.Unavailable = null;
+
                         this.VerticalResize?.Dispose();
+                        this.VerticalResize = null;
+                        
                         this.HorizontalResize?.Dispose();
+                        this.HorizontalResize = null;
+
                         this.DiagonalResize1?.Dispose();
+                        this.DiagonalResize1 = null;
+
                         this.DiagonalResize2?.Dispose();
+                        this.DiagonalResize2 = null;
+
                         this.Move?.Dispose();
+                        this.Move = null;
+
                         this.AlternativeSelect?.Dispose();
+                        this.AlternativeSelect = null;
+
                         this.LinkSelect?.Dispose();
+                        this.LinkSelect = null;
                     }
 
                     this.IsDisposed = true;

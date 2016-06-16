@@ -42,7 +42,7 @@
         {
             // Save immediately because the Exit is an asynchronous call, 
             // which may not finished before Process.Start() is called
-            this.Interop.Save.Save();
+            this.Interop.Save?.Save();
 
             this.Exit();
 
@@ -58,8 +58,7 @@
 
         protected override void Initialize()
         {
-            // Service is loaded after MMEngine.Initialize. But it has to 
-            // be constructed after Components.
+            // Provide global service access before component initialization
             Service = new MMEngineService(
                 new MMEngineAudioService(this.Audio),
                 new MMEngineGraphicsService(this.Graphics),
@@ -94,9 +93,7 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
-                this.Components.Remove(this.graphics);
                 this.audio = value;
-                this.Components.Add(this.graphics);
             }
         }
 
@@ -112,9 +109,7 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
-                this.Components.Remove(this.graphics);
                 this.graphics = value;
-                this.Components.Add(this.graphics);
             }
         }
 
@@ -133,9 +128,7 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
-                this.Components.Remove(this.numerical);
                 this.numerical = value;
-                this.Components.Add(this.numerical);
             }
         }
 
@@ -154,9 +147,7 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
-                this.Components.Remove(this.interop);
                 this.interop = value;
-                this.Components.Add(this.interop);
             }
         }
 
@@ -171,9 +162,7 @@
                     throw new ArgumentNullException(nameof(value));
                 }
 
-                this.Components.Remove(this.input);
                 this.input = value;
-                this.Components.Add(this.input);
             }
         }
 
@@ -181,16 +170,20 @@
 
         #region Load and Unload
 
-        protected override void UnloadContent() {}
-
         #endregion
 
         #region Draw and Update  
 
-        protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime time)
         {
-            this.UpdateInput(gameTime);
-            base.Update(gameTime);
+            this.UpdateInput(time);
+
+            this.Numerical.Update(time);
+            this.Interop.Update(time);
+            this.Graphics.Update(time);
+            this.Audio.Update(time);
+
+            base.Update(time);
         }
 
         private void UpdateInput(GameTime gameTime)
@@ -202,6 +195,7 @@
         protected override void Draw(GameTime time)
         {
             this.GraphicsDevice.Clear(Color.Transparent);
+            this.Graphics.Draw(time);
             base.Draw(time);
         }
 

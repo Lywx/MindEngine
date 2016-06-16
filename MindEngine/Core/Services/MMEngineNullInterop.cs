@@ -1,34 +1,40 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
-    using Events;
+    using Event;
     using IO.Directory;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
-    using Processes;
-    using Saves;
+    using Process;
+    using Save;
+    using Scenes;
 
     internal class MMEngineNullInterop : IMMEngineInterop
     {
+        public ContentManager Content { get; }
+
         public void Initialize() {}
 
         public void Dispose() {}
 
-        public IMMAssetManager Asset { get; }
+        public MMAssetManager Asset { get; }
 
-        public ContentManager Content { get; }
+        public MMDirectoryManager File { get; }
 
-        public IMMDirectoryManager File { get; }
+        public MMEventManager Event { get; }
 
-        public IMMEventManager Event { get; }
-
-        public IMMGameManager Game { get; }
+        public MMGameManager Game { get; }
 
         public MMEngine Engine { get; }
 
-        public IMMProcessManager Process { get; }
+        public MMProcessManager Process { get; }
 
-        public IMMSaveManager Save { get; set; }
+        public MMScreenManager Screen { get; }
+
+        public MMSaveManager Save { get; set; }
 
         public void OnExit() {}
+
+        public void Update(GameTime time) {}
     }
 }

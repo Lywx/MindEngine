@@ -1,6 +1,7 @@
 ﻿namespace MindEngine.Core.Services
 {
     using Audio;
+    using Microsoft.Xna.Framework;
 
     internal class MMEngineNullAudio : IMMEngineAudio
     {
@@ -12,9 +13,6 @@
 
         public IMMAudioDeviceController DeviceController { get; }
 
-        public MMEngineNullAudio()
-        {
-            
-        }
+        public void Update(GameTime time) {}
     }
 }

@@ -1,34 +1,31 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
-    using Events;
+    using Event;
     using IO.Directory;
-    using Processes;
-    using Saves;
+    using Process;
+    using Save;
+    using Scenes;
 
-    public interface IMMEngineInteropService 
+    public interface IMMEngineInteropService
     {
-        IMMAssetManager Asset { get; }
+        MMAssetManager Asset { get; }
 
-        // TODO(Wuxiang)
-        //IMMConsole Console { get; set; }
+        MMDirectoryManager File { get; }
 
-        IMMDirectoryManager File { get; }
+        MMEventManager Event { get; }
 
-        IMMEventManager Event { get; }
-
-        IMMGameManager Game { get; }
+        MMGameManager Game { get; }
 
         MMEngine Engine { get; }
 
-        IMMProcessManager Process { get; }
+        MMProcessManager Process { get; }
 
-        // TODO(Wuxiang)
-        //IMMScreenDirector Screen { get; }
+        MMScreenManager Screen { get; }
 
         /// <remarks>
-        /// Save that is replaceable in specific game 
+        ///     Save that is replaceable in specific game
         /// </remarks>
-        IMMSaveManager Save { get; set; }
+        MMSaveManager Save { get; set; }
     }
 }

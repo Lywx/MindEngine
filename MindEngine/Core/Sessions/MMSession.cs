@@ -6,11 +6,10 @@ namespace MindEngine.Core.Sessions
     using IO.Directory;
 
     [DataContract]
-    public sealed class MMSession<TData, TController> : IMMSession<TData, TController>
+    public sealed class MMSession<TData> : IMMSession<TData>
         where TData : IMMSessionData, new()
-        where TController : IMMSessionController<TData>, new()
     {
-        #region Constructors
+        #region Constructors and Finalizer
 
         private MMSession()
         {
@@ -21,63 +20,46 @@ namespace MindEngine.Core.Sessions
 
         #region Singleton
 
-        private static MMSession<TData, TController> Singleton { get; set; }
+        private static MMSession<TData> Singleton { get; set; }
 
         #endregion Singleton
 
         #region Session Update
 
+        public void Initialize()
+        {
+            this.Data.Initialize();
+        }
+
         public void Update()
         {
-            this.Controller.Update();
             this.Data.Update();
         }
 
         #endregion Update
 
-        #region File Data
-
-        [DataMember]
-        public static readonly string SaveFilename = "Session.xml";
-
-        public static string SaveFilePath => MMDirectoryManager.SavePath(SaveFilename);
-
-        #endregion
-
         #region Session Data 
 
         [DataMember]
-        public TData Data { get; set; }
+        public static readonly string FileName = "Session.xml";
 
-        /// <summary>
-        ///     Controller is more like a not saved data container for session-wide
-        ///     storage.
-        /// </summary>
-        public TController Controller { get; set; }
+        public static string FilePath => MMDirectoryManager.SavePath(FileName);
+
+        [DataMember]
+        public TData Data { get; set; }
 
         #endregion
 
         #region Session Creation
 
-        private static void CreateSession()
+        private static void Create()
         {
-            Singleton = new MMSession<TData, TController>
-            {
-                Controller = CreateController()
-            };
+            Singleton = new MMSession<TData>();
         }
 
-        private static TController CreateController()
+        private static MMSession<TData> Deserialize(DataContractSerializer deserializer, XmlDictionaryReader reader)
         {
-            return new TController
-            {
-                Data = Singleton.Data
-            };
-        }
-
-        private static MMSession<TData, TController> GetSessionFromDerializer(DataContractSerializer deserializer, XmlDictionaryReader reader)
-        {
-            return (MMSession<TData, TController>)deserializer.ReadObject(reader, true);
+            return (MMSession<TData>)deserializer.ReadObject(reader, true);
         }
 
         #endregion
@@ -86,10 +68,10 @@ namespace MindEngine.Core.Sessions
 
         public void Save()
         {
-            var serializer = new DataContractSerializer(typeof(MMSession<TData, TController>), null, int.MaxValue, false, true, null);
+            var serializer = new DataContractSerializer(typeof(MMSession<TData>), null, int.MaxValue, false, true, null);
             try
             {
-                using (var file = File.Create(SaveFilePath))
+                using (var file = File.Create(FilePath))
                 {
                     serializer.WriteObject(file, Singleton);
                 }
@@ -100,24 +82,24 @@ namespace MindEngine.Core.Sessions
             }
         }
 
-        public static MMSession<TData, TController> Load()
+        public static MMSession<TData> Load()
         {
-            if (File.Exists(SaveFilePath))
+            if (File.Exists(FilePath))
             {
                 // Auto-backup the old file
-                File.Copy(SaveFilePath, SaveFilePath + ".bak", true);
+                File.Copy(FilePath, FilePath + ".bak", true);
 
                 // Load from save
-                Load(SaveFilePath);
+                Load(FilePath);
             }
-            else if (File.Exists(SaveFilePath + ".bak"))
+            else if (File.Exists(FilePath + ".bak"))
             {
                 // Load from the backup
-                Load(SaveFilePath + ".bak");
+                Load(FilePath + ".bak");
             }
             else
             {
-                CreateSession();
+                Create();
             }
 
             return Singleton;
@@ -129,20 +111,19 @@ namespace MindEngine.Core.Sessions
             {
                 try
                 {
-                    var deserializer = new DataContractSerializer(typeof(MMSession<TData, TController>));
+                    var deserializer = new DataContractSerializer(typeof(MMSession<TData>));
                     using (var reader = XmlDictionaryReader.CreateTextReader(file, new XmlDictionaryReaderQuotas()))
                     {
-                        Singleton = GetSessionFromDerializer(deserializer, reader);
-                        Singleton.Controller = CreateController();
+                        Singleton = Deserialize(deserializer, reader);
                     }
                 }
                 catch (SerializationException)
                 {
-                    CreateSession();
+                    Create();
                 }
                 catch (XmlException)
                 {
-                    CreateSession();
+                    Create();
                 }
             }
         }

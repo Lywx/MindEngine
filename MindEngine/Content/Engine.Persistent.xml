@@ -13,22 +13,22 @@
     </Image>
   </Texture>
   <Cursors>
-    <Cursor Name ="Default">
-      <Design NormalSelect = "entis-arrow" 
-              HelpSelect = "entis-help"
-              WorkingInBackground = "entis-background"
-              Busy = "entis-busy"
-              PrecisionSelect = "entis-precision"
-              TextSelect = "entis-text"
-              Handwriting = "entis-pencil"
-              Unavailable = "entis-forbidden"
-              VerticalResize = "entis-vertical"
-              HorizontalResize = "entis-horizontal"
-              DiagonalResize1 = "entis-resize_down_left"
-              DiagonalResize2 = "entis-resize_down_right"
-              Move = "entis-move"
-              AlternativeSelect = "entis-alternate"
-              LinkSelect = "entis-link"/>
+    <Cursor Name ="Entis">
+      <Design NormalSelect = "entis_arrow" 
+              HelpSelect = "entis_help"
+              WorkingInBackground = "entis_background"
+              Busy = "entis_busy"
+              PrecisionSelect = "entis_precision"
+              TextSelect = "entis_text"
+              Handwriting = "entis_pencil"
+              Unavailable = "entis_forbidden"
+              VerticalResize = "entis_vertical"
+              HorizontalResize = "entis_horizontal"
+              DiagonalResize1 = "entis_resize_down_left"
+              DiagonalResize2 = "entis_resize_down_right"
+              Move = "entis_move"
+              AlternativeSelect = "entis_alternate"
+              LinkSelect = "entis_link"/>
       <Hotspot NormalSelect="5, 2" 
                HelpSelect="5, 2" 
                WorkingInBackground="5, 2" 

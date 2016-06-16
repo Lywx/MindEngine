@@ -34,8 +34,6 @@ namespace MindEngine.Core.Contents.Cursors
         protected override void UnloadContent()
         {
             this.DisposeCursors();
-
-            this.Cursors.Clear();
         }
 
         #endregion Load and Unload
@@ -94,6 +92,8 @@ namespace MindEngine.Core.Contents.Cursors
             {
                 cursor.Dispose();
             }
+
+            this.Cursors.Clear();
         }
 
         #endregion

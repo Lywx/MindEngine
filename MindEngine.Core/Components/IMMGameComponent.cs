@@ -6,7 +6,7 @@ namespace MindEngine.Core.Components
     /// <summary>
     /// The engine implementation of game component.
     /// </summary>
-    public interface IMMGameComponent : IGameComponent, IDisposable
+    public interface IMMGameComponent : IGameComponent, IMMUpdateableOperations, IDisposable
     {
         
     }

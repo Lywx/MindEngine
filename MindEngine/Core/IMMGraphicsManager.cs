@@ -4,8 +4,10 @@ namespace MindEngine.Core
     using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 
-    public interface IMMGraphicsManager : IMMGameComponent
+    public interface IMMGraphicsManager
     {
+        void Initialize();
+
         GraphicsDevice GraphicsDevice { get; }
 
         void ApplySettings(MMGraphicsSettings settings);

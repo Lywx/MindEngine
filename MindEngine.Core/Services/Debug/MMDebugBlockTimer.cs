@@ -30,6 +30,7 @@ namespace MindEngine.Core.Services.Debug
             this.timer.Start();
         }
 
+        // TODO: Provide a place to hold the record
         private void EndTiming()
         {
             this.timer.Stop();

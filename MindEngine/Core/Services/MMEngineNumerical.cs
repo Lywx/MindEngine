@@ -1,6 +1,7 @@
 namespace MindEngine.Core.Services
 {
     using System;
+    using Microsoft.Xna.Framework;
 
     public class MMEngineNumerical : IMMEngineNumerical
     {
@@ -9,14 +10,12 @@ namespace MindEngine.Core.Services
             this.Random = new Random((int)DateTime.Now.Ticks);
         }
 
-        public Random Random { get; private set; }
+        public Random Random { get; }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() {}
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() {}
+
+        public void Update(GameTime time) {}
     }
 }

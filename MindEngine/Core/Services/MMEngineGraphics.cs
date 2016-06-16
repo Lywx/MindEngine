@@ -45,7 +45,7 @@ namespace MindEngine.Core.Services
             this.DeviceController.Initialize();
             this.Renderer.Initialize();
 
-            this.Cursor = new MMCursorDevice(this.EngineInterop.Asset.Cursors["Default"]);
+            this.Cursor = new MMCursorDevice(this.EngineInterop.Asset.Cursors["Entis"]);
         }
 
         #endregion
@@ -92,9 +92,6 @@ namespace MindEngine.Core.Services
                 {
                     if (!this.IsDisposed)
                     {
-                        this.Manager?.Dispose();
-                        this.Manager = null;
-
                         this.DeviceController?.Dispose();
                         this.DeviceController = null;
                     }

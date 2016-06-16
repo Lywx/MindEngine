@@ -1,10 +1,11 @@
 namespace MindEngine.Core.Services
 {
     using Contents.Assets;
-    using Events;
+    using Event;
     using IO.Directory;
-    using Processes;
-    using Saves;
+    using Process;
+    using Save;
+    using Scenes;
 
     /// <remarks>
     ///     Sealed for added new keyword and changed accessibility in MMEngine property
@@ -18,7 +19,7 @@ namespace MindEngine.Core.Services
             this.interop = interop;
         }
 
-        public IMMAssetManager Asset => this.interop.Asset;
+        public MMAssetManager Asset => this.interop.Asset;
 
         //TODO(Wuxiang)
         //public MMConsole Console
@@ -33,19 +34,19 @@ namespace MindEngine.Core.Services
         //    }
         //}
 
-        public IMMDirectoryManager File => this.interop.File;
+        public MMDirectoryManager File => this.interop.File;
 
         public MMEngine Engine => this.interop.Engine;
 
-        public IMMEventManager Event => this.interop.Event;
+        public MMEventManager Event => this.interop.Event;
 
-        public IMMGameManager Game => this.interop.Game;
+        public MMGameManager Game => this.interop.Game;
 
-        public IMMProcessManager Process => this.interop.Process;
+        public MMProcessManager Process => this.interop.Process;
 
-        //public IMMScreenDirector Screen => this.interop.Screen;
+        public MMScreenManager Screen => this.interop.Screen;
 
-        public IMMSaveManager Save
+        public MMSaveManager Save
         {
             get
             {

@@ -2,7 +2,7 @@ namespace MindEngine.Core.Services
 {
     using Components;
 
-    public interface IMMEngineNumerical : IMMGameComponent, IMMEngineNumericalService
+    public interface IMMEngineNumerical : IMMGameComponent, IMMEngineNumericalService, IMMUpdateableOperations
     {
     }
 }

@@ -2,11 +2,12 @@ namespace MindEngine.Core.Services
 {
     using Components;
     using Contents.Assets;
-    using Events;
+    using Event;
     using IO.Directory;
     using Microsoft.Xna.Framework;
-    using Processes;
-    using Saves;
+    using Process;
+    using Save;
+    using Scenes;
 
     public class MMEngineInterop : MMCompositeComponent, IMMEngineInterop
     {
@@ -20,33 +21,24 @@ namespace MindEngine.Core.Services
             this.Event   = new MMEventManager(engine);
             this.Game    = new MMGameManager(engine);
             this.Process = new MMProcessManager(engine);
-
-            //this.Screen = screen;
-            //this.Engine.Components.Add(this.Screen);
-
-            //this.Console = console;
-            //this.Engine.Components.Add(this.Console);
+            this.Screen   = new MMScreenManager(engine);
         }
 
         #endregion
 
-        public IMMAssetManager Asset { get; private set; }
+        public MMAssetManager Asset { get; private set; }
 
-        //TODO(Wuxiang)
-        //public MMConsole Console { get; set; }
+        public MMDirectoryManager File { get; private set; }
 
-        public IMMDirectoryManager File { get; private set; }
+        public MMEventManager Event { get; private set; }
 
-        public IMMEventManager Event { get; private set; }
+        public new MMGameManager Game { get; private set; }
 
-        public new IMMGameManager Game { get; private set; }
+        public MMProcessManager Process { get; private set; }
 
-        public IMMProcessManager Process { get; private set; }
+        public MMScreenManager Screen { get; private set; }
 
-        //TODO(Wuxiang)
-        //public IMMScreenDirector Screen { get; private set; }
-
-        public IMMSaveManager Save { get; set; }
+        public MMSaveManager Save { get; set; }
 
         #region Initialization
 
@@ -61,8 +53,7 @@ namespace MindEngine.Core.Services
 
         public void OnExit()
         {
-            //TODO(Wuxiang)
-            //this.Screen.OnExit();
+            this.Screen.OnExit();
             this.Game.OnExit();
         }
 
@@ -70,10 +61,10 @@ namespace MindEngine.Core.Services
 
         #region Update
 
-        public override void UpdateInput(GameTime time)
+        public override void Update(GameTime time)
         {
-            //TODO(Wuxiang)
-            //this.Screen.UpdateInput(time);
+            this.Screen.Update(time);
+            this.Save?.Update(time);
         }
 
         #endregion
@@ -108,9 +99,8 @@ namespace MindEngine.Core.Services
                 this.Save?.Dispose();
                 this.Save = null;
 
-                //TODO(Wuxiang)
-                //this.Screen?.Dispose();
-                //this.Screen = null;
+                this.Screen?.Dispose();
+                this.Screen = null;
             }
 
             base.Dispose(disposing);

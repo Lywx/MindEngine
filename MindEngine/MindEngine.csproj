@@ -57,19 +57,53 @@
     <Compile Include="Audio\MMAudioDeviceController.cs" />
     <Compile Include="Audio\MMAudioManager.cs" />
     <Compile Include="Audio\MMAudioSettings.cs" />
-    <Compile Include="Core\Components\MMGameManager.cs" />
+    <Compile Include="Core\MMGameManager.cs" />
     <Compile Include="Core\Contents\Assets\MMAssetManager.cs" />
     <Compile Include="Core\Contents\Fonts\MMFontManager.cs" />
     <Compile Include="Core\Contents\Cursors\MMCursorManager.cs" />
     <Compile Include="Core\Contents\Texture\MMTextureManager.cs" />
-    <Compile Include="Core\Scenes\MMObject.cs" />
-    <Compile Include="Core\Services\Events\MMEventManager.cs" />
+    <Compile Include="Core\Scenes\Entity\MMEntityBehavior.cs" />
+    <Compile Include="Core\Scenes\Entity\MMEntity.cs" />
+    <Compile Include="Core\Scenes\Entity\MMDrawEntity.cs" />
+    <Compile Include="Core\Scenes\Entity\MMDrawOrderChangedEventArgs.cs" />
+    <Compile Include="Core\Scenes\Entity\MMDrawEnabledChangedEventArgs.cs" />
+    <Compile Include="Core\Scenes\Entity\MMEntityManager.cs" />
+    <Compile Include="Core\Scenes\Entity\MMEntitySchedule.cs" />
+    <Compile Include="Core\Scenes\MMScreen.cs" />
+    <Compile Include="Core\Scenes\MMScreenCollection.cs" />
+    <Compile Include="Core\Scenes\MMScreenManager.cs" />
+    <Compile Include="Core\Scenes\Entity\MMUpdateEnabledChangedEventArgs.cs" />
+    <Compile Include="Core\Scenes\Entity\MMUpdateOrderChangedEventArgs.cs" />
+    <Compile Include="Core\Scenes\Entity\MMUpdateEntity.cs" />
+    <Compile Include="Core\Scenes\Entity\MMDrawHandlerCollection.cs" />
+    <Compile Include="Core\Scenes\Input\MMMouseHandlerRectClickable.cs" />
+    <Compile Include="Core\MMObject.cs" />
+    <Compile Include="Core\Scenes\MMScreenSettings.cs" />
+    <Compile Include="Core\Scenes\Node\MMNode.cs" />
+    <Compile Include="Core\Scenes\Node\MMNodeCollection.cs" />
+    <Compile Include="Core\Scenes\Node\MMNodeParams.cs" />
+    <Compile Include="Core\Scenes\Widget\MMClipBox.cs" />
+    <Compile Include="Core\Scenes\Widget\MMImageBox.cs" />
+    <Compile Include="Core\Scenes\Widget\MMToolTip.cs" />
+    <Compile Include="Core\Scenes\Widget\MMWidget.cs" />
+    <Compile Include="Core\Scenes\Widget\MMWindow.cs" />
+    <Compile Include="Core\Services\Event\MMEventHelper.cs" />
+    <Compile Include="Core\Services\Event\MMEventManager.cs" />
     <Compile Include="Core\Services\IMMEngineAudio.cs" />
     <Compile Include="Core\Services\IMMEngineAudioService.cs" />
     <Compile Include="Core\Services\IMMEngineGraphics.cs" />
     <Compile Include="Core\Services\IMMEngineGraphicsService.cs" />
     <Compile Include="Core\Services\IMMEngineInput.cs" />
     <Compile Include="Core\Services\IMMEngineInputService.cs" />
+    <Compile Include="Core\Services\Process\MMProcess.cs" />
+    <Compile Include="Core\Services\Process\MMProcessCategory.cs" />
+    <Compile Include="Core\Services\Process\MMProcessChain.cs" />
+    <Compile Include="Core\Services\Process\MMProcessCountFrame.cs" />
+    <Compile Include="Core\Services\Process\MMProcessInstant.cs" />
+    <Compile Include="Core\Services\Process\MMProcessPlaySound.cs" />
+    <Compile Include="Core\Services\Process\MMProcessState.cs" />
+    <Compile Include="Core\Services\Process\MMProcessWaitDuration.cs" />
+    <Compile Include="Core\Services\Process\MMProcessWaitEvent.cs" />
     <Compile Include="Graphics\MMCursorDevice.cs" />
     <Compile Include="Core\Services\MMEngineAudio.cs" />
     <Compile Include="Core\Services\MMEngineAudioService.cs" />
@@ -88,8 +122,8 @@
     <Compile Include="Core\Services\MMEngineService.cs" />
     <Compile Include="Core\IMMGraphicsDeviceController.cs" />
     <Compile Include="Core\IMMGraphicsManager.cs" />
-    <Compile Include="Core\Services\Processes\MMProcessManager.cs" />
-    <Compile Include="Core\Services\Saves\MMSaveManager.cs" />
+    <Compile Include="Core\Services\Process\MMProcessManager.cs" />
+    <Compile Include="Core\Services\Save\MMSaveManager.cs" />
     <Compile Include="Core\Sessions\MMSession.cs" />
     <Compile Include="Graphics\MMGraphicsDeviceController.cs" />
     <Compile Include="Graphics\MMGraphicsManager.cs" />
@@ -107,6 +141,7 @@
     <Compile Include="Core\MMEngine.cs" />
     <Compile Include="Core\Components\MMCompositeComponent.cs" />
     <Compile Include="Core\MMGame.cs" />
+    <Compile Include="Math\Geometry\MMRectangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,6 +190,10 @@
     <ProjectReference Include="..\MindEngine.IO\MindEngine.IO.csproj">
       <Project>{066c52d2-3af6-469c-ac4a-04c98e8d7bc3}</Project>
       <Name>MindEngine.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MindEngine.Math\MindEngine.Math.csproj">
+      <Project>{B1D79A7E-408F-44A5-B6E2-C50C7EEF5AB3}</Project>
+      <Name>MindEngine.Math</Name>
     </ProjectReference>
     <ProjectReference Include="..\MindEngine.Parser\MindEngine.Parser.csproj">
       <Project>{24d0084c-e0af-4aad-a977-d246819d9f1d}</Project>

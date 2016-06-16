@@ -77,11 +77,6 @@ namespace MindEngine.Core.Contents.Assets
 
         #region Load and Unload 
 
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
-
         public void LoadPackage(string packageName, bool async = false)
         {
             this.ReadPackage(packageName);

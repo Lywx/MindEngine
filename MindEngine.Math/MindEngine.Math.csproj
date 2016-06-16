@@ -55,7 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoubleExtension.cs" />
+    <Compile Include="Geometry\IMMRectangle.cs" />
+    <Compile Include="Geometry\IMMShape.cs" />
+    <Compile Include="Geometry\MMShapeBoundChangedEventArgs.cs" />
+    <Compile Include="Geometry\MMShapeEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

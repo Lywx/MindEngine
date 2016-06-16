@@ -61,25 +61,25 @@
     <Compile Include="Contents\Cursors\MMCursorHotspot.cs" />
     <Compile Include="Contents\Cursors\MMCursorResource.cs" />
     <Compile Include="Contents\Cursors\MMCursorShape.cs" />
+    <Compile Include="IMMDrawableOperations.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMouseButton.cs" />
     <Compile Include="Services\Debug\MMDebugBlockTimer.cs" />
     <Compile Include="Services\Debug\MMDebugBlockTimerRecord.cs" />
-    <Compile Include="Services\Events\IMMEvent.cs" />
-    <Compile Include="Services\Events\IMMEventListener.cs" />
-    <Compile Include="Services\Events\IMMEventManager.cs" />
-    <Compile Include="Services\Events\MMEvent.cs" />
-    <Compile Include="Services\Events\MMEventListener.cs" />
-    <Compile Include="Services\Processes\IMMProcess.cs" />
-    <Compile Include="Services\Processes\IMMProcessManager.cs" />
-    <Compile Include="Services\Processes\IMMProcessManagerItem.cs" />
-    <Compile Include="Services\Processes\MMProcess.cs" />
-    <Compile Include="Services\Processes\MMProcessCategory.cs" />
+    <Compile Include="Services\Event\MMEvent.cs" />
+    <Compile Include="Services\Event\MMEventListener.cs" />
+    <Compile Include="Scenes\Input\Mouse\IMMMouseDraggable.cs" />
+    <Compile Include="Scenes\Input\Mouse\IMMMouseDoubleClickable.cs" />
+    <Compile Include="Scenes\Input\Mouse\IMMMouseClickable.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMouseEvent.cs" />
+    <Compile Include="Scenes\Input\MMInputCacher.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMouseButtonHistory.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMouseButtonState.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMousePositionHistory.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMousePositionState.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMouseState.cs" />
+    <Compile Include="Scenes\Input\Mouse\MMMouseStateAutomata.cs" />
     <Compile Include="Utils\MMFrameCounter.cs" />
-    <Compile Include="Utils\MMFrameCounterInstance.cs" />
-    <Compile Include="Services\Processes\MMProcessState.cs" />
-    <Compile Include="Services\Processes\MMProcessInstance_SoundEffect.cs" />
-    <Compile Include="Services\Processes\MMProcessInstance_Count.cs" />
-    <Compile Include="Services\Processes\MMProcessInstance_Wait.cs" />
-    <Compile Include="Services\Saves\IMMSaveManager.cs" />
+    <Compile Include="Services\Save\IMMSaveManager.cs" />
     <Compile Include="Utils\MMColorExtension.cs" />
     <Compile Include="Utils\MMColorConverter.cs" />
     <Compile Include="Components\IMMDrawableComponent.cs" />
@@ -114,13 +114,20 @@
     <Compile Include="Contents\Assets\MMAssetDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sessions\IMMSession.cs" />
-    <Compile Include="Sessions\IMMSessionController.cs" />
+    <Compile Include="Sessions\IMMSessionManager.cs" />
     <Compile Include="Sessions\IMMSessionData.cs" />
-    <Compile Include="Utils\MMFrameCounterState.cs" />
+    <Compile Include="Utils\MMSortingCollection.cs" />
+    <Compile Include="Utils\MMSortingFilteringCollection.cs" />
     <Compile Include="Utils\MMVectorConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contents\Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MindEngine.Math\MindEngine.Math.csproj">
+      <Project>{B1D79A7E-408F-44A5-B6E2-C50C7EEF5AB3}</Project>
+      <Name>MindEngine.Math</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
