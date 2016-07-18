@@ -2,8 +2,7 @@ namespace MindEngine.Core
 {
     using System;
     using Graphics;
-    using Microsoft.Xna.Framework.Graphics;
-    using Services;
+    using Service;
 
     /// <summary>
     ///     Object for engine service access.
@@ -17,6 +16,8 @@ namespace MindEngine.Core
 
         protected IMMEngineAudioService EngineAudio => MMEngine.Service.Audio;
 
+        protected IMMEngineDebugService EngineDebug => MMEngine.Service.Debug;
+
         protected IMMEngineInteropService EngineInterop => MMEngine.Service.Interop;
 
         protected IMMEngineInputService EngineInput => MMEngine.Service.Input;
@@ -25,9 +26,7 @@ namespace MindEngine.Core
 
         protected IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
 
-        protected GraphicsDevice EngineGraphicsDevice => this.EngineGraphics.Device;
-
-        protected IMMRenderer EngineGraphicsRenderer => this.EngineGraphics.Renderer;
+        protected MMRenderer EngineRenderer => this.EngineGraphics.Renderer;
 
         protected IMMGraphicsDeviceController EngineGraphicsDeviceController => this.EngineGraphics.DeviceController;
 

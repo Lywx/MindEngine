@@ -91,7 +91,7 @@ namespace MindEngine.Graphics
 
             // Border
             var window = this.Engine.Window;
-            window.IsBorderless = settings.IsWindowMode;
+            window.IsBorderless = settings.IsBorderless;
         }
 
         #endregion Graphics Operations

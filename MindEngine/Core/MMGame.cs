@@ -1,6 +1,6 @@
 namespace MindEngine.Core
 {
-    using Components;
+    using Component;
 
     /// <summary>
     /// Game is used in engine as the only extra component that update and draw.

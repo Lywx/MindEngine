@@ -1,6 +1,6 @@
 namespace MindEngine.Audio
 {
-    using Core.Components;
+    using Core.Component;
 
     public interface IMMAudioController : IMMGameComponent
     {

@@ -24,6 +24,8 @@
                   <xs:sequence>
                     <xs:element name="Design" minOccurs="1">
                       <xs:complexType>
+                        <xs:attribute name="DesignWidth" type="xs:unsignedInt" use="required"/>
+                        <xs:attribute name="DesignHeight" type="xs:unsignedInt" use="required"/>
                         <xs:attribute name="ScreenWidth" type="xs:unsignedInt" use="required"/>
                         <xs:attribute name="ScreenHeight" type="xs:unsignedInt" use="required"/>
                       </xs:complexType>

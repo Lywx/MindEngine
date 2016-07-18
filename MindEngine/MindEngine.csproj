@@ -58,90 +58,101 @@
     <Compile Include="Audio\MMAudioManager.cs" />
     <Compile Include="Audio\MMAudioSettings.cs" />
     <Compile Include="Core\MMGameManager.cs" />
-    <Compile Include="Core\Contents\Assets\MMAssetManager.cs" />
-    <Compile Include="Core\Contents\Fonts\MMFontManager.cs" />
-    <Compile Include="Core\Contents\Cursors\MMCursorManager.cs" />
-    <Compile Include="Core\Contents\Texture\MMTextureManager.cs" />
-    <Compile Include="Core\Scenes\Entity\MMEntityBehavior.cs" />
-    <Compile Include="Core\Scenes\Entity\MMEntity.cs" />
-    <Compile Include="Core\Scenes\Entity\MMDrawEntity.cs" />
-    <Compile Include="Core\Scenes\Entity\MMDrawOrderChangedEventArgs.cs" />
-    <Compile Include="Core\Scenes\Entity\MMDrawEnabledChangedEventArgs.cs" />
-    <Compile Include="Core\Scenes\Entity\MMEntityManager.cs" />
-    <Compile Include="Core\Scenes\Entity\MMEntitySchedule.cs" />
-    <Compile Include="Core\Scenes\MMScreen.cs" />
-    <Compile Include="Core\Scenes\MMScreenCollection.cs" />
-    <Compile Include="Core\Scenes\MMScreenManager.cs" />
-    <Compile Include="Core\Scenes\Entity\MMUpdateEnabledChangedEventArgs.cs" />
-    <Compile Include="Core\Scenes\Entity\MMUpdateOrderChangedEventArgs.cs" />
-    <Compile Include="Core\Scenes\Entity\MMUpdateEntity.cs" />
-    <Compile Include="Core\Scenes\Entity\MMDrawHandlerCollection.cs" />
-    <Compile Include="Core\Scenes\Input\MMMouseHandlerRectClickable.cs" />
+    <Compile Include="Core\Content\Asset\MMAssetManager.cs" />
+    <Compile Include="Core\Content\Font\MMFontManager.cs" />
+    <Compile Include="Core\Content\Cursor\MMCursorManager.cs" />
+    <Compile Include="Core\Content\Texture\MMTextureManager.cs" />
+    <Compile Include="Core\Scene\Entity\MMEntityBehavior.cs" />
+    <Compile Include="Core\Scene\Entity\MMEntity.cs" />
+    <Compile Include="Core\Scene\Entity\MMDrawEntity.cs" />
+    <Compile Include="Core\Scene\Entity\MMDrawOrderChangedEventArgs.cs" />
+    <Compile Include="Core\Scene\Entity\MMDrawEnabledChangedEventArgs.cs" />
+    <Compile Include="Core\Scene\Entity\MMEntityManager.cs" />
+    <Compile Include="Core\Scene\Screen\MMScreen.cs" />
+    <Compile Include="Core\Scene\Screen\MMScreenCollection.cs" />
+    <Compile Include="Core\Scene\Widget\MMBounds.cs" />
+    <Compile Include="Core\Scene\Widget\MMControlDefault.cs" />
+    <Compile Include="Core\Scene\Widget\MMControlManager.cs" />
+    <Compile Include="Core\Scene\Widget\MMModalContainer.cs" />
+    <Compile Include="Core\Service\State\MMScreenManager.cs" />
+    <Compile Include="Core\Scene\Entity\MMUpdateEnabledChangedEventArgs.cs" />
+    <Compile Include="Core\Scene\Entity\MMUpdateOrderChangedEventArgs.cs" />
+    <Compile Include="Core\Scene\Entity\MMUpdateEntity.cs" />
+    <Compile Include="Core\Scene\Entity\MMDrawEntityCollection.cs" />
     <Compile Include="Core\MMObject.cs" />
-    <Compile Include="Core\Scenes\MMScreenSettings.cs" />
-    <Compile Include="Core\Scenes\Node\MMNode.cs" />
-    <Compile Include="Core\Scenes\Node\MMNodeCollection.cs" />
-    <Compile Include="Core\Scenes\Node\MMNodeParams.cs" />
-    <Compile Include="Core\Scenes\Widget\MMClipBox.cs" />
-    <Compile Include="Core\Scenes\Widget\MMImageBox.cs" />
-    <Compile Include="Core\Scenes\Widget\MMToolTip.cs" />
-    <Compile Include="Core\Scenes\Widget\MMWidget.cs" />
-    <Compile Include="Core\Scenes\Widget\MMWindow.cs" />
-    <Compile Include="Core\Services\Event\MMEventHelper.cs" />
-    <Compile Include="Core\Services\Event\MMEventManager.cs" />
-    <Compile Include="Core\Services\IMMEngineAudio.cs" />
-    <Compile Include="Core\Services\IMMEngineAudioService.cs" />
-    <Compile Include="Core\Services\IMMEngineGraphics.cs" />
-    <Compile Include="Core\Services\IMMEngineGraphicsService.cs" />
-    <Compile Include="Core\Services\IMMEngineInput.cs" />
-    <Compile Include="Core\Services\IMMEngineInputService.cs" />
-    <Compile Include="Core\Services\Process\MMProcess.cs" />
-    <Compile Include="Core\Services\Process\MMProcessCategory.cs" />
-    <Compile Include="Core\Services\Process\MMProcessChain.cs" />
-    <Compile Include="Core\Services\Process\MMProcessCountFrame.cs" />
-    <Compile Include="Core\Services\Process\MMProcessInstant.cs" />
-    <Compile Include="Core\Services\Process\MMProcessPlaySound.cs" />
-    <Compile Include="Core\Services\Process\MMProcessState.cs" />
-    <Compile Include="Core\Services\Process\MMProcessWaitDuration.cs" />
-    <Compile Include="Core\Services\Process\MMProcessWaitEvent.cs" />
+    <Compile Include="Core\Service\State\MMScreenSettings.cs" />
+    <Compile Include="Core\Service\Process\MMProcessProgressDuration.cs" />
+    <Compile Include="Core\Scene\Node\MMNode.cs" />
+    <Compile Include="Core\Scene\Node\MMNodeCollection.cs" />
+    <Compile Include="Core\Scene\Widget\MMClipControl.cs" />
+    <Compile Include="Core\Scene\Widget\MMButton.cs" />
+    <Compile Include="Core\Scene\Widget\MMClipBox.cs" />
+    <Compile Include="Core\Scene\Widget\MMContainer.cs" />
+    <Compile Include="Core\Scene\Widget\MMImageBox.cs" />
+    <Compile Include="Core\Scene\Widget\MMLabel.cs" />
+    <Compile Include="Core\Scene\Widget\MMTextBox.cs" />
+    <Compile Include="Core\Scene\Widget\MMToolTip.cs" />
+    <Compile Include="Core\Scene\Widget\MMView.cs" />
+    <Compile Include="Core\Scene\Widget\MMControl.cs" />
+    <Compile Include="Core\Scene\Widget\MMWindow.cs" />
+    <Compile Include="Core\Service\Event\MMEventHelper.cs" />
+    <Compile Include="Core\Service\Event\MMEventManager.cs" />
+    <Compile Include="Core\Service\IMMEngineAudio.cs" />
+    <Compile Include="Core\Service\IMMEngineAudioService.cs" />
+    <Compile Include="Core\Service\IMMEngineDebug.cs" />
+    <Compile Include="Core\Service\IMMEngineDebugService.cs" />
+    <Compile Include="Core\Service\IMMEngineGraphics.cs" />
+    <Compile Include="Core\Service\IMMEngineGraphicsService.cs" />
+    <Compile Include="Core\Service\IMMEngineInput.cs" />
+    <Compile Include="Core\Service\IMMEngineInputService.cs" />
+    <Compile Include="Core\Service\MMEngineDebug.cs" />
+    <Compile Include="Core\Service\MMEngineDebugService.cs" />
+    <Compile Include="Core\Service\MMEngineNullDebug.cs" />
+    <Compile Include="Core\Service\Process\MMProcess.cs" />
+    <Compile Include="Core\Service\Process\MMProcessCategory.cs" />
+    <Compile Include="Core\Service\Process\MMProcessChain.cs" />
+    <Compile Include="Core\Service\Process\MMProcessCountFrame.cs" />
+    <Compile Include="Core\Service\Process\MMProcessInstant.cs" />
+    <Compile Include="Core\Service\Process\MMProcessPlaySound.cs" />
+    <Compile Include="Core\Service\Process\MMProcessState.cs" />
+    <Compile Include="Core\Service\Process\MMProcessWaitDuration.cs" />
+    <Compile Include="Core\Service\Process\MMProcessWaitEvent.cs" />
     <Compile Include="Graphics\MMCursorDevice.cs" />
-    <Compile Include="Core\Services\MMEngineAudio.cs" />
-    <Compile Include="Core\Services\MMEngineAudioService.cs" />
-    <Compile Include="Core\Services\MMEngineGraphics.cs" />
-    <Compile Include="Core\Services\MMEngineGraphicsService.cs" />
-    <Compile Include="Core\Services\MMEngineInput.cs" />
-    <Compile Include="Core\Services\MMEngineInputService.cs" />
-    <Compile Include="Core\Services\MMEngineInterop.cs" />
-    <Compile Include="Core\Services\MMEngineInteropService.cs" />
-    <Compile Include="Core\Services\MMEngineNullAudio.cs" />
-    <Compile Include="Core\Services\MMEngineNullGraphics.cs" />
-    <Compile Include="Core\Services\MMEngineNullInput.cs" />
-    <Compile Include="Core\Services\MMEngineNullInterop.cs" />
-    <Compile Include="Core\Services\MMEngineNumerical.cs" />
-    <Compile Include="Core\Services\MMEngineNumericalService.cs" />
-    <Compile Include="Core\Services\MMEngineService.cs" />
+    <Compile Include="Core\Service\MMEngineAudio.cs" />
+    <Compile Include="Core\Service\MMEngineAudioService.cs" />
+    <Compile Include="Core\Service\MMEngineGraphics.cs" />
+    <Compile Include="Core\Service\MMEngineGraphicsService.cs" />
+    <Compile Include="Core\Service\MMEngineInput.cs" />
+    <Compile Include="Core\Service\MMEngineInputService.cs" />
+    <Compile Include="Core\Service\MMEngineInterop.cs" />
+    <Compile Include="Core\Service\MMEngineInteropService.cs" />
+    <Compile Include="Core\Service\MMEngineNullAudio.cs" />
+    <Compile Include="Core\Service\MMEngineNullGraphics.cs" />
+    <Compile Include="Core\Service\MMEngineNullInput.cs" />
+    <Compile Include="Core\Service\MMEngineNullInterop.cs" />
+    <Compile Include="Core\Service\MMEngineNumerical.cs" />
+    <Compile Include="Core\Service\MMEngineNumericalService.cs" />
+    <Compile Include="Core\Service\MMEngineService.cs" />
     <Compile Include="Core\IMMGraphicsDeviceController.cs" />
     <Compile Include="Core\IMMGraphicsManager.cs" />
-    <Compile Include="Core\Services\Process\MMProcessManager.cs" />
-    <Compile Include="Core\Services\Save\MMSaveManager.cs" />
-    <Compile Include="Core\Sessions\MMSession.cs" />
+    <Compile Include="Core\Service\Process\MMProcessManager.cs" />
+    <Compile Include="Core\Service\Save\MMSaveManager.cs" />
+    <Compile Include="Core\Session\MMSession.cs" />
     <Compile Include="Graphics\MMGraphicsDeviceController.cs" />
     <Compile Include="Graphics\MMGraphicsManager.cs" />
     <Compile Include="Graphics\MMRenderer.cs" />
     <Compile Include="Core\IMMEngine.cs" />
-    <Compile Include="Core\Services\IMMEngineInterop.cs" />
-    <Compile Include="Core\Services\IMMEngineInteropService.cs" />
-    <Compile Include="Core\Services\IMMEngineNumerical.cs" />
-    <Compile Include="Core\Services\IMMEngineNumericalService.cs" />
-    <Compile Include="Core\IMMEngineOperations.cs" />
-    <Compile Include="Core\Services\IMMEngineService.cs" />
-    <Compile Include="Input\MMInputEventWin32.cs" />
+    <Compile Include="Core\Service\IMMEngineInterop.cs" />
+    <Compile Include="Core\Service\IMMEngineInteropService.cs" />
+    <Compile Include="Core\Service\IMMEngineNumerical.cs" />
+    <Compile Include="Core\Service\IMMEngineNumericalService.cs" />
+    <Compile Include="Core\Service\IMMEngineService.cs" />
     <Compile Include="Input\MMInputState.cs" />
     <Compile Include="Input\Keyboard\MMKeyboardBindingUtils.cs" />
     <Compile Include="Core\MMEngine.cs" />
-    <Compile Include="Core\Components\MMCompositeComponent.cs" />
+    <Compile Include="Core\Component\MMCompositeComponent.cs" />
     <Compile Include="Core\MMGame.cs" />
-    <Compile Include="Math\Geometry\MMRectangle.cs" />
+    <Compile Include="Input\Mouse\MMMouseInput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -152,6 +163,9 @@
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\Dependency\NLog\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Primtives2D">
+      <HintPath>..\Dependency\Primtives2D\Primtives2D.dll</HintPath>
     </Reference>
     <Reference Include="Sprache">
       <HintPath>..\Dependency\Sprache\Sprache.dll</HintPath>
@@ -168,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IO\" />
+    <Folder Include="Math\Geometry\" />
     <Folder Include="Processor\" />
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +266,7 @@
     <None Include="Content\Package.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Content\Texture\Screen.Blank.xnb">
+    <None Include="Content\Texture\screen_blank.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

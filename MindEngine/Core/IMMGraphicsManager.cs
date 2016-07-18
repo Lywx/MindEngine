@@ -1,6 +1,5 @@
 namespace MindEngine.Core
 {
-    using Components;
     using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 

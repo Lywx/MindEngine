@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoubleExtension.cs" />
-    <Compile Include="Geometry\IMMRectangle.cs" />
     <Compile Include="Geometry\IMMShape.cs" />
     <Compile Include="Geometry\MMShapeBoundChangedEventArgs.cs" />
     <Compile Include="Geometry\MMShapeEvent.cs" />

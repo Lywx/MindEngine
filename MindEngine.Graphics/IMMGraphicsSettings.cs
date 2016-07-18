@@ -2,6 +2,8 @@
 
 namespace MindEngine.Graphics
 {
+    using Microsoft.Xna.Framework;
+
     public interface IMMGraphicsSettings
     {
         float Aspect { get; set; }
@@ -10,9 +12,11 @@ namespace MindEngine.Graphics
 
         int Height { get; set; }
 
+        Point Center { get; }
+
         bool IsFullscreen { get; set; }
 
-        bool IsWindowMode { get; set; }
+        bool IsBorderless { get; set; }
 
         Screen Screen { get; }
 

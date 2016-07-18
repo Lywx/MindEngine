@@ -1,14 +1,27 @@
 ﻿namespace MindEngine.Core
 {
     using System;
-    using Services;
+    using Service;
+
+    public interface IMMEngineOperations
+    {
+        void Run();
+
+        void Restart();
+    }
 
     public interface IMMEngine : IDisposable, IMMEngineOperations
     {
+        IMMEngineAudio Audio { get; } 
+
+        IMMEngineGraphics Graphics { get; }
+
         IMMEngineInput Input { get; }
 
         IMMEngineInterop Interop { get; }
 
-        IMMEngineGraphics Graphics { get; }
+        IMMEngineNumerical Numerical { get; }
+
+        IMMEngineDebug Debug { get; set; }
     }
 }

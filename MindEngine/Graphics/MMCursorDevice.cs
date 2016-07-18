@@ -2,7 +2,7 @@ namespace MindEngine.Graphics
 {
     using System;
     using Core;
-    using Core.Contents.Cursors;
+    using Core.Content.Cursor;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -39,14 +39,12 @@ namespace MindEngine.Graphics
 
         public void Update(GameTime time)
         {
-            this.Position = this.EngineInput.State.Mouse.Position;
+            this.Position = this.EngineInput.Mouse.Position.ToVector2();
         }
 
         public void Draw(GameTime time)
         {
-            this.EngineGraphicsRenderer.Begin();
-            this.EngineGraphicsRenderer.Draw(this.TextureCurrent, this.Position - this.HotpotCurrent, 0f);
-            this.EngineGraphicsRenderer.End();
+            this.EngineRenderer.Draw(this.TextureCurrent, this.Position - this.HotpotCurrent, 0f);
         }
 
         #region Operations

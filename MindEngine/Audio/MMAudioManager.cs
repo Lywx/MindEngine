@@ -3,7 +3,7 @@ namespace MindEngine.Audio
     using System;
     using System.Collections.Generic;
     using Core;
-    using Core.Components;
+    using Core.Component;
 
     /// <summary>
     ///     Static storage of SpriteFont objects and colors for use throughout the game.

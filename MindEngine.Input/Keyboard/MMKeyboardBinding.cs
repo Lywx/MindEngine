@@ -2,5 +2,5 @@
 {
     using System.Collections.Generic;
 
-    public class MMKeyboardBinding<TAction> : Dictionary<TAction, MMKeyboardCombination> {}
+    public class MMKeyboardBinding<TAction> : Dictionary<TAction, MMKeyCombination> {}
 }

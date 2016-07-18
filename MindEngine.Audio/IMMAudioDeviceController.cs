@@ -1,7 +1,7 @@
 ﻿namespace MindEngine.Audio
 {
     using Core;
-    using Core.Components;
+    using Core.Component;
     using Microsoft.Xna.Framework.Audio;
 
     public interface IMMAudioDeviceController : IMMGameComponent, IMMUpdateableOperations

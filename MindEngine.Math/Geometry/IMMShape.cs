@@ -9,6 +9,6 @@ namespace MindEngine.Math.Geometry
 
         event EventHandler<MMShapeBoundChangedEventArgs> Resize;
 
-        Rectangle Bound { get; }
+        Rectangle Rectangle { get; }
     }
 }

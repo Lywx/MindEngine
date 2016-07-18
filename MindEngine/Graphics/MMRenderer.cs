@@ -3,12 +3,13 @@ namespace MindEngine.Graphics
     using System;
     using System.Globalization;
     using Core;
-    using Core.Components;
-    using Core.Contents.Fonts;
-    using Core.Contents.Fonts.Alignment;
-    using Core.Contents.Fonts.Extensions;
+    using Core.Component;
+    using Core.Content.Font;
+    using Core.Content.Font.Extensions;
+    using Core.Content.Text;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Primtives2D;
 
     public class MMRenderer : MMCompositeComponent, IMMRenderer
     {
@@ -24,7 +25,6 @@ namespace MindEngine.Graphics
             }
 
             this.DeviceController = deviceController;
-
         }
 
         #endregion
@@ -34,14 +34,6 @@ namespace MindEngine.Graphics
         public IMMGraphicsDeviceController DeviceController { get; }
 
         private SpriteBatch SpriteBatch => this.DeviceController.SpriteBatch;
-
-        #endregion
-
-        #region Initialization
-
-        public override void Initialize()
-        {
-        }
 
         #endregion
 
@@ -72,29 +64,6 @@ namespace MindEngine.Graphics
 
         #region Draw String
 
-        public void DrawMonospacedString(MMFont font, string str, Vector2 position, Color color, float scale)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                return;
-            }
-
-            var displayable = font.AvailableString(str);
-
-            var CJKCharIndexes = displayable.CJKUniqueCharIndexes();
-            var CJKCharAmendedPosition = displayable.CJKUniqueCharAmendedPosition(CJKCharIndexes);
-
-            var isCJKCharExisting = CJKCharIndexes.Count > 0;
-
-            for (var i = 0; i < displayable.Length; ++i)
-            {
-                var charPosition = isCJKCharExisting ? CJKCharAmendedPosition[i] : i;
-                var amendedPosition = position + new Vector2(charPosition * font.MonoData.AsciiSize(scale).X, 0);
-
-                this.DrawMonospacedChar(font, displayable[i], amendedPosition, color, scale);
-            }
-        }
-
         /// <param name="font"></param>
         /// <param name="str"></param>
         /// <param name="position"></param>
@@ -103,7 +72,7 @@ namespace MindEngine.Graphics
         /// <param name="halignment"></param>
         /// <param name="valignment"></param>
         /// <param name="leading">Vertical distance from line to line</param>
-        public void DrawMonospacedString(MMFont font, string str, Vector2 position, Color color, float scale, HoritonalAlignment halignment, VerticalAlignment valignment, int leading = 0)
+        public void DrawMonospacedString(MMFont font, string str, Vector2 position, Color color, float scale, MMHorizontalAlignment halignment = MMHorizontalAlignment.Right, MMVerticalAlignment valignment = MMVerticalAlignment.Bottom, int leading = 0)
         {
             if (string.IsNullOrEmpty(str))
             {
@@ -128,27 +97,50 @@ namespace MindEngine.Graphics
 
                 linePosition += new Vector2(0, i * leading);
 
-                if (valignment == VerticalAlignment.Center)
+                if (valignment == MMVerticalAlignment.Center)
                 {
                     linePosition -= new Vector2(0, lineSize.Y / 2);
                 }
 
-                if (valignment == VerticalAlignment.Top)
+                if (valignment == MMVerticalAlignment.Top)
                 {
                     linePosition -= new Vector2(0, lineSize.Y);
                 }
 
-                if (halignment == HoritonalAlignment.Center)
+                if (halignment == MMHorizontalAlignment.Center)
                 {
                     linePosition -= new Vector2(lineSize.X / 2, 0);
                 }
 
-                if (halignment == HoritonalAlignment.Left)
+                if (halignment == MMHorizontalAlignment.Left)
                 {
                     linePosition -= new Vector2(lineSize.X, 0);
                 }
 
-                this.DrawMonospacedString(font, lineString, linePosition, color, scale);
+                this.DrawMonospacedOneLineString(font, lineString, linePosition, color, scale);
+            }
+        }
+
+        private void DrawMonospacedOneLineString(MMFont font, string str, Vector2 position, Color color, float scale)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return;
+            }
+
+            var displayable = font.AvailableString(str);
+
+            var CJKCharIndexes = displayable.CJKUniqueCharIndexes();
+            var CJKCharAmendedPosition = displayable.CJKUniqueCharAmendedPosition(CJKCharIndexes);
+
+            var isCJKCharExisting = CJKCharIndexes.Count > 0;
+
+            for (var i = 0; i < displayable.Length; ++i)
+            {
+                var charPosition = isCJKCharExisting ? CJKCharAmendedPosition[i] : i;
+                var amendedPosition = position + new Vector2(charPosition * font.MonoData.AsciiSize(scale).X, 0);
+
+                this.DrawMonospacedChar(font, displayable[i], amendedPosition, color, scale);
             }
         }
 
@@ -158,20 +150,15 @@ namespace MindEngine.Graphics
 
             position += font.MonoData.Offset + new Vector2(-font.MeasureString(str, scale).X / 2, 0);
 
-            this.DrawString(font, str, position, color, scale);
+            this.DrawOneLineString(font, str, position, color, scale);
         }
 
-        public void DrawString(MMFont font, string str, Vector2 position, Color color, float scale)
+        public void DrawString(MMFont font, string text, Point position, Color color, float scale, MMHorizontalAlignment halignment = MMHorizontalAlignment.Right, MMVerticalAlignment valignment = MMVerticalAlignment.Bottom, int leading = 0)
         {
-            if (string.IsNullOrEmpty(str))
-            {
-                return;
-            }
-
-            this.SpriteBatch.DrawString(font.SpriteData, font.AvailableString(str), position, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
+            this.DrawString(font, text, position.ToVector2(), color, scale, halignment, valignment, leading);
         }
 
-        public void DrawString(MMFont font, string str, Vector2 position, Color color, float scale, HoritonalAlignment halignment, VerticalAlignment valignment, int leading = 0)
+        public void DrawString(MMFont font, string str, Vector2 position, Color color, float scale, MMHorizontalAlignment halignment = MMHorizontalAlignment.Right, MMVerticalAlignment valignment = MMVerticalAlignment.Bottom, int leading = 0)
         {
             if (string.IsNullOrEmpty(str))
             {
@@ -196,31 +183,51 @@ namespace MindEngine.Graphics
 
                 linePosition += new Vector2(0, i * leading);
 
-                if (valignment == VerticalAlignment.Center)
+                if (valignment == MMVerticalAlignment.Center)
                 {
                     linePosition -= new Vector2(0, lineSize.Y / 2);
                 }
 
-                if (valignment == VerticalAlignment.Top)
+                if (valignment == MMVerticalAlignment.Top)
                 {
                     linePosition -= new Vector2(0, lineSize.Y);
                 }
 
-                if (halignment == HoritonalAlignment.Center)
+                if (halignment == MMHorizontalAlignment.Center)
                 {
                     linePosition -= new Vector2(lineSize.X / 2, 0);
                 }
 
-                if (halignment == HoritonalAlignment.Left)
+                if (halignment == MMHorizontalAlignment.Left)
                 {
                     linePosition -= new Vector2(lineSize.X, 0);
                 }
 
-                this.DrawString(font, lineString, linePosition, color, scale);
+                this.DrawOneLineString(font, lineString, linePosition, color, scale);
             }
         }
 
+        private void DrawOneLineString(MMFont font, string str, Vector2 position, Color color, float scale)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return;
+            }
+
+            this.SpriteBatch.DrawString(font.SpriteData, font.AvailableString(str), position, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
+        }
+
         #endregion
+
+        public void DrawRectangle(Rectangle rectangle, Color color, float thickness = 1f)
+        {
+            Primitives2D.DrawRectangle(this.SpriteBatch, rectangle, color, thickness);
+        }
+        
+        public void DrawRectangle(Rectangle rectangle, Vector2 position, Vector2 size, Color color, float thickness = 1f)
+        {
+            Primitives2D.DrawRectangle(this.SpriteBatch, position, size, color, thickness);
+        }
 
         #region Draw Helpers
 

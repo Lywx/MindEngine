@@ -5,32 +5,31 @@ namespace MindEngine.Input.Mouse
 
     public interface IMMMouseInput : IMMInputtableOperations
     {
-        #region Button States
+        bool ButtonPressed(MMMouseButton button);
 
-        bool ButtonLeftClicked { get; }
+        ulong ButtonPressedDuration(MMMouseButton button);
 
-        bool ButtonRightClicked { get; }
+        bool ButtonDown(MMMouseButton button);
 
-        #endregion
+        bool ButtonUp(MMMouseButton button);
 
-        #region Wheel States
+        Point Position { get; }
 
-        bool WheelDownScrolled { get; }
+        bool PositionMove { get; }
 
-        bool WheelUpScrolled { get; }
+        Point PositionDiff { get; }
 
         /// <summary>
-        /// Integer value for wheel scrolling. Positive when scrolled down.
-        /// Negative when scrolled down.
+        ///     Mouse wheel scroll direction.
         /// </summary>
-        int WheelScroll { get; }
+        MMMouseWheelDirection WheelDirection { get; }
 
-        #endregion
+        int WheelDiff { get; }
 
-        #region Position State
+        bool WheelUp { get; }
 
-        Vector2 Position { get; }
+        bool WheelDown { get; }
 
-        #endregion
+        bool WheelMove { get; }
     }
 }

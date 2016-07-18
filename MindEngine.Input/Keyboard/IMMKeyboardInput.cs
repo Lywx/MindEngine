@@ -1,24 +1,12 @@
 namespace MindEngine.Input.Keyboard
 {
+    using System;
+    using System.Collections.Generic;
     using Core;
     using Microsoft.Xna.Framework.Input;
 
     public interface IMMKeyboardInput : IMMInputtableOperations
     {
-        #region Action States
-
-        /// <summary>
-        /// Check if an action has been pressed.
-        /// </summary>
-        bool ActionPressed(MMInputAction action);
-
-        /// <summary>
-        /// Check if an action was just performed in the most recent update.
-        /// </summary>
-        bool ActionTriggered(MMInputAction action);
-
-        #endregion
-
         #region Key States
 
         /// <summary>
@@ -27,15 +15,51 @@ namespace MindEngine.Input.Keyboard
         bool KeyPressed(Keys key);
 
         /// <summary>
+        /// Return the duration in ticks of a key has been pressed.
+        /// </summary>
+        ulong KeyPressedDuration(Keys key);
+
+        /// <summary>
         /// Check if a key was just pressed in the most recent update.
         /// </summary>
-        bool KeyTriggered(Keys key);
+        bool KeyDown(Keys key);
 
-        bool KeyAltDown { get; }
+        /// <summary>
+        /// Check if a key was just released in the most recent update.
+        /// </summary>
+        bool KeyUp(Keys key);
 
-        bool KeyCtrlDown { get; }
+        #endregion
 
-        bool KeyShiftDown { get; }
+        #region Key Combination States
+
+        bool KeyCombinationDown(MMKeyCombination combination);
+
+        bool KeyCombinationPressed(MMKeyCombination combination);
+
+        ulong KeyCombinationPressedDuration(MMKeyCombination combination);
+
+        bool KeyCombinationUp(MMKeyCombination combination);
+
+        #endregion
+
+        #region Modifier States
+
+        bool ModifierPressed(List<Keys> keys);
+
+        ulong ModifierPressedDuration(List<Keys> keys);
+
+        #endregion
+
+        #region Action States
+
+        bool ActionPressed(MMInputAction action);
+
+        ulong ActionPressedDuration(MMInputAction action);
+
+        bool ActionDown(MMInputAction action);
+
+        bool ActionUp(MMInputAction action);
 
         #endregion
     }

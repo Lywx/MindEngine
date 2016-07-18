@@ -1,6 +1,6 @@
 namespace MindEngine.Core
 {
-    using Components;
+    using Component;
 
     public interface IMMGameManager : IMMGameComponent
     {

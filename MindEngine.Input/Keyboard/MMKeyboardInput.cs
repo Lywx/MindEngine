@@ -2,24 +2,24 @@ namespace MindEngine.Input.Keyboard
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
     public class MMKeyboardInput : IMMKeyboardInput
     {
-        private MMKeyboardBinding<MMInputAction> keyboardBinding;
+        private MMKeyboardBinding<MMInputAction> KeyboardBinding { get; set; }
 
-        private KeyboardState keyboardCurrent;
+        private MMKeyboardRecord KeyboardRecord { get; set; } = new MMKeyboardRecord();
 
-        private KeyboardState keyboardPrevious;
+        private MMKeyboardState KeyboardState { get; set; } = new MMKeyboardState();
 
         #region Constructors
 
         public MMKeyboardInput()
         {
-            this.keyboardBinding = new MMKeyboardBinding<MMInputAction>();
-            
+            this.KeyboardBinding = new MMKeyboardBinding<MMInputAction>();
         }
 
         public MMKeyboardInput(MMKeyboardBinding<MMInputAction> keyboardBinding)
@@ -29,7 +29,7 @@ namespace MindEngine.Input.Keyboard
                 throw new ArgumentNullException(nameof(keyboardBinding));
             }
 
-            this.keyboardBinding = keyboardBinding;
+            this.KeyboardBinding = keyboardBinding;
         }
 
         #endregion Constructors
@@ -38,108 +38,150 @@ namespace MindEngine.Input.Keyboard
 
         public void UpdateInput(GameTime time)
         {
-            this.keyboardPrevious = this.keyboardCurrent;
-            this.keyboardCurrent = Keyboard.GetState();
+            var keyboardStateCurrent = Keyboard.GetState();
+
+            this.UpdateKeys(keyboardStateCurrent, time);
+
+            this.KeyboardRecord.Add(keyboardStateCurrent);
+        }
+
+        private void UpdateKeys(KeyboardState keyboardStateCurrent, GameTime time)
+        {
+            foreach (var keyState in this.KeyboardState.Values)
+            {
+                var keyPressedCurrent = keyboardStateCurrent.IsKeyDown(keyState.Key);
+                var keyPressedPrevious = keyState.Pressed;
+
+                // Update press or release change and related events
+                if (keyPressedCurrent && !keyPressedPrevious)
+                {
+                    keyState.Pressed = true;
+                    keyState.PressedDuration = 0;
+
+                    keyState.Down = true;
+                    keyState.Up = false;
+                }
+                else if (!keyPressedCurrent && keyPressedPrevious)
+                {
+                    keyState.Pressed = false;
+                    keyState.PressedDuration = 0;
+
+                    keyState.Down = false;
+                    keyState.Up = true;
+                }
+                else if (keyPressedCurrent /*&& keyPressedPrevious*/)
+                {
+                    Debug.Assert(time.ElapsedGameTime.Ticks > 0);
+                    keyState.PressedDuration += (ulong)time.ElapsedGameTime.Ticks;
+
+                    keyState.Down = false;
+                }
+                else // (!keyPressedCurrent && !keyPressedPrevious) 
+                {
+                    keyState.Up = false;
+                }
+            }
         }
 
         #endregion Update
 
-        #region Modifier States
-
-        public bool KeyAltDown
-            =>
-                this.keyboardCurrent.IsKeyDown(Keys.LeftAlt)
-                || this.keyboardCurrent.IsKeyDown(Keys.RightAlt);
-
-        public bool KeyCtrlDown
-            =>
-                this.keyboardCurrent.IsKeyDown(Keys.LeftControl)
-                || this.keyboardCurrent.IsKeyDown(Keys.RightControl);
-
-        public bool KeyShiftDown
-            =>
-                this.keyboardCurrent.IsKeyDown(Keys.LeftShift)
-                || this.keyboardCurrent.IsKeyDown(Keys.RightShift);
-
-        private bool AreModifiersReady(KeyValuePair<Keys, List<Keys>> binding)
-        {
-            return this.AreModifiersEmpty(binding) || this.AreModifiersPressed(binding);
-        }
-
-        private bool AreModifiersPressed(KeyValuePair<Keys, List<Keys>> binding)
-        {
-            return binding.Value.All(this.KeyPressed);
-        }
-
-        private bool AreModifiersEmpty(KeyValuePair<Keys, List<Keys>> binding)
-        {
-            return binding.Value.Count == 0;
-        }
-
-        #endregion 
-
         #region Action States
 
-        /// <summary>
-        ///     Check if an action has been pressed.
-        /// </summary>
         public bool ActionPressed(MMInputAction action)
         {
-            return this.IsKeyboardBindingPressed(this.keyboardBinding[action]);
+            return this.KeyCombinationPressed(this.KeyboardBinding[action]);
         }
 
-        /// <summary>
-        ///     Check if an action was just performed in the most recent update.
-        /// </summary>
-        public bool ActionTriggered(MMInputAction action)
+        public ulong ActionPressedDuration(MMInputAction action)
         {
-            return this.IsKeyboardBindingTriggered(this.keyboardBinding[action]);
+            return this.KeyCombinationPressedDuration(this.KeyboardBinding[action]);
+        }
+
+        public bool ActionDown(MMInputAction action)
+        {
+            return this.KeyCombinationDown(this.KeyboardBinding[action]);
+        }
+
+        public bool ActionUp(MMInputAction action)
+        {
+            return this.KeyCombinationUp(this.KeyboardBinding[action]);
         }
 
         #endregion
+
+        #region Modifier States
+
+        public ulong ModifierPressedDuration(List<Keys> keys)
+        {
+            return keys.Min(key => this.KeyPressedDuration(key));
+        }
+
+        public bool ModifierPressed(List<Keys> keys)
+        {
+            return keys.Count == 0 || keys.All(this.KeyPressed);
+        }
+
+        #endregion 
 
         #region Keyboard Binding States
 
         /// <summary>
         ///     Check if an action map has been pressed.
         /// </summary>
-        private bool IsKeyboardBindingPressed(MMKeyboardCombination combination)
+        public bool KeyCombinationPressed(MMKeyCombination combination)
         {
-            return
-                combination.Any(binding => this.KeyPressed(binding.Key)
-                                           && this.AreModifiersReady(binding));
+            return combination.Any(binding => this.KeyPressed(binding.Key)
+                                              && this.ModifierPressed(binding.Value));
+        }
+
+        public ulong KeyCombinationPressedDuration(MMKeyCombination combination)
+        {
+            // Maximal amount in different bindings
+            return combination.Max(
+
+                // Minimal amount in different keys
+                binding => Math.Min(
+                this.KeyPressedDuration(binding.Key),
+                this.ModifierPressedDuration(binding.Value)));
         }
 
         /// <summary>
         ///     Check if an action map has been triggered this frame.
         /// </summary>
-        private bool IsKeyboardBindingTriggered(MMKeyboardCombination combination)
+        public bool KeyCombinationDown(MMKeyCombination combination)
         {
-            return
-                combination.Any(
-                    binding => this.KeyTriggered(binding.Key)
-                               && this.AreModifiersReady(binding));
+            return combination.Any(
+                binding => this.KeyDown(binding.Key) && this.ModifierPressed(binding.Value));
+        }
+
+        public bool KeyCombinationUp(MMKeyCombination combination)
+        {
+            return combination.Any(
+                binding => this.KeyDown(binding.Key) && this.ModifierPressed(binding.Value));
         }
 
         #endregion
 
         #region Keyboard States
 
-        /// <summary>
-        ///     Check if a key is pressed.
-        /// </summary>
         public bool KeyPressed(Keys key)
         {
-            return this.keyboardCurrent.IsKeyDown(key);
+            return this.KeyboardState[key].Pressed;
         }
 
-        /// <summary>
-        ///     Check if a key was just pressed in the most recent update.
-        /// </summary>
-        public bool KeyTriggered(Keys key)
+        public ulong KeyPressedDuration(Keys key)
         {
-            return this.keyboardCurrent.IsKeyDown(key)
-                   && !this.keyboardPrevious.IsKeyDown(key);
+            return this.KeyboardState[key].PressedDuration;
+        }
+
+        public bool KeyDown(Keys key)
+        {
+            return this.KeyboardState[key].Down;
+        }
+
+        public bool KeyUp(Keys key)
+        {
+            return this.KeyboardState[key].Up;
         }
 
         #endregion 

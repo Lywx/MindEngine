@@ -3,7 +3,7 @@ namespace MindEngine.Parser
     using System;
     using System.Xml;
     using Core;
-    using Core.Utils;
+    using Core.Util;
     using Microsoft.Xna.Framework;
 
     public static class MMXmlReader

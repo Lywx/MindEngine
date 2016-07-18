@@ -5,6 +5,7 @@
     using System.Windows.Forms;
     using IO.Configuration;
     using Math;
+    using Microsoft.Xna.Framework;
     using NLog;
 
     /// <summary>
@@ -44,7 +45,7 @@
                 MMPlainConfigurationReader.ReadValueInts(configuration, "Resolution", 1, 600));
 
             this.IsFullscreen = MMPlainConfigurationReader.ReadValueBool(configuration, "Full Screen", false);
-            this.IsWindowMode = MMPlainConfigurationReader.ReadValueBool(configuration, "Window Mode", true);
+            this.IsBorderless = MMPlainConfigurationReader.ReadValueBool(configuration, "Borderless", true);
 
             this.Fps = MMPlainConfigurationReader.ReadValueInt(configuration, "FPS", 30);
         }
@@ -62,6 +63,8 @@
         #endregion
 
         #region Resolution Data 
+
+        public Point Center => new Point(this.Width / 2, this.Height / 2);
 
         private int width;
 
@@ -121,12 +124,12 @@
 
         public bool IsFullscreen { get; set; }
 
-        private bool isWindowMode;
+        private bool isBorderless;
 
-        public bool IsWindowMode
+        public bool IsBorderless
         {
-            get { return this.isWindowMode; }
-            set { this.isWindowMode = !this.IsFullscreen && value; }
+            get { return this.isBorderless; }
+            set { this.isBorderless = !this.IsFullscreen && value; }
         }
 
         #endregion

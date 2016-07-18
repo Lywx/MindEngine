@@ -15,20 +15,9 @@
 #---------------------------------- Content ---------------------------------#
 
 #begin Engine.Persistent.xml
-/importer:PackageImporter
+/importer:MMPackageImporter
 /processor:PassThroughProcessor
 /build:Engine.Persistent.xml
-
-#begin Texture/Screen.Blank.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:Texture/Screen.Blank.png
 
 #begin Cursors/entis_alternate.png
 /importer:TextureImporter
@@ -194,4 +183,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Cursors/entis_vertical.png
+
+#begin Texture/screen_blank.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:Texture/screen_blank.png
 

@@ -55,26 +55,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMMInputEvent.cs" />
-    <Compile Include="IMMInputState.cs" />
+    <Compile Include="Gamepad\IMMGamepadInput.cs" />
+    <Compile Include="Gamepad\MMGamePadButton.cs" />
+    <Compile Include="Gamepad\MMGamePadButtonState.cs" />
+    <Compile Include="Gamepad\MMGamePadState.cs" />
+    <Compile Include="Gamepad\MMGamePadStickState.cs" />
+    <Compile Include="Keyboard\MMKeyboardState.cs" />
+    <Compile Include="Keyboard\MMKeyboardRecord.cs" />
+    <Compile Include="Keyboard\MMKeyboardSettings.cs" />
+    <Compile Include="Keyboard\MMKeyState.cs" />
+    <Compile Include="Mouse\IMMMouseInput.cs" />
+    <Compile Include="Mouse\MMMouseButtonState.cs" />
+    <Compile Include="Mouse\MMMouseRecord.cs" />
+    <Compile Include="Mouse\MMMouseOffset.cs" />
     <Compile Include="Keyboard\IMMKeyboardInput.cs" />
     <Compile Include="Keyboard\MMKeyboardBinding.cs" />
-    <Compile Include="Keyboard\MMKeyboardCombination.cs" />
+    <Compile Include="Keyboard\MMKeyCombination.cs" />
     <Compile Include="Keyboard\MMKeyboardInput.cs" />
-    <Compile Include="Keyboard\EventArgs\MMKeyEventArgs.cs" />
     <Compile Include="MMInputAction.cs" />
     <Compile Include="MMInputActionParser.cs" />
     <Compile Include="MMInputActions.cs" />
-    <Compile Include="Keyboard\EventArgs\MMCharEventArgs.cs" />
-    <Compile Include="Mouse\IMMMouseInput.cs" />
-    <Compile Include="Mouse\EventArgs\MMMouseEventArgs.cs" />
-    <Compile Include="Mouse\MMMouseButtons.cs" />
-    <Compile Include="Mouse\MMMouseInput.cs" />
+    <Compile Include="Keyboard\MMCharEventArgs.cs" />
+    <Compile Include="MMInputDevice.cs" />
+    <Compile Include="MMInputPlayer.cs" />
+    <Compile Include="Mouse\MMMouseSettings.cs" />
+    <Compile Include="Mouse\MMMouseState.cs" />
+    <Compile Include="Mouse\MMMouseWheelDirection.cs" />
+    <Compile Include="Mouse\MMMouseButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Gamepad\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MindEngine.Core\MindEngine.Core.csproj">
       <Project>{b4e9a85b-90b0-4b6c-b002-9c6683a44869}</Project>

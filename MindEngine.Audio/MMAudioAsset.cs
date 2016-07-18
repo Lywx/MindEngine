@@ -1,6 +1,6 @@
 ﻿namespace MindEngine.Audio
 {
-    using Core.Contents.Assets;
+    using Core.Content.Asset;
 
     public class MMAudioAsset : MMAsset
     {

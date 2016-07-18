@@ -30,13 +30,10 @@ namespace MindEngine.Input
             var fields = typeof(T).GetFields();
             foreach (var field in fields)
             {
-                if (field.IsPublic
-                    && field.IsStatic
+                if (field.IsPublic && field.IsStatic
 
                     // Ignore case
-                    && string.Compare(
-                        name,
-                        field.Name,
+                    && string.Compare(name, field.Name,
                         StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     return (MMInputAction)field.GetValue(null);

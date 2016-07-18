@@ -2,7 +2,7 @@ namespace MindEngine.Audio
 {
     using System;
     using Core;
-    using Core.Components;
+    using Core.Component;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Audio;
 

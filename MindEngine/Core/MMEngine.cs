@@ -4,11 +4,14 @@
     using System.Diagnostics;
     using System.Reflection;
     using Microsoft.Xna.Framework;
-    using Services;
+    using Microsoft.Xna.Framework.Graphics;
+    using Service;
 
     public class MMEngine : Game, IMMEngine
     {
         private IMMEngineAudio audio;
+
+        private IMMEngineDebug debug;
 
         private IMMEngineGraphics graphics;
 
@@ -24,8 +27,11 @@
         {
             this.Content.RootDirectory = "Content";
 
-            // Use software cursor implemented by the engine
-            this.IsMouseVisible = false;
+            // The default behavior is to use the system cursor. If you want to 
+            // use software cursor implemented by the engine, you would turn 
+            // this off. Then provide a initializer for cursor object in the 
+            // engine graphics class.
+            this.IsMouseVisible = true;
         }
 
         #endregion
@@ -61,6 +67,7 @@
             // Provide global service access before component initialization
             Service = new MMEngineService(
                 new MMEngineAudioService(this.Audio),
+                new MMEngineDebugService(this.Debug), 
                 new MMEngineGraphicsService(this.Graphics),
                 new MMEngineInputService(this.Input),
                 new MMEngineInteropService(this.Interop),
@@ -97,6 +104,20 @@
             }
         }
 
+        public IMMEngineDebug Debug
+        {
+            get { return this.debug ?? (this.debug = new MMEngineNullDebug()); }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
+                this.debug = value;
+            }
+        }
 
         public IMMEngineGraphics Graphics
         {
@@ -178,10 +199,15 @@
         {
             this.UpdateInput(time);
 
-            this.Numerical.Update(time);
-            this.Interop.Update(time);
-            this.Graphics.Update(time);
-            this.Audio.Update(time);
+            // You need to call normal Update method in components manually, so
+            // that you could control the way they are updating. The usually 
+            // things may include:
+            //
+            // 1. Engine Numerical Component
+            // 2. Engine Save Manager
+            // 3. Engine Screen Manager
+            // 4. Engine Cursor Device
+            // 5. Engine Audio Component
 
             base.Update(time);
         }
@@ -195,7 +221,7 @@
         protected override void Draw(GameTime time)
         {
             this.GraphicsDevice.Clear(Color.Transparent);
-            this.Graphics.Draw(time);
+            this.GraphicsDevice.Clear(ClearOptions.DepthBuffer, new Vector4(0, 0, 0, 0), 1f, 0);
             base.Draw(time);
         }
 
