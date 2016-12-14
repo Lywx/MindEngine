@@ -7,7 +7,6 @@
     using Entity;
     using Geometry;
     using Microsoft.Xna.Framework;
-    using Object;
     using Style;
 
     internal interface IMMControl
@@ -46,14 +45,14 @@
 
         MMControl ControlRoot { get; }
 
-        void AttachControl(MMControl child);
+        void AddControl(MMControl child);
 
         void RemoveControl(MMControl child);
 
         #endregion
     }
 
-    public class MMControl : MMGameObject, IMMControl
+    public class MMControl : MMEntity, IMMControl
     {
         public class MMControlRegistration {}
 
@@ -84,7 +83,7 @@
             set { this.NodeParent = value; }
         }
 
-        public virtual void AttachControl(MMControl child)
+        public virtual void AddControl(MMControl child)
         {
             base.AttachNode(child);
 
@@ -342,8 +341,8 @@
 
         private void SetClippingRectangle(MMControl control)
         {
-            this.EngineGraphicsDeviceController.ScissorRectangleEnabled = true;
-            this.EngineGraphicsDeviceController.ScissorRectangle = this.ClippingRectangle(control);
+            EngineGraphicsDeviceController.ScissorRectangleEnabled = true;
+            EngineGraphicsDeviceController.ScissorRectangle = this.ClippingRectangle(control);
 
             this.ClippingRectangleDebug(control);
         }
@@ -351,9 +350,9 @@
         [Conditional("DEBUG")]
         private void ClippingRectangleDebug(MMControl control)
         {
-            if (this.EngineDebug.Graphics_WidgetClippingDisabled)
+            if (EngineDebug.Graphics_WidgetClippingDisabled)
             {
-                this.EngineGraphicsDeviceController.ScissorRectangleEnabled = false;
+                EngineGraphicsDeviceController.ScissorRectangleEnabled = false;
             }
         }
 
@@ -372,9 +371,9 @@
             // with individual scissor test. The scissor test is against the 
             // bounds of the control.
 
-            this.EngineRenderer.Begin();
+            EngineRenderer.Begin();
             this.DrawControl(time);
-            this.EngineRenderer.End();
+            EngineRenderer.End();
 
             this.DrawChildrenControl(time);
         }
@@ -393,9 +392,9 @@
             {
                 this.SetClippingRectangle(controlParam);
 
-                this.EngineRenderer.Begin();
+                EngineRenderer.Begin();
                 controlParam.DrawControl(time);
-                this.EngineRenderer.End();
+                EngineRenderer.End();
 
                 controlParam.DrawChildrenControl(time);
             }, time);
@@ -412,10 +411,10 @@
         [Conditional("DEBUG")]
         protected virtual void DrawControlPrimitive(GameTime time)
         {
-            if (this.EngineDebug.Graphics_WidgetPrimitiveEnabled)
+            if (EngineDebug.Graphics_WidgetPrimitiveEnabled)
             {
-                this.EngineRenderer.DrawRectangle(this.ControlBounds, Color.Red, 1f);
-                this.EngineRenderer.DrawRectangle(this.ControlClientBounds, Color.DarkRed, 1f);
+                EngineRenderer.DrawRectangle(this.ControlBounds, Color.Red, 1f);
+                EngineRenderer.DrawRectangle(this.ControlClientBounds, Color.DarkRed, 1f);
             }
         }
 

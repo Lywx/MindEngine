@@ -26,7 +26,7 @@ namespace MindEngine.Core.Service.Process
         {
             foreach (var listener in this.EventListeners)
             {
-                this.EngineInterop.Event.RemoveListener(listener);
+                EngineInterop.Event.RemoveListener(listener);
             }
         }
 

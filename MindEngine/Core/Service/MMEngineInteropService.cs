@@ -5,6 +5,7 @@ namespace MindEngine.Core.Service
     using IO.Directory;
     using Process;
     using Save;
+    using Scripting;
     using State;
 
     /// <summary>
@@ -25,6 +26,12 @@ namespace MindEngine.Core.Service
         public MMDirectoryManager File => this.Interop.File;
 
         public MMEngine Engine => this.Interop.Engine;
+
+        public IMMScriptManager Script
+        {
+            get { return this.Interop.Script; }
+            set { this.Interop.Script = value; }
+        }
 
         public MMEventManager Event => this.Interop.Event;
 

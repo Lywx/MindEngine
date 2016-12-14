@@ -64,7 +64,7 @@ namespace MindEngine.Core.Scene.Widget.Component
                 this.Element_ImageStyle = (MMImageStyle)this.ControlParent.ControlSkin.ElementStyles[this.ElementRegistration.Image];
             }
 
-            this.Element_Image = this.EngineInterop.Asset.Texture[this.Element_ImageStyle.ImageProperty.ImageName];
+            this.Element_Image = EngineInterop.Asset.Texture[this.Element_ImageStyle.ImageProperty.ImageName];
         }
 
         protected override void DrawComponent(GameTime time)

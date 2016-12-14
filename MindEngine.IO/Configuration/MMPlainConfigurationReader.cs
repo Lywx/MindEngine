@@ -2,46 +2,132 @@ namespace MindEngine.IO.Configuration
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Parser;
 
     public static class MMPlainConfigurationReader
     {
-        public static bool ReadValueBool(Dictionary<string, string> dict, string key, bool @default = false)
+        #region Value Type Reader
+
+        public static bool ReadBool(Dictionary<string, string> dict, string key, bool @default = false)
         {
-            return (bool)ReadValueFrom(dict, key, 0, typeof(bool), @default);
+            return (bool)ReadValueAt(dict, key, 0, typeof(bool), @default);
         }
 
         public static int ReadValueInt(Dictionary<string, string> dict, string key, int @default = 0)
         {
-            return ReadValueInts(dict, key, 0, @default);
+            return ReadIntAt(dict, key, 0, @default);
         }
 
         /// <summary>
         /// Get integer value from multiple int string separated by single white space.
         /// </summary>
-        public static int ReadValueInts(Dictionary<string, string> dict, string key, int index, int @default = 0)
+        public static int ReadIntAt(Dictionary<string, string> dict, string key, int index, int @default = 0)
         {
-            return (int)ReadValueFrom(dict, key, index, typeof(int), @default);
+            return (int)ReadValueAt(dict, key, index, typeof(int), @default);
         }
 
-        public static float ReadValueFloat(Dictionary<string, string> dict, string key, float @default = 0f)
+        public static float ReadFloat(Dictionary<string, string> dict, string key, float @default = 0f)
         {
-            return ReadValueFloats(dict, key, 0, @default);
+            return ReadFloatAt(dict, key, 0, @default);
         }
 
-        public static float ReadValueFloats(Dictionary<string, string> dict, string key, int index, float @default = 0f)
+        public static float ReadFloatAt(Dictionary<string, string> dict, string key, int index, float @default = 0f)
         {
-            return (float)ReadValueFrom(dict, key, index, typeof(float), @default);
+            return (float)ReadValueAt(dict, key, index, typeof(float), @default);
         }
 
-        private static object ReadValueFrom(Dictionary<string, string> dict, string key, int index, Type type, object @default)
+        #endregion
+
+        #region Template Reader
+
+        private static T ReadDataAt<T>(Dictionary<string, string> dict, string key, int index, Func<string, object, T> reader, T @default = default(T))
         {
-            return MMValueReader.ReadValue(dict.ValueAt(key, index), type, @default);
+            return MMValueReader.ReadData(dict.ValueStringAt(key, index), reader, @default);
         }
 
-        private static string ValueAt(this Dictionary<string, string> dict, string key, int index)
+        private static object ReadValueAt(Dictionary<string, string> dict, string key, int index, Type type, object @default)
         {
-            return dict[key].Split(' ')[index];
+            return MMValueReader.ReadValue(dict.ValueStringAt(key, index), type, @default);
         }
+
+        #endregion
+
+        #region Dictionary Utils
+
+        private static string ValueStringAt(this Dictionary<string, string> dict, string key, int index)
+        {
+            return ValueStringAt(dict, key, index, ' ');
+        }
+
+        private static string ValueStringAt(this Dictionary<string, string> dict, string key, int index, char split)
+        {
+            // Add space at the end of string to streamline the edge case
+            var valueString = dict[key] + split;
+
+            var valueBegin = 0;
+            var valueEnd = -1;
+            var valueIndex = -1;
+
+            var valueReady = false;
+
+            var spacePrevious = false;
+            var spaceCurrent = false;
+
+            for (var i = 0; i < valueString.Length; ++i)
+            {
+                var charCurrent = valueString[i];
+                if (charCurrent == split)
+                {
+                    spaceCurrent = true;
+
+                    if (!spacePrevious)
+                    {
+                        valueEnd = i;
+                    }
+                }
+                else
+                {
+                    spaceCurrent = false;
+
+                    if (spacePrevious)
+                    {
+                        valueBegin = i;
+                    }
+                }
+
+                var valueValid = valueBegin < valueEnd;
+                if (valueValid && !valueReady)
+                {
+                    valueReady = true;
+
+                    ++valueIndex;
+                    if (valueIndex == index)
+                    {
+                        return valueString.Substring(valueBegin, valueEnd - valueBegin);
+                    }
+                }
+                else if (!valueValid)
+                {
+                    valueReady = false;
+                }
+
+                spacePrevious = spaceCurrent;
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(index));
+        }
+
+        private static List<string> ValueStringListFrom(this Dictionary<string, string> dict, string key)
+        {
+            return ValueStringListFrom(dict, key, ',');
+        }
+
+        private static List<string> ValueStringListFrom(this Dictionary<string, string> dict, string key, char split)
+        {
+            return dict[key].Split(split).ToList();
+        }
+
+        #endregion
     }
 }

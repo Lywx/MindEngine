@@ -23,18 +23,18 @@
 
         public void LoadConfiguration()
         {
-            var configuration = MMPlainConfigurationLoader.LoadUnique("Graphics.ini");
+            var configuration = MMPlainConfigurationLoader.LoadUnique("Video.ini");
 
             this.Aspect = (float)
-                          MMPlainConfigurationReader.ReadValueInts(configuration, "Resolution Aspect", 0, 16) 
-                          / MMPlainConfigurationReader.ReadValueInts(configuration, "Resolution Aspect", 1, 9);
+                          MMPlainConfigurationReader.ReadIntAt(configuration, "Resolution Aspect", 0, 16) 
+                          / MMPlainConfigurationReader.ReadIntAt(configuration, "Resolution Aspect", 1, 9);
 
             this.SetResolution(
-                MMPlainConfigurationReader.ReadValueInts(configuration, "Resolution", 0, 800), 
-                MMPlainConfigurationReader.ReadValueInts(configuration, "Resolution", 1, 600));
+                MMPlainConfigurationReader.ReadIntAt(configuration, "Resolution", 0, 800), 
+                MMPlainConfigurationReader.ReadIntAt(configuration, "Resolution", 1, 600));
 
-            this.IsFullscreen = MMPlainConfigurationReader.ReadValueBool(configuration, "Full Screen", false);
-            this.IsBorderless = MMPlainConfigurationReader.ReadValueBool(configuration, "Borderless", true);
+            this.IsFullscreen = MMPlainConfigurationReader.ReadBool(configuration, "Full Screen", false);
+            this.IsBorderless = MMPlainConfigurationReader.ReadBool(configuration, "Borderless", true);
 
             this.Fps = MMPlainConfigurationReader.ReadValueInt(configuration, "FPS", 30);
         }

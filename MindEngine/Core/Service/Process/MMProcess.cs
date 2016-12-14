@@ -1,7 +1,9 @@
 ﻿namespace MindEngine.Core.Service.Process
 {
     using System;
+    using System.Diagnostics;
     using Microsoft.Xna.Framework;
+    using NLog;
 
     public class MMProcessPriorityChangedEventArgs : EventArgs
     {
@@ -13,13 +15,31 @@
         public int Priority { get; }
     }
 
-    public interface IMMProcess : IMMProcessManagerItem
+    internal interface IMMProcess : IMMProcessManagerItem
     {
-        string Name { get; set; }
+        void Enter();
+
+        void Run();
+
+        void Wait();
+
+        void Dispatch();
+
+        void Exit();
     }
 
     public abstract class MMProcess : MMObject, IMMProcess
     {
+#if DEBUG
+
+        #region Logger
+
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+#endif
+
         #region Constructors and Finalizer
 
         protected MMProcess(string name, MMProcessCategory category)
@@ -40,15 +60,11 @@
 
         #endregion
 
-        #region Process States
-
         public string Name { get; set; }
 
         public MMProcessState State { get; private set; } = MMProcessState.Inertial;
 
-        #endregion Process States
-
-        #region Process Event Operations
+        #region Process State Operations
 
         public event EventHandler<EventArgs> Exited = delegate {};
 
@@ -63,43 +79,58 @@
         /// </summary>
         public void Enter()
         {
-            if (this.State == MMProcessState.Inertial)
-            {
-                this.State = MMProcessState.New;
-            }
+            this.ChangeState(MMProcessState.Inertial, MMProcessState.New);
         }
 
         public void Run()
         {
-            if (this.State == MMProcessState.New)
-            {
-                this.State = MMProcessState.Running;
-            }
+            this.ChangeState(MMProcessState.New, MMProcessState.Running);
         }
 
         public void Wait()
         {
-            if (this.State == MMProcessState.Running)
-            {
-                this.State = MMProcessState.Waiting;
-            }
+            this.ChangeState(MMProcessState.Running, MMProcessState.Waiting);
         }
 
         public void Dispatch()
         {
-            if (this.State == MMProcessState.Waiting)
-            {
-                this.State = MMProcessState.Running;
-            }
+            this.ChangeState(MMProcessState.Waiting, MMProcessState.Running);
         }
 
         public void Exit()
         {
-            if (this.State == MMProcessState.Running)
+            this.ChangeState(MMProcessState.Running, MMProcessState.Terminated);
+        }
+
+        private void ChangeState(MMProcessState stateCurrent, MMProcessState stateNext)
+        {
+            if (this.State == stateCurrent)
             {
-                this.State = MMProcessState.Terminated;
+                this.State = stateNext;
+
+                this.LogStateChange(stateCurrent, stateNext);
+            }
+            else
+            {
+                this.LogStateError(stateCurrent, stateNext);
             }
         }
+
+        [Conditional("DEBUG")]
+        private void LogStateChange(MMProcessState stateCurrent, MMProcessState stateNext)
+        {
+            logger.Info($"{this.Name} switch state : {stateCurrent} -> {stateNext}");
+        }
+
+        [Conditional("DEBUG")]
+        private void LogStateError(MMProcessState stateCurrent, MMProcessState stateNext)
+        {
+            logger.Warn($"{this.Name} incorrectly try to switch change : {stateCurrent} -> {stateNext}");
+        }
+
+        #endregion Process States
+
+        #region Process Event Operations
 
         public virtual void OnExit()
         {
@@ -118,8 +149,6 @@
 
         public virtual void OnEnter()
         {
-            this.State = MMProcessState.Running;
-
             this.Entered?.Invoke(this, EventArgs.Empty);
         }
 
@@ -130,6 +159,10 @@
         public MMProcessCategory Category { get; }
 
         public virtual int Priority => (int)this.Category;
+
+        /// TODO(Feature): Dynamic process priority. To do that you need to 
+        /// implement Priority property with a event calling get set pair.
+        public event EventHandler<MMProcessPriorityChangedEventArgs> PriorityChanged = delegate {};
 
         public int CompareTo(IMMProcessManagerItem other)
         {

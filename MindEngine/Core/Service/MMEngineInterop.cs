@@ -6,6 +6,8 @@ namespace MindEngine.Core.Service
     using IO.Directory;
     using Process;
     using Save;
+    using Scripting;
+    using Scripting.IronPython;
     using State;
 
     public class MMEngineInterop : MMCompositeComponent, IMMEngineInterop
@@ -21,6 +23,7 @@ namespace MindEngine.Core.Service
             this.Game    = new MMGameManager(engine);
             this.Process = new MMProcessManager(engine);
             this.Screen  = new MMScreenManager(engine);
+            this.Script  = ;
         }
 
         #endregion
@@ -32,6 +35,8 @@ namespace MindEngine.Core.Service
         public MMEventManager Event { get; private set; }
 
         public new MMGameManager Game { get; private set; }
+
+        public IMMScriptManager Script { get; set; }
 
         public MMProcessManager Process { get; private set; }
 

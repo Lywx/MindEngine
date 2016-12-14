@@ -196,9 +196,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Engine.Persistent.xml" />
-    <None Include="Configuration\Graphics Context.py" />
+    <None Include="Configuration\Control.ini" />
+    <None Include="Configuration\Video.ini" />
     <None Include="Core\Scene\Widget\Component\MMLayerComponent.txt" />
     <Content Include="Icon.ico" />
+    <None Include="MindEngine.exe.nlog" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Scene\Widget\Model\" />
@@ -244,12 +246,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Configuration\Audio.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Configuration\Control %28Keyboard%29.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Configuration\Graphics.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Audio\Win\Audio.xgs">

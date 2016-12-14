@@ -30,7 +30,7 @@ namespace MindEngine.Core.Service
             
             this.Renderer.Initialize();
 
-            this.Cursor = new MMCursorDevice(this.EngineInterop.Asset.Cursors["Entis"]);
+            this.Cursor = new MMCursorDevice(EngineInterop.Asset.Cursors["Entis"]);
 
             base.Initialize();
         }

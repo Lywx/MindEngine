@@ -4,6 +4,7 @@ namespace MindEngine.Core.Service.Process
     using Component;
     using Microsoft.Xna.Framework;
     using Debug;
+    using NLog;
     using Util.Collection;
 
     /// <summary>
@@ -12,30 +13,34 @@ namespace MindEngine.Core.Service.Process
     /// </summary>
     public interface IMMProcessManagerItem : IComparable<IMMProcessManagerItem>, IDisposable
     {
-        #region Process States
+        string Name { get; set; }
 
         MMProcessState State { get; }
 
-        #endregion
-
-        /// Process events are scheduled by the process manager. It should not 
-        /// be called by anything else.
-
         #region Process Event Operations
 
+        /// Process on events are scheduled by the process manager. It should not 
+        /// be called by anything else.
+
+        /// <summary>
+        /// Called after the process calls Enter();
+        /// </summary>
         void OnEnter();
 
+        /// <summary>
+        /// Called after the process calls Exit();
+        /// </summary>
         void OnExit();
 
+        /// <summary>
+        /// Called after the process calls Run() or Dispatch();
+        /// </summary>
         void OnUpdate(GameTime time);
 
+        /// <summary>
+        /// Called after the process calls Wait();
+        /// </summary>
         void OnWait(GameTime time);
-
-        #endregion
-
-        #region Process State Operations
-
-        void Enter();
 
         #endregion
 
@@ -57,6 +62,16 @@ namespace MindEngine.Core.Service.Process
 
     public class MMProcessManager : GameComponent, IMMProcessManager
     {
+#if DEBUG
+
+        #region Logger
+
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+#endif
+
         #region Process Data
 
         private MMSortingList<IMMProcessManagerItem, MMProcessPriorityChangedEventArgs> Processes { get; set; }
@@ -107,6 +122,7 @@ namespace MindEngine.Core.Service.Process
 
                             case MMProcessState.New:
                             {
+                                logger.Info($"{processParam.Name} OnEnter");
                                 processParam.OnEnter();
                                 break;
                             }

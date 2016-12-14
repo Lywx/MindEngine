@@ -12,7 +12,7 @@ namespace MindEngine.Core
         protected MMGame(MMEngine engine)
             : base(engine)
         {
-            this.EngineInterop.Game.Add(this);
+            EngineInterop.Game.Add(this);
         }
 
         #endregion

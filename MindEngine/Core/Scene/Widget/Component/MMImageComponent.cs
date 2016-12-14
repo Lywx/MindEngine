@@ -65,7 +65,7 @@
                 this.Element_ImageStyle = (MMImageStyle)this.ControlParent.ControlSkin.ElementStyles[this.ElementRegistration.Image];
             }
 
-            this.Element_Image = this.EngineInterop.Asset.Texture[this.Element_ImageStyle.ImageProperty.ImageName];
+            this.Element_Image = EngineInterop.Asset.Texture[this.Element_ImageStyle.ImageProperty.ImageName];
         }
 
         protected override void OnInitComponent()
@@ -88,7 +88,7 @@
 
             if (this.Element_ImageStyle.ImageProperty != null)
             {
-                this.EngineRenderer.Draw(
+                EngineRenderer.Draw(
                     this.Element_Image.Resource,
                     this.ComponentBounds(this.ControlBounds, this.Element_ImageStyle),
                     this.Element_ImageStyle.ImageProperty.ImageBaseColor, 0f);
@@ -101,7 +101,7 @@
 
             if (this.Engine.Debug.Graphics_WidgetPrimitiveEnabled)
             {
-                this.EngineRenderer.DrawMonospacedString(
+                EngineRenderer.DrawMonospacedString(
                     this.Element_DefaultTextFont,
                     $"Image = {this.Element_ImageStyle.ImageProperty.ImageName}\n" +
                     $"Opacity = {this.Element_ImageStyle.ImageProperty.ImageOpacity}\n" +

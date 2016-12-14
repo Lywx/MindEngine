@@ -5,7 +5,7 @@ namespace MindEngine.Core.Scene.Entity
 
     public abstract class MMEntityComponent : MMEntityBehavior
     {
-        protected MMEntityComponent(int updateIndex) : base(updateIndex)
+        protected MMEntityComponent()
         {
         }
 
@@ -19,16 +19,15 @@ namespace MindEngine.Core.Scene.Entity
     /// </summary>
     public class MMEntityUpdateComponent : MMEntityComponent
     {
-        public MMEntityUpdateComponent(int updateIndex) : base(updateIndex)
+        public MMEntityUpdateComponent()
         {
-            
         }
 
         public override string ComponentName => MMEntityUpdateBehavior.Name;
 
         private MMEntityUpdatableList UpdateList { get; set; } = new MMEntityUpdatableList();
 
-        public void AddBehavior(MMEntityUpdateBehavior updateBehavior)
+        public void AttachBehavior(MMEntityUpdateBehavior updateBehavior)
         {
             var updateIndex = updateBehavior.UpdateOrder;
 
@@ -41,7 +40,7 @@ namespace MindEngine.Core.Scene.Entity
             this.UpdateList.Add(updateBehavior);
         }
 
-        public void RemoveBehavior(int updateIndex)
+        public void DetachBehavior(int updateIndex)
         {
             var internalIndex = this.UpdateList.FindIndex(updatable => updatable.UpdateOrder == updateIndex);
             this.UpdateList.RemoveAt(internalIndex);

@@ -58,7 +58,7 @@ namespace MindEngine.Core.Scene.Widget.Component
         protected virtual void OnInitElement()
         {
             this.Element_DefaultTextStyle = (MMTextStyle)this.ControlParent.ControlSkin.ElementStyles[this.ElementRegistration.DebugText];
-            this.Element_DefaultTextFont = this.EngineInterop.Asset.Fonts[this.Element_DefaultTextStyle.TextProperty.FontName];
+            this.Element_DefaultTextFont = EngineInterop.Asset.Fonts[this.Element_DefaultTextStyle.TextProperty.FontName];
 
             this.Element_DefaultPrimitiveStyle =  (MMPrimitiveStyle)this.ControlParent.ControlSkin.ElementStyles[this.ElementRegistration.DebugPrimitive];
         }
@@ -135,9 +135,9 @@ namespace MindEngine.Core.Scene.Widget.Component
         [Conditional("DEBUG")]
         protected virtual void DrawComponentPrimitive(GameTime time)
         {
-            if (this.EngineDebug.Graphics_WidgetPrimitiveEnabled)
+            if (EngineDebug.Graphics_WidgetPrimitiveEnabled)
             {
-                this.EngineRenderer.DrawRectangle(
+                EngineRenderer.DrawRectangle(
                     this.ComponentBounds(this.ControlBounds, 
                     this.Element_DefaultPrimitiveStyle), 
                     this.Element_DefaultPrimitiveStyle.LineColor, 

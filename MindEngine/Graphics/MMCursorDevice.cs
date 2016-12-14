@@ -39,12 +39,12 @@ namespace MindEngine.Graphics
 
         public void Update(GameTime time)
         {
-            this.Position = this.EngineInput.Mouse.Position.ToVector2();
+            this.Position = EngineInput.Mouse.Position.ToVector2();
         }
 
         public void Draw(GameTime time)
         {
-            this.EngineRenderer.Draw(this.TextureCurrent, this.Position - this.HotpotCurrent, 0f);
+            EngineRenderer.Draw(this.TextureCurrent, this.Position - this.HotpotCurrent, 0f);
         }
 
         #region Operations

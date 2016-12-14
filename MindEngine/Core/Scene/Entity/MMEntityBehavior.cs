@@ -6,8 +6,8 @@ namespace MindEngine.Core.Scene.Entity
     public class MMEntityUpdateBehavior : MMEntityBehavior
     {
         public MMEntityUpdateBehavior(int updateIndex, Action<GameTime> updateAction)
-            : base(updateIndex)
         {
+            this.UpdateOrder = updateIndex;
             this.UpdateAction = updateAction;
         }
 
@@ -31,9 +31,8 @@ namespace MindEngine.Core.Scene.Entity
         /// <summary>
         /// </summary>
         /// <param name="updateIndex">Index has to be 0-based positive index.</param>
-        protected MMEntityBehavior(int updateIndex)
+        protected MMEntityBehavior()
         {
-            this.UpdateOrder = updateIndex;
         }
 
         public sealed override int UpdateOrder

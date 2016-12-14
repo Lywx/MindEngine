@@ -4,7 +4,7 @@ namespace MindEngine.Core.Scene.Widget.Control
     using Geometry;
     using Property;
 
-    public interface IMMContainerControl : IMMControl
+    internal interface IMMContainerControl : IMMControl
     {
         void AddControl(MMControl child, bool clientArea);
     }
@@ -73,11 +73,11 @@ namespace MindEngine.Core.Scene.Widget.Control
         {
             if (clientArea)
             {
-                this.ControlClientArea.AttachControl(child);
+                this.ControlClientArea.AddControl(child);
             }
             else
             {
-                base.AttachControl(child);
+                base.AddControl(child);
             }
         }
 
@@ -91,7 +91,7 @@ namespace MindEngine.Core.Scene.Widget.Control
         {
             this.ControlClientArea = new MMClipControl();
             this.ControlClientArea.ControlStyle = this.ControlSkin.ControlStyles[""].As;
-            base.AttachControl(this.ControlClientArea);
+            base.AddControl(this.ControlClientArea);
 
             base.OnInitControl();
         }

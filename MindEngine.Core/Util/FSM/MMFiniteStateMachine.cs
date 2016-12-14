@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace MindEngine.Core.Util.FSM
 {
-    using System.Diagnostics;
-
     public partial class MMStateMachine<TState, TTransition>
     {
         public TState State

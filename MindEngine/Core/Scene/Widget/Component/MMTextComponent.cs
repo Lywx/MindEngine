@@ -62,7 +62,7 @@
                 this.Element_TextStyle = (MMTextStyle)this.ControlParent.ControlSkin.ElementStyles[this.ElementRegistration.Text];
             }
 
-            this.Element_TextFont = this.EngineInterop.Asset.Fonts[this.Element_TextStyle.TextProperty.FontName];
+            this.Element_TextFont = EngineInterop.Asset.Fonts[this.Element_TextStyle.TextProperty.FontName];
         }
 
         #endregion
@@ -82,7 +82,7 @@
                 componentBounds.Width,
                 this.Element_TextStyle.TextProperty.TextMonospaced);
 
-            this.EngineRenderer.DrawString(
+            EngineRenderer.DrawString(
                 this.Element_TextFont,
                 multilineText,
                 componentBounds.Location,

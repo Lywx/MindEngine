@@ -128,7 +128,7 @@
                 //{
                 //    Image = this.ControlRegistration.CaptionButtonClose
                 //}
-            this.AttachControl(this.CaptionButtonClose);
+            this.AddControl(this.CaptionButtonClose);
         }
 
         protected override void OnInitComponent()

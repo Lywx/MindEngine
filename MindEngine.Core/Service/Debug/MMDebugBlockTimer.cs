@@ -5,7 +5,7 @@ namespace MindEngine.Core.Service.Debug
 
     public class MMDebugBlockTimer : IDisposable
     {
-        // TODO(Wuxiang)
+        // TODO(Feature): Provide a place to hold timer record
         // private int timerId;
 
         private Stopwatch timer;
@@ -30,7 +30,7 @@ namespace MindEngine.Core.Service.Debug
             this.timer.Start();
         }
 
-        // TODO: Provide a place to hold the record
+        // TODO(Feature): Provide a place to hold the record
         private void EndTiming()
         {
             this.timer.Stop();

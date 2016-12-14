@@ -41,8 +41,8 @@ namespace MindEngine.Graphics
 
         public void Initialize()
         {
-            var availableResolution = this.Engine.Interop..Configuration.Get<>
-            this.Context = new MMGraphicsDeviceContext(this.);
+            var availableResolution = Engine.Interop.Configuration.Get<>
+            this.Context = new MMGraphicsDeviceContext(availableResolution);
             this.Setting = 
 
             this.ApplySetting(this.Setting);

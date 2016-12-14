@@ -5,6 +5,23 @@
 
     public static class MMValueReader
     {
+        public static T ReadData<T>(string valueString, Func<string, object, T> valueReader, T valueDefault)
+        {
+            if (valueReader == null)
+            {
+                throw new ArgumentNullException(nameof(valueReader));
+            }
+
+            try
+            {
+                return valueReader.Invoke(valueString, valueDefault);
+            }
+            catch (Exception)
+            {
+                return valueDefault; 
+            }
+        }
+
         /// <summary>
         /// Read data value in string format.
         /// </summary>

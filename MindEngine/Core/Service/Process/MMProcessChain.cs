@@ -45,7 +45,7 @@ namespace MindEngine.Core.Service.Process
         private void AttachNextProcess()
         {
             this.ProcessCurrent = this.Processes[this.ProcessIndex];
-            this.EngineInterop.Process.AttachProcess(this.ProcessCurrent);
+            EngineInterop.Process.AttachProcess(this.ProcessCurrent);
         }
     }
 }

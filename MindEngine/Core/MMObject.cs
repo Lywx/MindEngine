@@ -12,23 +12,23 @@ namespace MindEngine.Core
     {
         #region Engine Access
 
-        protected IMMEngine Engine => this.EngineInterop.Engine;
+        protected static IMMEngine Engine => EngineInterop.Engine;
 
-        protected IMMEngineAudioService EngineAudio => MMEngine.Service.Audio;
+        protected static IMMEngineAudioService EngineAudio => MMEngine.Service.Audio;
 
-        protected IMMEngineDebugService EngineDebug => MMEngine.Service.Debug;
+        protected static IMMEngineDebugService EngineDebug => MMEngine.Service.Debug;
 
-        protected IMMEngineInteropService EngineInterop => MMEngine.Service.Interop;
+        protected static IMMEngineInteropService EngineInterop => MMEngine.Service.Interop;
 
-        protected IMMEngineInputService EngineInput => MMEngine.Service.Input;
+        protected static IMMEngineInputService EngineInput => MMEngine.Service.Input;
 
-        protected IMMEngineNumericalService EngineNumerical => MMEngine.Service.Numerical;
+        protected static IMMEngineNumericalService EngineNumerical => MMEngine.Service.Numerical;
 
-        protected IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
+        protected static IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
 
-        protected MMGraphicsRenderer EngineRenderer => this.EngineGraphics.Renderer;
+        protected static MMGraphicsRenderer EngineRenderer => EngineGraphics.Renderer;
 
-        protected IMMGraphicsDeviceController EngineGraphicsDeviceController => this.EngineGraphics.DeviceController;
+        protected static IMMGraphicsDeviceController EngineGraphicsDeviceController => EngineGraphics.DeviceController;
 
         #endregion
     }

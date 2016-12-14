@@ -16,8 +16,6 @@ namespace MindEngine.Core.Scene.Screen
         {
         }
 
-        public override string EntityClass => "Screen";
-
         protected override void DrawInternal(GameTime time)
         {
             this.NodeChildren.Draw(time);
