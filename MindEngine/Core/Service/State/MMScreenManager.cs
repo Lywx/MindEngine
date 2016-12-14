@@ -49,7 +49,7 @@
 
         private List<MMScreen> screensToUpdate = new List<MMScreen>();
 
-        private readonly MMScreenCollection screens = new MMScreenCollection();
+        private readonly MMScreenList screens = new MMScreenList();
 
         #endregion Screen Data
 
@@ -112,14 +112,14 @@
         public void AddScreen(MMScreen screen)
         {
             this.screens.Add(screen);
-            screen.OnEnter();
+            screen.OnEnterScene();
         }
 
         public void RemoveScreen(MMScreen screen)
         {
             this.screens.Remove(screen);
             this.screensToUpdate.Remove(screen);
-            screen.OnExit();
+            screen.OnExitScene();
         }
 
         public void RemoveScreenFrom(int index)

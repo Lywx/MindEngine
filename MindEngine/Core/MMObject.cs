@@ -26,7 +26,7 @@ namespace MindEngine.Core
 
         protected IMMEngineGraphicsService EngineGraphics => MMEngine.Service.Graphics;
 
-        protected MMRenderer EngineRenderer => this.EngineGraphics.Renderer;
+        protected MMGraphicsRenderer EngineRenderer => this.EngineGraphics.Renderer;
 
         protected IMMGraphicsDeviceController EngineGraphicsDeviceController => this.EngineGraphics.DeviceController;
 

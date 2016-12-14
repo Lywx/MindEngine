@@ -7,7 +7,7 @@ namespace MindEngine.Core.Service
 
     public class MMEngineGraphics : MMCompositeComponent, IMMEngineGraphics
     {
-        public MMEngineGraphics(MMEngine engine, MMGraphicsSettings settings)
+        public MMEngineGraphics(MMEngine engine)
             : base(engine)
         {
             if (engine == null)
@@ -15,36 +15,19 @@ namespace MindEngine.Core.Service
                 throw new ArgumentNullException(nameof(engine));
             }
 
-            if (settings == null)
-            {
-                throw new ArgumentNullException(nameof(settings));
-            }
-
-            this.Settings = settings;
-            this.Manager = new MMGraphicsManager(engine, settings);
-
-            // No dependency injection here, because sprite batch is never replaced as long 
-            // as this is a MonoGame application.
+            this.DeviceManager = new MMGraphicsDeviceManager(engine);
             this.DeviceController = new MMGraphicsDeviceController(engine);
 
-            // No dependency injection here, because string drawer is a class focus on string 
-            // drawing. The functionality is never extended in the form of inheritance.
-            this.Renderer = new MMRenderer(engine, this.DeviceController);
+            this.Renderer = new MMGraphicsRenderer(engine, this.DeviceController);
         }
-
-        public GraphicsDevice Device => this.Manager.GraphicsDevice;
-
-        /// <remarks>
-        /// The default behavior is not initializing cursor. The user need to initialize their own cursor.
-        /// </remarks>
-        public MMCursorDevice Cursor { get; set; }
 
         #region Initialization
 
         public override void Initialize()
         {
-            this.Manager.Initialize();
+            this.DeviceManager.Initialize();
             this.DeviceController.Initialize();
+            
             this.Renderer.Initialize();
 
             this.Cursor = new MMCursorDevice(this.EngineInterop.Asset.Cursors["Entis"]);
@@ -54,21 +37,24 @@ namespace MindEngine.Core.Service
 
         #endregion
 
-        #region Setting Data
+        #region Device
 
-        public IMMGraphicsManager Manager { get; private set; }
+        public IMMGraphicsDeviceManager DeviceManager { get; private set; }
 
-        public IMMGraphicsSettings Settings { get; }
+        public MMGraphicsDeviceSetting DeviceSetting { get; }
 
-        #endregion
-
-        #region Render Data
+        public GraphicsDevice Device => this.DeviceManager.GraphicsDevice;
 
         public IMMGraphicsDeviceController DeviceController { get; private set; }
 
-        public MMRenderer Renderer { get; }
-
         #endregion
+
+        public MMGraphicsRenderer Renderer { get; }
+
+        /// <remarks>
+        /// The default behavior is not initializing cursor. The user need to initialize their own cursor.
+        /// </remarks>
+        public MMCursorDevice Cursor { get; set; }
 
         #region IDisposable
 

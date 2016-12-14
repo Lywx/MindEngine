@@ -4,6 +4,10 @@ namespace MindEngine.Core.Service
     using Graphics;
     using Microsoft.Xna.Framework.Graphics;
 
+    /// <summary>
+    /// Provide a wrapper around the service in order to hot swap the core 
+    /// module in engine.
+    /// </summary>
     public sealed class MMEngineGraphicsService : IMMEngineGraphicsService
     {
         public MMEngineGraphicsService(IMMEngineGraphics graphics)
@@ -16,25 +20,23 @@ namespace MindEngine.Core.Service
             this.Graphics = graphics;
         }
 
-        private IMMEngineGraphics Graphics { get; }
+        IMMEngineGraphics Graphics { get; }
 
-        #region Manager and Settings
+        #region Device
 
-        public IMMGraphicsManager Manager => this.Graphics.Manager;
+        public IMMGraphicsDeviceManager DeviceManager => this.Graphics.DeviceManager;
 
-        public IMMGraphicsSettings Settings => this.Graphics.Settings;
+        public IMMGraphicsDeviceController DeviceController => this.Graphics.DeviceController;
+
+        public GraphicsDevice Device => this.DeviceManager.GraphicsDevice;
+
+        public MMGraphicsDeviceSetting DeviceSetting => this.Graphics.DeviceSetting;
 
         #endregion
 
-        #region Renderer
+        #region 
 
-        public GraphicsDevice Device => this.Manager.GraphicsDevice;
-
-        public MMCursorDevice Cursor => this.Graphics.Cursor;
-
-        public MMRenderer Renderer => this.Graphics.Renderer;
-
-        public IMMGraphicsDeviceController DeviceController => this.Graphics.DeviceController;
+        public MMGraphicsRenderer Renderer => this.Graphics.Renderer;
 
         #endregion
     }

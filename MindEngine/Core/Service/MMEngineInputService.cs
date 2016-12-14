@@ -6,6 +6,10 @@ namespace MindEngine.Core.Service
     using Input.Mouse;
     using Microsoft.Xna.Framework;
 
+    /// <summary>
+    /// Provide a wrapper around the service in order to hot swap the core 
+    /// module in engine.
+    /// </summary>
     public sealed class MMEngineInputService : IMMEngineInputService
     {
         public MMEngineInputService(IMMEngineInput input)

@@ -5,17 +5,11 @@ namespace MindEngine.Core.Service
 
     public interface IMMEngineGraphicsService
     {
-        #region Manager and Settings
+        #region Device
 
-        IMMGraphicsManager Manager { get; }
+        IMMGraphicsDeviceManager DeviceManager { get; }
 
-        IMMGraphicsSettings Settings { get; }
-
-        #endregion
-
-        #region Renderer
-
-        MMRenderer Renderer { get; }
+        MMGraphicsDeviceSetting DeviceSetting { get; }
 
         IMMGraphicsDeviceController DeviceController { get; }
 
@@ -23,6 +17,6 @@ namespace MindEngine.Core.Service
 
         #endregion
 
-        MMCursorDevice Cursor { get; }
+        MMGraphicsRenderer Renderer { get; }
     }
 }

@@ -3,6 +3,16 @@
     using System;
     using Microsoft.Xna.Framework;
 
+    public class MMProcessPriorityChangedEventArgs : EventArgs
+    {
+        public MMProcessPriorityChangedEventArgs(int priority)
+        {
+            this.Priority = priority;
+        }
+
+        public int Priority { get; }
+    }
+
     public interface IMMProcess : IMMProcessManagerItem
     {
         string Name { get; set; }
@@ -30,17 +40,36 @@
 
         #endregion
 
-        public string Name { get; set; }
-
         #region Process States
 
-        public MMProcessState State { get; private set; } = MMProcessState.New;
+        public string Name { get; set; }
+
+        public MMProcessState State { get; private set; } = MMProcessState.Inertial;
 
         #endregion Process States
 
         #region Process Event Operations
 
+        public event EventHandler<EventArgs> Exited = delegate {};
+
+        public event EventHandler<EventArgs> Waited = delegate {};
+
+        public event EventHandler<EventArgs> Updated = delegate {};
+
+        public event EventHandler<EventArgs> Entered = delegate {};
+
+        /// <summary>
+        /// The process will need to populate manually to enter the running state.
+        /// </summary>
         public void Enter()
+        {
+            if (this.State == MMProcessState.Inertial)
+            {
+                this.State = MMProcessState.New;
+            }
+        }
+
+        public void Run()
         {
             if (this.State == MMProcessState.New)
             {
@@ -48,7 +77,7 @@
             }
         }
 
-        protected void Wait()
+        public void Wait()
         {
             if (this.State == MMProcessState.Running)
             {
@@ -56,7 +85,7 @@
             }
         }
 
-        protected void Dispatch()
+        public void Dispatch()
         {
             if (this.State == MMProcessState.Waiting)
             {
@@ -64,7 +93,7 @@
             }
         }
 
-        protected void Exit()
+        public void Exit()
         {
             if (this.State == MMProcessState.Running)
             {
@@ -74,20 +103,24 @@
 
         public virtual void OnExit()
         {
-            
+            this.Exited?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnUpdate(GameTime time)
         {
-            
+            this.Updated?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnWait(GameTime time)
         {
+            this.Waited?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnEnter()
         {
+            this.State = MMProcessState.Running;
+
+            this.Entered?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion 

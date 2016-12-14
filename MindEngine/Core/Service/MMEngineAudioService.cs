@@ -3,6 +3,10 @@ namespace MindEngine.Core.Service
     using System;
     using Audio;
 
+    /// <summary>
+    /// Provide a wrapper around the service in order to hot swap the core 
+    /// module in engine.
+    /// </summary>
     public sealed class MMEngineAudioService : IMMEngineAudioService
     {
         public MMEngineAudioService(IMMEngineAudio audio)

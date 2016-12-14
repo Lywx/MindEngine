@@ -6,11 +6,11 @@
 
     internal class MMEngineNullGraphics : MMCompositeComponent, IMMEngineGraphics
     {
-        public IMMGraphicsManager Manager { get; }
+        public IMMGraphicsDeviceManager DeviceManager { get; }
 
         public IMMGraphicsSettings Settings { get; }
 
-        public MMRenderer Renderer { get; }
+        public MMGraphicsRenderer Renderer { get; }
 
         public IMMGraphicsDeviceController DeviceController { get; }
 

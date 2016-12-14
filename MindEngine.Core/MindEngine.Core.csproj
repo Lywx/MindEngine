@@ -40,6 +40,38 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IronPython, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\IronPython.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\IronPython.Modules.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronPython.SQLite, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\IronPython.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronPython.Wpf, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\IronPython.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\Microsoft.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\Microsoft.Scripting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.AspNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\Microsoft.Scripting.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.5\lib\Net45\Microsoft.Scripting.Metadata.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MonoGame.Framework, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependency\MonoGame\MonoGame.Framework.dll</HintPath>
@@ -61,17 +93,14 @@
     <Compile Include="Content\Cursor\MMCursorHotspot.cs" />
     <Compile Include="Content\Cursor\MMCursorResource.cs" />
     <Compile Include="Content\Cursor\MMCursorShape.cs" />
-    <Compile Include="Content\Widget\MMControlDesign.cs" />
-    <Compile Include="Content\Widget\MMControlElement.cs" />
-    <Compile Include="Content\Widget\MMControlElementCollection.cs" />
-    <Compile Include="Content\Widget\MMControlLayer.cs" />
-    <Compile Include="Content\Widget\MMControlMargins.cs" />
-    <Compile Include="Content\Widget\MMControlSettings.cs" />
-    <Compile Include="Content\Widget\MMControlSize.cs" />
-    <Compile Include="Content\Widget\MMControlLayout.cs" />
-    <Compile Include="Content\Widget\MMControlSkin.cs" />
-    <Compile Include="Content\Widget\MMControlText.cs" />
-    <Compile Include="Content\Widget\MMControlImage.cs" />
+    <Compile Include="Service\Scripting\IMMScriptManager.cs" />
+    <Compile Include="Service\Scripting\IronPython\MMIronPythonScript.cs" />
+    <Compile Include="Service\Scripting\IronPython\MMIronPythonSession.cs" />
+    <Compile Include="Service\Scripting\MMThreadQueue.cs" />
+    <Compile Include="Util\Collection\IMMList.cs" />
+    <Compile Include="Util\Collection\MMMultiList.cs" />
+    <Compile Include="Util\FSM\MMFiniteStateMachine.cs" />
+    <Compile Include="Util\FSM\MMStateRepresentation.cs" />
     <Compile Include="Util\MMTexture2DExtension.cs" />
     <Compile Include="IMMDrawableOperations.cs" />
     <Compile Include="Service\Debug\MMDebugBlockTimer.cs" />
@@ -116,8 +145,8 @@
     <Compile Include="Session\IMMSession.cs" />
     <Compile Include="Session\IMMSessionManager.cs" />
     <Compile Include="Session\IMMSessionData.cs" />
-    <Compile Include="Util\MMSortingCollection.cs" />
-    <Compile Include="Util\MMSortingFilteringCollection.cs" />
+    <Compile Include="Util\Collection\MMSortingList.cs" />
+    <Compile Include="Util\Collection\MMSortingFilteringList.cs" />
     <Compile Include="Util\MMVectorConverter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +157,9 @@
       <Project>{B1D79A7E-408F-44A5-B6E2-C50C7EEF5AB3}</Project>
       <Name>MindEngine.Math</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

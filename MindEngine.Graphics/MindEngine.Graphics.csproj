@@ -59,9 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMMGraphicsSettings.cs" />
-    <Compile Include="IMMRenderer.cs" />
-    <Compile Include="MMGraphicsSettings.cs" />
+    <Compile Include="IMMGraphicsDeviceManager.cs" />
+    <Compile Include="IMMGraphicsManager.cs" />
+    <Compile Include="IMMGraphicsRenderer.cs" />
+    <Compile Include="MMGraphicsDeviceContext.cs" />
+    <Compile Include="MMGraphicsDeviceSettingProvider.cs" />
+    <Compile Include="MMGraphicsDeviceResolution.cs" />
+    <Compile Include="MMGraphicsDeviceSetting.cs" />
+    <Compile Include="MMGraphicsDeviceSettingController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

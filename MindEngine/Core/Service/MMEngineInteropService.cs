@@ -7,9 +7,10 @@ namespace MindEngine.Core.Service
     using Save;
     using State;
 
-    /// <remarks>
-    ///     Sealed for added new keyword and changed accessibility in MMEngine property
-    /// </remarks>
+    /// <summary>
+    /// Provide a wrapper around the service in order to hot swap the core 
+    /// module in engine.
+    /// </summary>
     public sealed class MMEngineInteropService : IMMEngineInteropService
     {
         private IMMEngineInterop Interop { get; }
@@ -20,19 +21,6 @@ namespace MindEngine.Core.Service
         }
 
         public MMAssetManager Asset => this.Interop.Asset;
-
-        //TODO(Wuxiang)
-        //public MMConsole Console
-        //{
-        //    get
-        //    {
-        //        return this.interop.Console;
-        //    }
-        //    set
-        //    {
-        //        this.interop.Console = value;
-        //    }
-        //}
 
         public MMDirectoryManager File => this.Interop.File;
 
@@ -48,15 +36,8 @@ namespace MindEngine.Core.Service
 
         public MMSaveManager Save
         {
-            get
-            {
-                return this.Interop.Save;
-            }
-
-            set
-            {
-                this.Interop.Save = value;
-            }
+            get { return this.Interop.Save; } 
+            set { this.Interop.Save = value; }
         }
     }
 }

@@ -1,7 +1,7 @@
 namespace MindEngine.Core.Scene.Screen
 {
+    using Entity;
     using Microsoft.Xna.Framework;
-    using Node;
 
     /// <summary>
     /// Screen is the primary unit for processing different meta-game state. 
@@ -10,7 +10,7 @@ namespace MindEngine.Core.Scene.Screen
     /// Game Screen. Most of the time, these screen are independent and serve 
     /// different functionality.
     /// </summary>
-    public class MMScreen : MMNode
+    public class MMScreen : MMEntityNode
     {
         public MMScreen()
         {
@@ -20,7 +20,7 @@ namespace MindEngine.Core.Scene.Screen
 
         protected override void DrawInternal(GameTime time)
         {
-            this.Children.Draw(time);
+            this.NodeChildren.Draw(time);
         }
     }
 }

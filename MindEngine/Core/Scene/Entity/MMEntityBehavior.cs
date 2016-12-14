@@ -3,23 +3,43 @@ namespace MindEngine.Core.Scene.Entity
     using System;
     using Microsoft.Xna.Framework;
 
-    public class MMUpdateBehavior : MMEntityBehavior
+    public class MMEntityUpdateBehavior : MMEntityBehavior
     {
-        public MMUpdateBehavior(Action<GameTime> updateAction)
+        public MMEntityUpdateBehavior(int updateIndex, Action<GameTime> updateAction)
+            : base(updateIndex)
         {
             this.UpdateAction = updateAction;
         }
 
-        private Action<GameTime> UpdateAction { get; set; }
+        /// <summary>
+        /// </summary>
+        /// <remarks>
+        ///     Used by MMEntityUpdateComponent.Name.
+        /// </remarks>
+        public static string Name { get; } = "Update";
 
-        public override void Update(GameTime time)
+        private Action<GameTime> UpdateAction { get; }
+
+        protected override void UpdateInternal(GameTime time)
         {
             this.UpdateAction.Invoke(time);
         }
     }
 
-    public abstract class MMEntityBehavior
+    public class MMEntityBehavior : MMEntityUpdatable
     {
-        public abstract void Update(GameTime time);
+        /// <summary>
+        /// </summary>
+        /// <param name="updateIndex">Index has to be 0-based positive index.</param>
+        protected MMEntityBehavior(int updateIndex)
+        {
+            this.UpdateOrder = updateIndex;
+        }
+
+        public sealed override int UpdateOrder
+        {
+            get { return base.UpdateOrder; }
+            set { base.UpdateOrder = value; }
+        }
     }
 }

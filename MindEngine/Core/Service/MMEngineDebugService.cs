@@ -2,6 +2,10 @@ namespace MindEngine.Core.Service
 {
     using System;
 
+    /// <summary>
+    /// Provide a wrapper around the service in order to hot swap the core 
+    /// module in engine.
+    /// </summary>
     public class MMEngineDebugService : IMMEngineDebugService
     {
         private IMMEngineDebug Debug { get; set; }

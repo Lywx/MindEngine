@@ -3,8 +3,8 @@ namespace MindEngine.Core.Service.Process
     using System;
     using Component;
     using Microsoft.Xna.Framework;
-    using Service.Debug;
-    using Util;
+    using Debug;
+    using Util.Collection;
 
     /// <summary>
     /// This is the interface used in the manager class. It provide a minimal 
@@ -45,6 +45,8 @@ namespace MindEngine.Core.Service.Process
 
         int Priority { get; }
 
+        event EventHandler<MMProcessPriorityChangedEventArgs> PriorityChanged;
+
         #endregion
     }
 
@@ -57,11 +59,11 @@ namespace MindEngine.Core.Service.Process
     {
         #region Process Data
 
-        private MMSortingCollection<IMMProcessManagerItem> processes 
-            = new MMSortingCollection<IMMProcessManagerItem>(
-                (item1, item2) => item1.CompareTo(item2), 
-                (item, handler) => {}, 
-                (item, handler) => {}); 
+        private MMSortingList<IMMProcessManagerItem, MMProcessPriorityChangedEventArgs> Processes { get; set; }
+            = new MMSortingList<IMMProcessManagerItem, MMProcessPriorityChangedEventArgs>(
+                (process, processOther) => process.CompareTo(processOther), 
+                (process, handler) => process.PriorityChanged += handler, 
+                (process, handler) => process.PriorityChanged -= handler); 
 
         #endregion Process Data
 
@@ -93,43 +95,51 @@ namespace MindEngine.Core.Service.Process
         {
             using (new MMDebugBlockTimer())
             {
-                this.processes.ForEach((processParam, timeParam) =>
-                {
-                    switch (processParam.State)
+                this.Processes.ForEach(
+                    delegate(IMMProcessManagerItem processParam, GameTime timeParam)
                     {
-                        case MMProcessState.New:
+                        switch (processParam.State)
                         {
-                            // The process normally won't call Enter themselves.
-                            processParam.Enter();
-                            processParam.OnEnter();
-                            break;
+                            case MMProcessState.Inertial:
+                            {
+                                break;
+                            }
+
+                            case MMProcessState.New:
+                            {
+                                processParam.OnEnter();
+                                break;
+                            }
+
+                            case MMProcessState.Running:
+                            {
+                                processParam.OnUpdate(time);
+                                break;
+                            }
+
+                            case MMProcessState.Waiting:
+                            {
+                                processParam.OnWait(time);
+                                break;
+                            }
+
+                            case MMProcessState.Terminated:
+                            {
+                                // After this method there should be no reference 
+                                // connected to this process except the process 
+                                // manager.
+                                processParam.OnExit();
+
+                                this.Processes.Remove(processParam);
+
+                                processParam.Dispose();
+                                break;
+                            }
+
+                            default:
+                                throw new ArgumentOutOfRangeException();
                         }
-
-                        case MMProcessState.Running:
-                        {
-                            processParam.OnUpdate(time);
-                            break;
-                        }
-
-                        case MMProcessState.Waiting:
-                        {
-                            processParam.OnWait(time);
-                            break;
-                        }
-
-                        case MMProcessState.Terminated:
-                        {
-                            processParam.OnExit();
-
-                            this.processes.Remove(processParam);
-                            processParam.Dispose();
-                            break;
-                        }
-
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }, time);
+                    }, time);
             }
         }
 
@@ -139,7 +149,7 @@ namespace MindEngine.Core.Service.Process
 
         public void AttachProcess(IMMProcessManagerItem process)
         {
-            this.processes.Add(process);
+            this.Processes.Add(process);
         }
 
         #endregion Operations
@@ -150,8 +160,8 @@ namespace MindEngine.Core.Service.Process
         {
             if (disposing)
             {
-                this.processes?.Clear();
-                this.processes = null;
+                this.Processes?.Clear();
+                this.Processes = null;
             }
 
             base.Dispose(disposing);

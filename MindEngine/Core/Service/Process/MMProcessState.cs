@@ -2,6 +2,8 @@
 {
     public enum MMProcessState
     {
+        Inertial,
+
         New,
 
         Running,

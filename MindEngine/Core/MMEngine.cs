@@ -7,6 +7,28 @@
     using Microsoft.Xna.Framework.Graphics;
     using Service;
 
+    public interface IMMEngineOperations
+    {
+        void Run();
+
+        void Restart();
+    }
+
+    public interface IMMEngine : IDisposable, IMMEngineOperations
+    {
+        IMMEngineAudio Audio { get; } 
+
+        IMMEngineGraphics Graphics { get; }
+
+        IMMEngineInput Input { get; }
+
+        IMMEngineInterop Interop { get; }
+
+        IMMEngineNumerical Numerical { get; }
+
+        IMMEngineDebug Debug { get; set; }
+    }
+
     public class MMEngine : Game, IMMEngine
     {
         private IMMEngineAudio audio;
